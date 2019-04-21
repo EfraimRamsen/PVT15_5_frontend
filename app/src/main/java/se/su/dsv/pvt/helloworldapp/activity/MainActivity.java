@@ -1,7 +1,9 @@
-package se.su.dsv.pvt.helloworldapp;
+package se.su.dsv.pvt.helloworldapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import se.su.dsv.pvt.helloworldapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
