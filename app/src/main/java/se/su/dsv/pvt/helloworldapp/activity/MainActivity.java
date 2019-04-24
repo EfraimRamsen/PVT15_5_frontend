@@ -42,15 +42,20 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<HelloWorldData>() {
             @Override
             public void onResponse(Call<HelloWorldData> call, Response<HelloWorldData> response) {
-                String resultResponse = response.body().getResult();
-                String nameResponse = response.body().getName();
-                String ageResponse = response.body().getAge();
+                try {
+                    String resultResponse = response.body().getResult();
+                    String nameResponse = response.body().getName();
+                    String ageResponse = response.body().getAge();
 
-                resultText = (TextView) findViewById(R.id.responseText);
-                resultText.setText(resultResponse);
+                    resultText = (TextView) findViewById(R.id.responseText);
+                    resultText.setText(resultResponse);
 
-                Log.d(TAG, "Received data (result, name, age): " + resultResponse + " " + nameResponse + " "
-                + ageResponse);
+                    Log.d(TAG, "Received data (result, name, age): " + resultResponse + " " + nameResponse + " "
+                            + ageResponse);
+                } catch (NullPointerException e) {
+                    System.out.println("API-data contained null.");
+                }
+
             }
 
             @Override
