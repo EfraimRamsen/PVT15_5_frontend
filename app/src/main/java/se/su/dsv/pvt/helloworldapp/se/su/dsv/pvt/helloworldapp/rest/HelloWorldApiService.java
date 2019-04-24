@@ -5,7 +5,7 @@ import retrofit2.http.GET;
 import se.su.dsv.pvt.helloworldapp.model.HelloWorldData;
 
 public interface HelloWorldApiService {
-    @GET("/sayJSON")
+    @GET("sayJSON/")
     Call<HelloWorldData> getJsonResponse();
 
 }
