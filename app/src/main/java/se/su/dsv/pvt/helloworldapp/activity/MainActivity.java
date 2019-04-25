@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         connectAndGetApiData();
     }
 
+
     public void connectAndGetApiData() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
+            
 
             @Override
             public void onFailure(Call<HelloWorldData> call, Throwable t) {
