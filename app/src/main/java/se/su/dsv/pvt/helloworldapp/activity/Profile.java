@@ -1,11 +1,11 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,32 +16,40 @@ import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.HelloWorldData;
 import se.su.dsv.pvt.helloworldapp.se.su.dsv.pvt.helloworldapp.rest.HelloWorldApiService;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+
+public class Profile extends AppCompatActivity {
+
+    private static final String TAG = Profile.class.getSimpleName();
 
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
 
     private static Retrofit retrofit = null;
 
-    TextView resultText;
+    TextView resultView;
+    TextView nameView;
+    TextView ageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //connectAndGetApiData();
+        setContentView(R.layout.activity_profile);
+        connectAndGetApiData();
     }
-    public void gotoProfile(View view) {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-    public void gotoMap(View view) {
-        Intent intent = new Intent(this, Map.class);
-        startActivity(intent);
-    }
+
     /*
+    public void setTextProto(String[] s) {
+        System.out.println("hej");
+        System.out.println(s[1]);
+        final TextView resultView =(TextView)findViewById(R.id.resulttext);
+        final TextView nameView = (TextView) findViewById(R.id.nametext);
+        final TextView ageView = (TextView) findViewById(R.id.agetext);
+        resultView.setText(s[0]);
+        nameView.setText(s[1]);
+        ageView.setText(s[2]);
+    }*/
 
     public void connectAndGetApiData() {
+
         if (retrofit == null) {
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         }
@@ -49,16 +57,23 @@ public class MainActivity extends AppCompatActivity {
         HelloWorldApiService helloWorldApiService = retrofit.create(HelloWorldApiService.class);
         Call<HelloWorldData> call = helloWorldApiService.getJsonResponse();
 
+
         call.enqueue(new Callback<HelloWorldData>() {
             @Override
             public void onResponse(Call<HelloWorldData> call, Response<HelloWorldData> response) {
                 try {
+                    final String[] output = new String[3];
                     String resultResponse = response.body().getResult();
                     String nameResponse = response.body().getName();
                     String ageResponse = response.body().getAge();
+                    System.out.println(resultResponse + " lol");
+                    resultView = (TextView) findViewById(R.id.resulttext);
+                    nameView = (TextView) findViewById(R.id.nametext);
+                    ageView = (TextView) findViewById(R.id.agetext);
+                    resultView.setText(resultResponse);
+                    nameView.setText(nameResponse);
+                    ageView.setText(ageResponse);
 
-                    resultText = (TextView) findViewById(R.id.responseText);
-                    resultText.setText(resultResponse);
 
                     Log.d(TAG, "Received data (result, name, age): " + resultResponse + " " + nameResponse + " "
                             + ageResponse);
@@ -73,9 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, t.toString());
             }
         });
+
+        System.out.println(call.toString());
     }
-    */
-
-
 
 }
