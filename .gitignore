@@ -21,8 +21,8 @@ gen/
 out/
 
 # Gradle files
-.gradle
-.gradle/
+#.gradle
+#.gradle/
 build/
 
 # Signing files
