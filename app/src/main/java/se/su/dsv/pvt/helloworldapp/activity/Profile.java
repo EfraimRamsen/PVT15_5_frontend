@@ -70,8 +70,7 @@ public class Profile extends AppCompatActivity {
                     ageView.setText(ageResponse);
 
 
-                    Log.d(TAG, "Received data (result, name, age): " + resultResponse + " " + nameResponse + " "
-                            + ageResponse);
+                    Log.d(TAG, "Received data - Result: " + resultResponse + " Name: " + nameResponse + " Age: "  + ageResponse);
                 } catch (NullPointerException e) {
                     System.out.println("API-data contained null.");
                 }
