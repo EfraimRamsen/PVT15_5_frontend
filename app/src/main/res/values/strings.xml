@@ -3,4 +3,5 @@
     <string name="start_text">Witness My Fitness</string>
     <string name="map">Map</string>
     <string name="profile">Profile</string>
+    <string name="back_button">Back</string>
 </resources>
