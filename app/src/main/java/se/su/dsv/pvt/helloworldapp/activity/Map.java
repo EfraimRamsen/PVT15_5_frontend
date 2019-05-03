@@ -65,6 +65,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             askPermission();
         }
 
+
+
 //        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); // icke-animerad
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); //animerad laddning av kartan
     }

@@ -4,15 +4,15 @@
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person_black_24dp"
-        android:title="Profil" />
-    <item
-        android:id="@+id/nav_map"
-        android:icon="@drawable/ic_place_black_24dp"
-        android:title="Karta"/>
+        android:title="@string/profile" />
     <item
         android:id="@+id/nav_challenges"
         android:icon="@drawable/ic_fitness_center_black_24dp"
-        android:title="Utmaningar"/>
+        android:title="@string/challenges"/>
+    <item
+        android:id="@+id/nav_map"
+        android:icon="@drawable/ic_place_black_24dp"
+        android:title="@string/map"/>
 
 
 
