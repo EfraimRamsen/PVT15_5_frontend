@@ -1,12 +1,11 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -31,6 +30,11 @@ public class Profile extends AppCompatActivity {
 
     private static Retrofit retrofit = null;
 
+    // Used for the top title bar:
+    public static final String viewTitle = "Profile";
+    public static final int titleIcon = R.drawable.ic_profile;
+    public static final int iconId = R.id.profile_icon;
+
     TextView resultView;
     TextView nameView;
     TextView ageView;
@@ -40,34 +44,13 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         connectAndGetApiData();
-        Toolbar toolbar = (Toolbar) TopActionBar.getToolbar("Profile", findViewById(R.id.my_toolbar));
-        toolbar.setNavigationIcon(R.drawable.icons8);
+        // Create, configure, and set the toolbar:
+        Toolbar toolbar = (Toolbar) TopActionBar
+                .getToolbar(viewTitle, findViewById(TopActionBar.getToolbarIntLink())
+                        , false);
         setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        /**
-         * Denna klass borde abstraheras iväg, dvs. man skickar iväg MenuItem item i guess???
-         */
-        switch(item.getItemId()) {
-            case R.id.back_button:
-                System.out.println("loool");
-                return super.onOptionsItemSelected(item);
-
-                /*Intent intent = new Intent(this, getParent().getClass());
-                startActivity(intent);
-                return true;*/
-            default:
-                System.out.println("defullllllet");
-
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toptoolbar, menu);
-        return true;
+        ImageView iV = (ImageView) toolbar.findViewById(iconId);
+        iV.setImageDrawable(ResourcesCompat.getDrawable(getResources(), titleIcon, null));
     }
 
     // Allting här under är magi, och inget jag kan förklara för varken mig själv eller någon annan.

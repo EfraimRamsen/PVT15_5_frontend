@@ -2,8 +2,6 @@ package se.su.dsv.pvt.helloworldapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import se.su.dsv.pvt.helloworldapp.R;
@@ -13,6 +11,8 @@ import se.su.dsv.pvt.helloworldapp.R;
  */
 public class TopActionBar extends AppCompatActivity {
 
+    public static final int toolbarIntLink = R.id.my_toolbar;
+
     /**
      *
      * @param title is the chosen title for the view.
@@ -20,31 +20,26 @@ public class TopActionBar extends AppCompatActivity {
      *               my_toolbar.
      * @return a Toolbar-object which is customized to one's liking.
      */
-    public static Toolbar getToolbar(String title, View viewId) {
+
+    /**
+     *
+     * @param title is the chosen title for the view.
+     * @param viewId is the id you get via findViewById(R.id.xxx), with xxx in this case being
+     *               my_toolbar.
+     * @param isStartScreen if true, back button is unneccessary.
+     * @return
+     */
+    public static Toolbar getToolbar(String title, View viewId, boolean isStartScreen) {
         Toolbar toolbar = (Toolbar) viewId;
         toolbar.setTitle(title);
+        if (!isStartScreen) {
+            toolbar.setNavigationIcon(R.drawable.ic_back_button);
+        }
+        toolbar.hideOverflowMenu();
         return toolbar;
     }
-
-    public void buttonClicked(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.back_button:
-                this.findViewById(R.id.parent);
-        }
+    public static int getToolbarIntLink() {
+        return toolbarIntLink;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.back_button:
-                System.out.println("loool");
-                return true;
-
-            default:
-                System.out.println("defullllllet");
-
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }
