@@ -43,6 +43,17 @@
             tools:layout_editor_absoluteX="16dp" />
 
     </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -52,5 +63,9 @@
         android:background="@color/mint"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
         app:menu="@menu/bottom_navigation" />
+  
+
+
+
 
 </android.support.constraint.ConstraintLayout>
