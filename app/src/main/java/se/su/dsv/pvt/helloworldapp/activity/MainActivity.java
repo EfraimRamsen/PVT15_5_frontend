@@ -26,12 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
         // Create toolbar:
-        Toolbar toolbar = (Toolbar) TopActionBar.getToolbar(getString(R.string.main_title)
-                , findViewById(R.id.my_toolbar), true);
+        Toolbar toolbar = (Toolbar) TopActionBar.getToolbar(findViewById(R.id.my_toolbar), true);
         setSupportActionBar(toolbar);
         ImageView iV = (ImageView) toolbar.findViewById(iconId);
         iV.setImageDrawable(ResourcesCompat.getDrawable(getResources(), titleIcon, null));
-      
+
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();

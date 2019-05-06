@@ -46,7 +46,7 @@ public class Profile extends AppCompatActivity {
         connectAndGetApiData();
         // Create, configure, and set the toolbar:
         Toolbar toolbar = (Toolbar) TopActionBar
-                .getToolbar(getString(R.string.profile_title), findViewById(TopActionBar.getToolbarIntLink())
+                .getToolbar(findViewById(TopActionBar.getToolbarIntLink())
                         , false);
         setSupportActionBar(toolbar);
         ImageView iV = (ImageView) toolbar.findViewById(iconId);
