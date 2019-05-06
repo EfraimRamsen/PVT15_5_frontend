@@ -7,7 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.concurrent.TimeUnit;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,8 +57,14 @@ public class Profile extends AppCompatActivity {
     // Allting här under är magi, och inget jag kan förklara för varken mig själv eller någon annan.
     public void connectAndGetApiData() {
 
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .build();
+
         if (retrofit == null) {
-            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build();
         }
 
         HelloWorldApiService helloWorldApiService = retrofit.create(HelloWorldApiService.class);
@@ -85,8 +92,7 @@ public class Profile extends AppCompatActivity {
                     ageView.setText(ageResponse);
 
 
-                    Log.d(TAG, "Received data (result, name, age): " + resultResponse + " " + nameResponse + " "
-                            + ageResponse);
+                    Log.d(TAG, "Received data - Result: " + resultResponse + " Name: " + nameResponse + " Age: "  + ageResponse);
                 } catch (NullPointerException e) {
                     System.out.println("API-data contained null.");
                 }

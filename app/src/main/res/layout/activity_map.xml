@@ -4,6 +4,9 @@
     android:id="@+id/constraintlayoutmap"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity" >
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -23,5 +26,31 @@
             android:foregroundGravity="right" />
 
     </android.support.v7.widget.Toolbar>
+
+    <!--Nedan är hur man hade kunnat konfigurera Google maps utan kod - kan tas bort-->
+    <!--<fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        map:cameraBearing="0"
+        map:cameraTargetLat="59.3246656"
+        map:cameraTargetLng="18.0410247"
+        map:cameraTilt="0"
+        map:cameraZoom="10.5"
+        map:mapType="normal"
+        map:uiCompass="false"
+        map:uiRotateGestures="true"
+        map:uiScrollGestures="false"
+        map:uiTiltGestures="true"
+        map:uiZoomControls="false"
+        map:uiZoomGestures="true"
+        tools:ignore="MissingPrefix" />-->
+
+    <fragment
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.constraint.ConstraintLayout>
