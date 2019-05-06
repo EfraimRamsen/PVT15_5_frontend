@@ -32,7 +32,6 @@ public class Profile extends AppCompatActivity {
     private static Retrofit retrofit = null;
 
     // Used for the top title bar:
-    public static final String viewTitle = "Profile";
     public static final int titleIcon = R.drawable.ic_profile;
     public static final int iconId = R.id.profile_icon;
 
@@ -47,7 +46,7 @@ public class Profile extends AppCompatActivity {
         connectAndGetApiData();
         // Create, configure, and set the toolbar:
         Toolbar toolbar = (Toolbar) TopActionBar
-                .getToolbar(viewTitle, findViewById(TopActionBar.getToolbarIntLink())
+                .getToolbar(getString(R.string.profile_title), findViewById(TopActionBar.getToolbarIntLink())
                         , false);
         setSupportActionBar(toolbar);
         ImageView iV = (ImageView) toolbar.findViewById(iconId);

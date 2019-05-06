@@ -18,7 +18,6 @@ import se.su.dsv.pvt.helloworldapp.R;
 public class MainActivity extends AppCompatActivity {
 
     // Used for the top title bar:
-    public static final String viewTitle = "Witness-my-fitness";
     public static final int titleIcon = R.drawable.ic_main;
     public static final int iconId = R.id.main_icon;
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
         // Create toolbar:
-        Toolbar toolbar = (Toolbar) TopActionBar.getToolbar(viewTitle
+        Toolbar toolbar = (Toolbar) TopActionBar.getToolbar(getString(R.string.main_title)
                 , findViewById(R.id.my_toolbar), true);
         setSupportActionBar(toolbar);
         ImageView iV = (ImageView) toolbar.findViewById(iconId);

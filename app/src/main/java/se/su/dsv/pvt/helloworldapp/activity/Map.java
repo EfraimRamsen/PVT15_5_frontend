@@ -29,7 +29,6 @@ import se.su.dsv.pvt.helloworldapp.R;
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
-    public static final String viewTitle = "Profile";
     public static final int titleIcon = R.drawable.ic_map;
     public static final int iconId = R.id.map_icon;
 
@@ -40,7 +39,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
       
         // Create, configure, and set the toolbar:
         Toolbar toolbar = (Toolbar) TopActionBar
-                .getToolbar(viewTitle, findViewById(TopActionBar.getToolbarIntLink())
+                .getToolbar(getString(R.string.map_title), findViewById(TopActionBar.getToolbarIntLink())
                         , false);
         setSupportActionBar(toolbar);
         ImageView iV = (ImageView) toolbar.findViewById(iconId);

@@ -5,4 +5,8 @@
     <string name="profile">Profil</string>
     <string name="challenges">Utmaningar</string>
     <string name="back_button">Back_button</string>
+
+    <string name="main_title">Utemaning</string>
+    <string name="map_title">Karta</string>
+    <string name="profile_title">Profil</string>
 </resources>
