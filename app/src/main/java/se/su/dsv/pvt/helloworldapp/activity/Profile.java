@@ -49,6 +49,13 @@ public class Profile extends AppCompatActivity {
                 .getToolbar(findViewById(TopActionBar.getToolbarIntLink())
                         , false);
         setSupportActionBar(toolbar);
+        /*
+        int windowWidth = TopActionBar.getWindowWidth(getWindowManager().getDefaultDisplay());
+        toolbar.setTitleMarginStart(windowWidth / 4);
+        toolbar.setTitleMarginEnd(windowWidth / 4);
+        TextView tv = (TextView) toolbar.findViewById(R.id.profile_title_text);
+        tv.setText(getString(R.string.profile_title));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
         ImageView iV = (ImageView) toolbar.findViewById(iconId);
         iV.setImageDrawable(ResourcesCompat.getDrawable(getResources(), titleIcon, null));
     }

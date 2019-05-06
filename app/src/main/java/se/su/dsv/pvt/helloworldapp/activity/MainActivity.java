@@ -2,6 +2,7 @@ package se.su.dsv.pvt.helloworldapp.activity;
 
 import android.content.Intent;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
@@ -26,8 +28,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
         // Create toolbar:
-        Toolbar toolbar = (Toolbar) TopActionBar.getToolbar(findViewById(R.id.my_toolbar), true);
+        Toolbar toolbar = (Toolbar) TopActionBar
+                .getToolbar(findViewById(TopActionBar.getToolbarIntLink()), true);
         setSupportActionBar(toolbar);
+        /*
+        int windowWidth = TopActionBar.getWindowWidth(getWindowManager().getDefaultDisplay());
+        toolbar.setTitleMarginStart(windowWidth / 4);
+        toolbar.setTitleMarginEnd(windowWidth / 4);
+        TextView tv = (TextView) toolbar.findViewById(R.id.main_title_text);
+        tv.setText(getString(R.string.main_title));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
         ImageView iV = (ImageView) toolbar.findViewById(iconId);
         iV.setImageDrawable(ResourcesCompat.getDrawable(getResources(), titleIcon, null));
 
