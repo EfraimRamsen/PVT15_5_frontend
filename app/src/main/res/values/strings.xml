@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Witness My Fitness</string>
-    <string name="start_text">Witness My Fitness</string>
-    <string name="map">Map</string>
-    <string name="profile">Profile</string>
+    <string name="app_name">Utemaning</string>
+    <string name="start_text">Utemaning</string>
+    <string name="map">Karta</string>
+    <string name="profile">Profil</string>
+    <string name="challenges">Utmaningar</string>
+
 </resources>
