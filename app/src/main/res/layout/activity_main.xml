@@ -46,6 +46,22 @@
     <TextView
         android:id="@+id/responseText"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="176dp"
+        android:layout_marginBottom="281dp"
+        android:text="HTTP Response"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
      *
      */
 
-}
-=======
+
+
 //    public void gotoProfile(View view) {
 //        Intent intent = new Intent(this, Profile.class);
 //        startActivity(intent);
