@@ -16,16 +16,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.HelloWorldData;
-import se.su.dsv.pvt.helloworldapp.se.su.dsv.pvt.helloworldapp.rest.HelloWorldApiService;
+import se.su.dsv.pvt.helloworldapp.rest.HelloWorldApiService;
 
 
-public class Profile extends AppCompatActivity {
+public class gammalProfile extends AppCompatActivity {
 
     /**
      * de tre första variablerna hör till magin.
      * De tre efterföljande är de tre TextViews - dvs. textfält - som används i den här vyn.
      */
-    private static final String TAG = Profile.class.getSimpleName();
+    private static final String TAG = gammalProfile.class.getSimpleName();
 
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
 
@@ -42,7 +42,7 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.gammal_activity_profile);
         connectAndGetApiData();
         // Create, configure, and set the toolbar:
         Toolbar toolbar = (Toolbar) TopActionBar
@@ -88,7 +88,7 @@ public class Profile extends AppCompatActivity {
                      * de, uh, sex nedanstående kodraderna deklarerar först de olika TextViews:arna;
                      * detta sker genom att anropa findViewById, slänga in R.id. och sen namnet
                      * på komponenten som ska ändras. Detta namn finns i respektive layouts xml-fil,
-                     * vilket i det aktuella fallet är activity_profile.xml.
+                     * vilket i det aktuella fallet är gammal_activity_profileprofile.xml.
                      */
                     resultView = (TextView) findViewById(R.id.resulttext);
                     nameView = (TextView) findViewById(R.id.nametext);

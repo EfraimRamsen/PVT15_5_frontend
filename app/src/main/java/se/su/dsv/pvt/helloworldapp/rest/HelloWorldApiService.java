@@ -1,4 +1,4 @@
-package se.su.dsv.pvt.helloworldapp.se.su.dsv.pvt.helloworldapp.rest;
+package se.su.dsv.pvt.helloworldapp.rest;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
