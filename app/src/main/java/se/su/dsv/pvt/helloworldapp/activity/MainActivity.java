@@ -18,7 +18,7 @@ import se.su.dsv.pvt.helloworldapp.R;
 public class MainActivity extends AppCompatActivity {
 
     // Used for the top title bar:
-    public static final int titleIcon = R.drawable.ic_main;
+    public static final int titleIcon = 0;
     public static final int iconId = R.id.main_icon;
 
 
@@ -74,23 +74,3 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 }
-
-
-    /**
-     * Den här och den efterföljande metoden startar aktiviteter, och i det här fallet är
-     * aktiviteten en vy. Intent-objektet behövs för att välja vart vi ska: detta genom xxx.class-
-     * ordet. En intent kan innehålla en mängd andra saker, men ja. Sen används metoden startActivity()
-     * för att starta aktiviteten.
-     *
-     */
-
-
-
-//    public void gotoProfile(View view) {
-//        Intent intent = new Intent(this, gammalProfile.class);
-//        startActivity(intent);
-//    }
-//    public void gotoMap(View view) {
-//        Intent intent = new Intent(this, Map.class);
-//        startActivity(intent);
-//    }

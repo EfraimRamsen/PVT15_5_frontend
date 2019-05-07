@@ -32,7 +32,7 @@ public class gammalProfile extends AppCompatActivity {
     private static Retrofit retrofit = null;
 
     // Used for the top title bar:
-    public static final int titleIcon = R.drawable.ic_profile;
+    public static final int titleIcon = 0;
     public static final int iconId = R.id.profile_icon;
 
     TextView resultView;
