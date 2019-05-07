@@ -1,4 +1,4 @@
-package se.su.dsv.pvt.helloworldapp.activity;
+package se.su.dsv.pvt.helloworldapp.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
 

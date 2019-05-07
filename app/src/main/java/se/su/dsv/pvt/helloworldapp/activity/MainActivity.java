@@ -1,20 +1,17 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
-import android.content.Intent;
-import android.support.v4.app.FragmentManager;
+import se.su.dsv.pvt.helloworldapp.fragment.*;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.google.android.gms.maps.MapFragment;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new ProfileFragment();
                     break;
                 case R.id.nav_map:
-                    selectedFragment = new MapFragment();
+                    selectedFragment = new MapViewFragment();
                     break;
                 case R.id.nav_challenges:
                     selectedFragment = new ChallengeFragment();
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //    public void gotoProfile(View view) {
-//        Intent intent = new Intent(this, Profile.class);
+//        Intent intent = new Intent(this, gammalProfile.class);
 //        startActivity(intent);
 //    }
 //    public void gotoMap(View view) {
