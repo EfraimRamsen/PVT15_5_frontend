@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int titleIcon = R.drawable.ic_main;
     public static final int iconId = R.id.main_icon;
 
-    Fragment selectedFragment = null;
-    Fragment mapFragment = new MapFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +53,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
 
             switch (item.getItemId()) {
                 case R.id.nav_profile:
                     selectedFragment = new ProfileFragment();
                     break;
                 case R.id.nav_map:
-                    selectedFragment = mapFragment;
+                    selectedFragment = new MapFragment();
                     break;
                 case R.id.nav_challenges:
                     selectedFragment = new ChallengeFragment();
