@@ -1,6 +1,7 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -23,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
     public static final int titleIcon = R.drawable.ic_main;
     public static final int iconId = R.id.main_icon;
 
+    Fragment selectedFragment = null;
+    Fragment mapFragment = new MapFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
+
         // Create toolbar:
         Toolbar toolbar = (Toolbar) TopActionBar
                 .getToolbar(findViewById(TopActionBar.getToolbarIntLink()), true);
@@ -43,21 +48,26 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
+
     }
+
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
+
             switch (item.getItemId()) {
                 case R.id.nav_profile:
                     selectedFragment = new ProfileFragment();
                     break;
                 case R.id.nav_map:
-                    selectedFragment = new MapFragment();
+                    selectedFragment = mapFragment;
                     break;
                 case R.id.nav_challenges:
                     selectedFragment = new ChallengeFragment();
