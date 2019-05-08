@@ -13,9 +13,9 @@ import se.su.dsv.pvt.helloworldapp.R;
 
 public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
-    private View window;
-    private View contents;
-    private Context c;
+    private View customView;
+    private Context c; // Used to access the layoutinflater (can probably be done in a nicer way,
+                        // but android be android...
 
     public CustomMapMarker(Context c) {
         this.c = c;
@@ -28,14 +28,14 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
     /**
      * här skriver man koden/skapar viewen som ska visas i kartan. ATM är allt hårdkodat.
-     * @param m is unused?
+     * @param m is the marker which contains the marker-info.
      * @return a View which has the custom needed.
      */
     @Override
     public View getInfoContents(Marker m) {
         // standardkod som kan återanvändas i framtiden:
         LayoutInflater layoutInflater = LayoutInflater.from(c);
-        View customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
+        customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
         ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
 
