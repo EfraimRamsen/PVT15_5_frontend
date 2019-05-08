@@ -49,6 +49,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        // Denna här raden sätter sätter custommarker istället för standard:
         map.setInfoWindowAdapter(new CustomMapMarker(getContext()));
 
         CameraPosition cameraPosition = CameraPosition.builder()

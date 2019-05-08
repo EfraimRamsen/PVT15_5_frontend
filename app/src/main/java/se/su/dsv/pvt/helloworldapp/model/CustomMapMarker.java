@@ -33,11 +33,14 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
      */
     @Override
     public View getInfoContents(Marker m) {
+        // standardkod som kan återanvändas i framtiden:
         LayoutInflater layoutInflater = LayoutInflater.from(c);
         View customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
+        ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
+
+        //kod som ska ersättas/tas bort/bli slutgiltig:
         MarkerInfo markerInfo = new MarkerInfo();
-        ((TextView) customView.findViewById(R.id.gym_name)).setText(markerInfo.getName());
         ((ImageView) customView.findViewById(R.id.gym_ratings)).setImageResource(R.drawable.ic_back_button);
         ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText("4,2");
 
