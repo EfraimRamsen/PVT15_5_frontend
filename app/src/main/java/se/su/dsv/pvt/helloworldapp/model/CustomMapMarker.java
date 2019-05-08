@@ -48,46 +48,10 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
 
         //kod som ska ersättas/tas bort/bli slutgiltig:
-        MarkerInfo markerInfo = new MarkerInfo();
         ((ImageView) customView.findViewById(R.id.gym_ratings)).setImageResource(R.drawable.ic_back_button);
         ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText("4,2");
 
         return customView;
-    }
-
-}
-
-/**
- * Class only used to read and store a map-objects information. May be moved or deleted, probably
- * the latter.
- */
-class MarkerInfo {
-    private String name;
-    private double rating;
-    private int challenges;
-
-    public MarkerInfo() {
-        this.name = "hejsans utegym";
-        this.rating = 3.5;
-        this.challenges = 8;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public double getRating() {
-        return rating;
-    }
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-    public int getChallenges() {
-        return challenges;
-    }
-    public void setChallenges(int challenges) {
-        this.challenges = challenges;
     }
 
 }
