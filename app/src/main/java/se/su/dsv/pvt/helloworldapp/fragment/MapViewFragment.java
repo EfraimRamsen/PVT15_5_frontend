@@ -59,6 +59,13 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                 .tilt(0)
                 .build();
 
+        /**
+         * TODO:
+         * - we should probably create a better way of reading and adding the markers to the map.
+         * This is probably something we do after adding all the markers, and finishing the Gym-class.
+         * - Are we always going to show every marker, or will we give the user the ability to show
+         * every marker that's, say, 3 km from the users location?
+         */
         googleMap.addMarker((new MarkerOptions()
                 .position(new LatLng(59.344187, 18.099205))
                 .title("Utegym - Östermalm")

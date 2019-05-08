@@ -11,6 +11,14 @@ import com.google.android.gms.maps.model.Marker;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
+/**
+ * TODO:
+ * - Decide how we will show the ratings via stars, can be done in two ways (i think):
+ * either we have 10 or so icon-files, and choose the one with the correct number of stars for
+ * each object; or we have five separate ImageViews, and fill them up separately.
+ * - Fix the "visa mer"-button, add an android:onClick to it: what is it supposed to do?
+ */
+
 public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
     private View customView;
