@@ -2,7 +2,6 @@ package se.su.dsv.pvt.helloworldapp.activity;
 
 import se.su.dsv.pvt.helloworldapp.fragment.*;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 import se.su.dsv.pvt.helloworldapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,6 +71,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_navigation, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * this corresponds with the button in the bottom of the custom marker-popup which shows
+     * "+ visa mer".
+     * @param v
+     */
+    public void markerButton(View v) {
+        ;
     }
 
 

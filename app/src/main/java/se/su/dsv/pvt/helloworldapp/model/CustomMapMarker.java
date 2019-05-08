@@ -53,5 +53,4 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
         return customView;
     }
-
 }

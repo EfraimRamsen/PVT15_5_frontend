@@ -1,7 +1,6 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
