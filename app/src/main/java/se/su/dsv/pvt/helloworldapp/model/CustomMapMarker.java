@@ -35,7 +35,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
     public View getInfoContents(Marker m) {
         LayoutInflater layoutInflater = LayoutInflater.from(c);
         View customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
-        ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_back_button);
+        ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
         MarkerInfo markerInfo = new MarkerInfo();
         ((TextView) customView.findViewById(R.id.gym_name)).setText(markerInfo.getName());
         ((ImageView) customView.findViewById(R.id.gym_ratings)).setImageResource(R.drawable.ic_back_button);
