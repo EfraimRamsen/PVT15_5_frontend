@@ -1,6 +1,7 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.model.CustomMapMarker;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
@@ -46,6 +48,8 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         googleMap = map;
 
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        map.setInfoWindowAdapter(new CustomMapMarker(getContext()));
 
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(new LatLng(59.3246656, 18.0410247))

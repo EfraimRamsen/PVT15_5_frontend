@@ -1,0 +1,117 @@
+
+<!--
+Shamelessly stolen from https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/main/res/layout/custom_info_contents.xml
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- rad 1: -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gym_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="start"/> <!-- might not work, delete mayhaps -->
+
+            <TextView
+                android:id="@+id/gym_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#ff000000"
+                android:textSize="14sp"
+                android:textStyle="bold" /> <!-- Storleken på texten raden ovan denna -->
+
+        </LinearLayout>
+
+        <!-- rad 2: -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gym_ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="start"/>
+            <TextView
+                android:id="@+id/gym_ratings_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#ff000000"
+                android:textSize="14sp"
+                android:textStyle="bold" /> <!-- Storleken på texten raden ovan denna -->
+            />
+
+        </LinearLayout>
+
+        <!-- rad 3: -->
+        <Button
+            android:id="@+id/gym_button_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/visa_mer" />
+
+
+
+    </LinearLayout>
+
+
+
+    <!--
+    <ImageView
+        android:id="@+id/badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:adjustViewBounds="true"></ImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#ff000000"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/snippet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#ff7f7f7f"
+            android:textSize="14dp" />
+    </LinearLayout>-->
+</LinearLayout>
