@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     final Fragment fragment3 = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
+    Intent intent;
 
 
     @Override
@@ -32,10 +33,28 @@ public class MainActivity extends AppCompatActivity {
 
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
+        intent = getIntent();
+        if (intent.hasExtra("profile")) {
+            fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
+            fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
+            fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
+            active = fragment1;
+        } else if (intent.hasExtra("my")) {
+            fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
+            fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
+            fm.beginTransaction().add(R.id.fragment_container,fragment2, "2").commit();
+            active = fragment2;
+        } else if (intent.hasExtra("find")) {
+            fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
+            fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
+            fm.beginTransaction().add(R.id.fragment_container,fragment3, "3").commit();
+            active = fragment3;
+        }
+
         //Lägger till fragmenten i fragment_container, och döljer fragment 2 och 3
-        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
-        fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
+//        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
+//        fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
+//        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
 
     }
 
@@ -46,22 +65,25 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.nav_challenges:
-                    fm.beginTransaction().hide(active).show(fragment1).commit();
-                    active = fragment1;
-                    return true;
 
-                case R.id.nav_add_challenge:
-                    fm.beginTransaction().hide(active).show(fragment2).commit();
-                    active = fragment2;
-                    return true;
+                switch (item.getItemId()) {
+                    case R.id.nav_challenges:
+                        fm.beginTransaction().hide(active).show(fragment1).commit();
+                        active = fragment1;
+                        return true;
 
-                case R.id.nav_map:
-                    fm.beginTransaction().hide(active).show(fragment3).commit();
-                    active = fragment3;
-                    return true;
-            }
+                    case R.id.nav_add_challenge:
+                        fm.beginTransaction().hide(active).show(fragment2).commit();
+                        active = fragment2;
+                        return true;
+
+                    case R.id.nav_map:
+                        fm.beginTransaction().hide(active).show(fragment3).commit();
+                        active = fragment3;
+                        return true;
+                }
+
+
             return false;
         }
     };
