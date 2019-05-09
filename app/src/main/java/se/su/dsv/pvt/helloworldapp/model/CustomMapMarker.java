@@ -47,10 +47,37 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
         ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
 
-        //kod som ska ersättas/tas bort/bli slutgiltig:
-        ((ImageView) customView.findViewById(R.id.gym_ratings)).setImageResource(R.drawable.ic_back_button);
-        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText("4,2");
+        // Slaskkod, att göra bättre/ta bort:
+        double rating = 4.5;
+        ((ImageView) customView.findViewById(R.id.gym_star_1)).setImageResource(R.drawable.ic_star_empty);
+        ((ImageView) customView.findViewById(R.id.gym_star_2)).setImageResource(R.drawable.ic_star_empty);
+        ((ImageView) customView.findViewById(R.id.gym_star_3)).setImageResource(R.drawable.ic_star_empty);
+        ((ImageView) customView.findViewById(R.id.gym_star_4)).setImageResource(R.drawable.ic_star_empty);
+        ((ImageView) customView.findViewById(R.id.gym_star_5)).setImageResource(R.drawable.ic_star_empty);
+        ImageView[] ratingStars = new ImageView[5];
+        ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
+        ratingStars[1] = (ImageView) customView.findViewById(R.id.gym_star_2);
+        ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
+        ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
+        ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
 
+        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(rating));
+
+        if (rating >= 0.25) {
+            for (int i = 0; i <= 4; i++) {
+                ImageView iT = ratingStars[i];
+                System.out.println(i);
+                System.out.println(rating);
+                if (rating >= 0.25){
+                    iT.setImageResource(R.drawable.ic_star_half);
+                }
+                if (rating >= 0.75) {
+                    iT.setImageResource(R.drawable.ic_star_full);
+                }
+
+                rating = rating - 1.0;
+            }
+        }
         return customView;
     }
 }
