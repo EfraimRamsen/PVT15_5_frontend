@@ -25,6 +25,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
     private Context c; // Used to access the layoutinflater (can probably be done in a nicer way,
                         // but android be android...
 
+
     public CustomMapMarker(Context c) {
         this.c = c;
     }
@@ -42,19 +43,31 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoContents(Marker m) {
         // standardkod som kan återanvändas i framtiden:
+        /**
+         * få tag på information från markern här någonstans: String name, double betyg/stjärnor.
+         */
         LayoutInflater layoutInflater = LayoutInflater.from(c);
         customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
+        String name = m.getTitle();
+        double rating = 4.5;
+
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
         ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
 
+
+        ImageView[] ratingStars = new ImageView[5];
+        ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
+        ratingStars[1] = (ImageView) customView.findViewById(R.id.gym_star_2);
+        ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
+        ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
+        ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
+
         // Slaskkod, att göra bättre/ta bort:
-        double rating = 4.5;
         ((ImageView) customView.findViewById(R.id.gym_star_1)).setImageResource(R.drawable.ic_star_empty);
         ((ImageView) customView.findViewById(R.id.gym_star_2)).setImageResource(R.drawable.ic_star_empty);
         ((ImageView) customView.findViewById(R.id.gym_star_3)).setImageResource(R.drawable.ic_star_empty);
         ((ImageView) customView.findViewById(R.id.gym_star_4)).setImageResource(R.drawable.ic_star_empty);
         ((ImageView) customView.findViewById(R.id.gym_star_5)).setImageResource(R.drawable.ic_star_empty);
-        ImageView[] ratingStars = new ImageView[5];
         ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
         ratingStars[1] = (ImageView) customView.findViewById(R.id.gym_star_2);
         ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
