@@ -33,7 +33,7 @@
                 android:singleLine="false"
                 android:textColor="#ff000000"
                 android:textSize="12sp"
-                 /> <!-- Storleken på texten raden ovan denna -->
+                 />
 
         </LinearLayout>
 
@@ -42,16 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-<!--
-            <ImageView
-                android:id="@+id/gym_ratings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:adjustViewBounds="true"
-                android:layout_gravity="start"/>
-                -->
-            <!-- addera fem tomma stjärnor härunder, och ta bort imageviewen med id gym_ratings-->
             <ImageView
                 android:id="@+id/gym_star_1"
                 android:layout_width="wrap_content"
@@ -93,9 +83,8 @@
                 android:singleLine="false"
                 android:textColor="#ff000000"
                 android:textSize="12sp"
-                /> <!-- Storleken på texten raden ovan denna -->
+                />
             />
-
         </LinearLayout>
 
         <!-- rad 3: -->
@@ -107,8 +96,6 @@
             android:layout_weight="1"
             android:onClick="markerButton"
             android:text="@string/visa_mer" />
-
-
 
     </LinearLayout>
 

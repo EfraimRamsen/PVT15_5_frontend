@@ -76,7 +76,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
          * Om vi vill skicka med information med en marker gör man som följer.
          * Skillnaden gentemot innan är att man skapar en Marker som refererar till den MarkerOptions
          * man skapar, och sedan adderar en tag medelest marker.setTag(Object o);
-         * Denna tag läses sedan av i CustomMapMarker, under getInfoContents-metoden som har ett
+         * Denna tag läses sedan av i CustomMapMarker.java, under getInfoContents-metoden som har ett
          * Marker-objekt som argument.
          */
         Marker marker = googleMap.addMarker((new MarkerOptions()
