@@ -35,16 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
         intent = getIntent();
         if (intent.hasExtra("profile")) {
+            bottomNavigation.setSelectedItemId(R.id.nav_challenges);
             fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
             fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
             fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
             active = fragment1;
         } else if (intent.hasExtra("my")) {
+            bottomNavigation.setSelectedItemId(R.id.nav_add_challenge);
             fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
             fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
             fm.beginTransaction().add(R.id.fragment_container,fragment2, "2").commit();
             active = fragment2;
         } else if (intent.hasExtra("find")) {
+            bottomNavigation.setSelectedItemId(R.id.nav_map);
             fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
             fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").hide(fragment1).commit();
             fm.beginTransaction().add(R.id.fragment_container,fragment3, "3").commit();
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
