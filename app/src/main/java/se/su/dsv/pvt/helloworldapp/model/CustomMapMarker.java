@@ -72,6 +72,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
 
         ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(rating));
+        ((TextView) customView.findViewById(R.id.gym_challenges)).setText(new String("12 inmaningar"));
 
         if (rating >= 0.25) {
             for (int i = 0; i <= 4; i++) {

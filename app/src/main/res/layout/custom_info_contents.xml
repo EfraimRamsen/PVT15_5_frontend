@@ -6,14 +6,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp">
 
         <!-- rad 1: -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp">
+            >
 
             <ImageView
                 android:id="@+id/gym_icon"
@@ -41,43 +43,44 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
             <ImageView
                 android:id="@+id/gym_star_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
                 android:layout_marginLeft="1dp"
                 android:adjustViewBounds="true"
                 android:layout_gravity="start"/>
             <ImageView
                 android:id="@+id/gym_star_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
                 android:layout_marginLeft="1dp"
                 android:adjustViewBounds="true" />
             <ImageView
                 android:id="@+id/gym_star_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
                 android:layout_marginLeft="1dp"
                 android:adjustViewBounds="true" />
             <ImageView
                 android:id="@+id/gym_star_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
                 android:layout_marginLeft="1dp"
                 android:adjustViewBounds="true" />
             <ImageView
                 android:id="@+id/gym_star_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
                 android:layout_marginLeft="1dp"
                 android:adjustViewBounds="true" />
 
             <TextView
                 android:id="@+id/gym_ratings_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
                 android:layout_gravity="end"
                 android:ellipsize="end"
                 android:singleLine="false"
@@ -88,7 +91,29 @@
         </LinearLayout>
 
         <!-- rad 3: -->
-        <Button
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+            <TextView
+                android:id="@+id/gym_challenges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:textColor="#ff000000"
+                android:textSize="12sp"
+                />
+
+        </LinearLayout>
+
+        <!-- rad 4: -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+            <Button
             android:id="@+id/gym_button_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,6 +121,7 @@
             android:layout_weight="1"
             android:onClick="markerButton"
             android:text="@string/visa_mer" />
+        </LinearLayout>
 
     </LinearLayout>
 
