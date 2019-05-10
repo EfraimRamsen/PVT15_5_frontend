@@ -14,4 +14,10 @@ public class OutdoorGym extends Place {
         super(location, name, id);
         this.description = description;
     }
+    public String getDescription() {
+        return this.description;
+    }
+    public void setDescription(String s) {
+        this.description = s;
+    }
 }
