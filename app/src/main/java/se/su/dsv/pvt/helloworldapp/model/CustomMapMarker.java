@@ -27,6 +27,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         this.c = c;
     }
 
+    // This needs to return null for the program to use getInfoContents()
     @Override
     public View getInfoWindow(Marker m) {
         return null;
@@ -50,7 +51,15 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
         ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
+        setRatingStars(rating);
 
+        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(rating));
+        ((TextView) customView.findViewById(R.id.gym_challenges)).setText(new String("12 inmaningar"));
+
+        return customView;
+    }
+
+    private void setRatingStars(double rating) {
 
         ImageView[] ratingStars = new ImageView[5];
         ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
@@ -59,7 +68,6 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
         ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
 
-        // Slaskkod, att göra bättre/ta bort:
         ((ImageView) customView.findViewById(R.id.gym_star_1)).setImageResource(R.drawable.ic_star_empty);
         ((ImageView) customView.findViewById(R.id.gym_star_2)).setImageResource(R.drawable.ic_star_empty);
         ((ImageView) customView.findViewById(R.id.gym_star_3)).setImageResource(R.drawable.ic_star_empty);
@@ -70,9 +78,6 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
         ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
         ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
-
-        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(rating));
-        ((TextView) customView.findViewById(R.id.gym_challenges)).setText(new String("12 inmaningar"));
 
         if (rating >= 0.25) {
             for (int i = 0; i <= 4; i++) {
@@ -89,6 +94,5 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
                 rating = rating - 1.0;
             }
         }
-        return customView;
     }
 }
