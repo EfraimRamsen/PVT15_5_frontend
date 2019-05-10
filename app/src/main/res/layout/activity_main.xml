@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/mint"
+        android:background="@color/babygul"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
         app:menu="@menu/bottom_navigation" />
   
