@@ -48,23 +48,24 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            TextView titel = (TextView) findViewById(R.id.main_title_text);
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
                     fm.beginTransaction().hide(active).show(fragment1).commit();
                     active = fragment1;
-                    // De två raderna här under ändrar texten på titeln.
-                    TextView titel = (TextView) findViewById(R.id.main_title_text);
-                    titel.setText(new String("bananer"));
+                    titel.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
                     fm.beginTransaction().hide(active).show(fragment2).commit();
                     active = fragment2;
+                    titel.setText(R.string.add_challenge);
                     return true;
 
                 case R.id.nav_map:
                     fm.beginTransaction().hide(active).show(fragment3).commit();
                     active = fragment3;
+                    titel.setText(R.string.map);
                     return true;
             }
             return false;
