@@ -3,18 +3,17 @@
 
 
     <item
-        android:id="@+id/nav_challenges"
-        android:icon="@drawable/barbell_pic"
-        android:title="@string/challenges"/>
+        android:id="@+id/nav_map"
+        android:icon="@drawable/map_pic"
+        android:title="@string/map"/>
     <item
         android:id="@+id/nav_add_challenge"
         android:icon="@drawable/plus_symbol"
         android:title="@string/add_challenge" />
     <item
-        android:id="@+id/nav_map"
-        android:icon="@drawable/map_pic"
-        android:title="@string/map"/>
-
+        android:id="@+id/nav_challenges"
+        android:icon="@drawable/barbell_pic"
+        android:title="@string/challenges"/>
 
 
 </menu>
