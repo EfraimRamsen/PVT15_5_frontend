@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import se.su.dsv.pvt.helloworldapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_challenges:
                     fm.beginTransaction().hide(active).show(fragment1).commit();
                     active = fragment1;
+                    // De två raderna här under ändrar texten på titeln.
+                    TextView titel = (TextView) findViewById(R.id.main_title_text);
+                    titel.setText(new String("bananer"));
                     return true;
 
                 case R.id.nav_add_challenge:
