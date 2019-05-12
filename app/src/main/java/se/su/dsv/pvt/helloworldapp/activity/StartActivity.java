@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
@@ -22,27 +23,27 @@ public class StartActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        Button profileBtn = (Button) findViewById(R.id.btnProfile);
+        ImageButton profileBtn = (ImageButton) findViewById(R.id.profileBtn);
         profileBtn.setOnClickListener(this);
-        Button myChallengesBtn = (Button) findViewById(R.id.btnMyChallenges);
+        ImageButton myChallengesBtn = (ImageButton) findViewById(R.id.myChallengesBtn);
         myChallengesBtn.setOnClickListener(this);
-        Button findChallangesBtn = (Button) findViewById(R.id.btnMyChallenges);
+        ImageButton findChallangesBtn = (ImageButton) findViewById(R.id.mapBtn);
         findChallangesBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnProfile) {
+        if (v.getId() == R.id.profileBtn) {
             System.out.println("profil");
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("profile", PROFILE_VIEW);
             v.getContext().startActivity(intent);
-        } else if (v.getId() == R.id.btnMyChallenges) {
+        } else if (v.getId() == R.id.myChallengesBtn) {
             System.out.println("mina utmaningar");
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("my", MY_CHALLENGES_VIEW);
             v.getContext().startActivity(intent);
-        } else if (v.getId() == R.id.btnFindChallenges) {
+        } else if (v.getId() == R.id.mapBtn) {
             System.out.println("hitta challenge");
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("find", FIND_CHALLENGES_VIEW);

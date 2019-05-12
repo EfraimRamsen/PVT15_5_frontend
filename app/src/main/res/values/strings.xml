@@ -4,7 +4,8 @@
     <string name="map">Karta</string>
     <string name="profile">Profil</string>
     <string name="add_challenge">Ny Utmaning</string>
-    <string name="challenges">Mina Utmaningar</string>
+    <string name="challenges">Mina \nutmaningar</string>
+    <string name="find_challenges">Hitta \nutmaning</string>
     <string name="back_button">Back_button</string>
 
     <string name="main_title">Utemaning</string>
