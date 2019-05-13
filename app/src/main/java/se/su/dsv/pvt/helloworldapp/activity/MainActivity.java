@@ -2,6 +2,7 @@ package se.su.dsv.pvt.helloworldapp.activity;
 
 import se.su.dsv.pvt.helloworldapp.fragment.*;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
