@@ -4,15 +4,16 @@
 
     <item
         android:id="@+id/nav_challenges"
-        android:icon="@drawable/ic_fitness_center_black_24dp"
-        android:title="@string/challenges"/>
+        android:icon="@drawable/barbell_pic"
+        android:title="@string/challenges"
+        android:titleCondensed="@string/challenges"/>
     <item
         android:id="@+id/nav_add_challenge"
-        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:icon="@drawable/plus_symbol"
         android:title="@string/add_challenge" />
     <item
         android:id="@+id/nav_map"
-        android:icon="@drawable/ic_place_black_24dp"
+        android:icon="@drawable/map_pic"
         android:title="@string/map"/>
 
 
