@@ -3,7 +3,7 @@
     <color name="colorPrimary">#49E20D</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#fcd3c4</color>
-    <color name="mint">#d5f9cc</color>
-    <color name="babygul">#FCFCC9</color>
+    <color name="mint">#D3FFD5</color>
+    <color name="babygul">#FFFCDF</color>
     <color name="grisrosa">#fcd3c4</color>
 </resources>
