@@ -18,9 +18,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.model.CustomMapMarker;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
@@ -47,6 +49,9 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        // Denna här raden sätter sätter custommarker istället för standard:
+        map.setInfoWindowAdapter(new CustomMapMarker(getContext()));
+
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(new LatLng(59.3246656, 18.0410247))
                 .zoom(10.5f)
@@ -54,17 +59,40 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                 .tilt(0)
                 .build();
 
+        /**
+         * TODO:
+         * - we should probably create a better way of reading and adding the markers to the map.
+         * This is probably something we do after adding all the markers, and finishing the Gym-class.
+         * - Are we always going to show every marker, or will we give the user the ability to show
+         * every marker that's, say, 3 km from the users location?
+         */
+        /*
         googleMap.addMarker((new MarkerOptions()
                 .position(new LatLng(59.344187, 18.099205))
                 .title("Utegym - Östermalm")
                 .snippet("Tessinparkens norra del nära parkleken.")
+        ));*/
+        /**
+         * Om vi vill skicka med information med en marker gör man som följer.
+         * Skillnaden gentemot innan är att man skapar en Marker som refererar till den MarkerOptions
+         * man skapar, och sedan adderar en tag medelest marker.setTag(Object o);
+         * Denna tag läses sedan av i CustomMapMarker.java, under getInfoContents-metoden som har ett
+         * Marker-objekt som argument.
+         */
+        Marker marker = googleMap.addMarker((new MarkerOptions()
+                .position(new LatLng(59.344187, 18.099205))
+                .title("Utegym - Östermalm")
+                .snippet("Tessinparkens norra del nära parkleken.")
         ));
+        marker.setTag(new String("this is not a gym"));
 
+        /*
         googleMap.addMarker((new MarkerOptions()
                 .position(new LatLng(59.357905, 17.865372))
                 .title("Grimsta utegym")
                 .snippet("Utegymmet är placerat invid Grimsta bollplan.")
         ));
+        */
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
