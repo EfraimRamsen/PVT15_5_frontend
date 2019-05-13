@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDFEE2">
+    android:background="@drawable/gradient_background">
 
 
     <ImageButton
@@ -89,7 +89,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:labelFor="@id/myChallengesBtn"
-        android:text="@string/challenges"
+        android:text="@string/challenges_start_page"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +106,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:labelFor="@id/mapBtn"
-        android:text="@string/find_challenges"
+        android:text="@string/find_challenges_start_page"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -125,12 +125,29 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:scaleType="centerInside"
+        android:src="@drawable/utemaning_logo_test"
         app:layout_constraintBottom_toTopOf="@+id/myChallengesBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657"
-        android:src="@drawable/utemaning_logo_test" />
+        app:layout_constraintVertical_bias="0.657" />
+
+    <!--Nedan är exempel på om man vill få knapp-ikonerna i högre upplösning - då måste man göra om knapparna-->
+    <!--<ImageButton-->
+    <!--android:id="@+id/imageButton3"-->
+    <!--android:layout_width="125dp"-->
+    <!--android:layout_height="125dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:background="@drawable/roundedbackground"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/myChallengesTxt"-->
+    <!--android:src="@drawable/barbell_pic" />-->
 
 </android.support.constraint.ConstraintLayout>
