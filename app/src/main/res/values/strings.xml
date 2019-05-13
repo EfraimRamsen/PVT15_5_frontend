@@ -3,8 +3,9 @@
     <string name="start_text">Utemaning</string>
     <string name="map">Hitta utmaning</string>
     <string name="profile">Profil</string>
+    <string name="challenges">Mina \nutmaningar</string>
+    <string name="find_challenges">Hitta \nutmaning</string>
     <string name="add_challenge">Skapa utmaning</string>
-    <string name="challenges">Mina utmaningar</string>
     <string name="back_button">Back_button</string>
 
     <string name="main_title">Utemaning</string>
