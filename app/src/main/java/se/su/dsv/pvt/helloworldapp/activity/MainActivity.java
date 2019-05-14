@@ -103,14 +103,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    /**
-     * this corresponds with the button in the bottom of the custom marker-popup which shows
-     * "+ visa mer".
-     * @param v
-     */
-    public void markerButton(View v) {
-        ;
-    }
-
-
 }

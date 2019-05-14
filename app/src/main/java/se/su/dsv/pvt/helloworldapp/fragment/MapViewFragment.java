@@ -86,13 +86,13 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         ));
         marker.setTag(new String("this is not a gym"));
 
-        /*
-        googleMap.addMarker((new MarkerOptions()
+
+        Marker marker1 = googleMap.addMarker((new MarkerOptions()
                 .position(new LatLng(59.357905, 17.865372))
                 .title("Grimsta utegym")
                 .snippet("Utegymmet är placerat invid Grimsta bollplan.")
         ));
-        */
+        marker1.setTag(new String("detta är inte heller ett gym"));
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -103,6 +103,17 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
         //        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); // icke-animerad
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); //animerad laddning av kartan
+
+
+        /**
+         * Denna metod används när man klickar på popupen av en mapmarker!
+         */
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                System.out.println("do stuff  -- " + marker.getTitle());
+            }
+        });
 
     }
 
