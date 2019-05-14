@@ -9,7 +9,7 @@
     android:background="@drawable/gradient_background">
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/challenge"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText13"
+        android:id="@+id/challengeText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -34,10 +34,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/challenge" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/description"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
@@ -47,10 +47,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText13" />
+        app:layout_constraintTop_toBottomOf="@+id/challengeText" />
 
     <EditText
-        android:id="@+id/editText14"
+        android:id="@+id/descriptionText"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
@@ -62,10 +62,10 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/location"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
@@ -75,10 +75,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText14" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
     <EditText
-        android:id="@+id/editText15"
+        android:id="@+id/locationPicker"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -89,10 +89,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/location" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/date"
         android:layout_width="87dp"
         android:layout_height="30dp"
         android:layout_marginStart="56dp"
@@ -100,10 +100,10 @@
         android:text="*Datum"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText15" />
+        app:layout_constraintTop_toBottomOf="@+id/locationPicker" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/time"
         android:layout_width="134dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
@@ -111,10 +111,10 @@
         android:text="*Tid"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText15" />
+        app:layout_constraintTop_toBottomOf="@+id/locationPicker" />
 
     <EditText
-        android:id="@+id/editText16"
+        android:id="@+id/dateText"
         android:layout_width="129dp"
         android:layout_height="40dp"
         android:layout_marginStart="56dp"
@@ -123,10 +123,10 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <EditText
-        android:id="@+id/editText18"
+        android:id="@+id/timeText"
         android:layout_width="129dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
@@ -135,10 +135,10 @@
         android:ems="10"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/cancelButton"
         android:layout_width="135dp"
         android:layout_height="55dp"
         android:layout_marginStart="56dp"
@@ -146,10 +146,10 @@
         android:background="@drawable/rounded_button"
         android:text="Avbryt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText16" />
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/createButton"
         android:layout_width="135dp"
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
@@ -157,6 +157,6 @@
         android:background="@drawable/rounded_button2"
         android:text="Skapa"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText18" />
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
 </android.support.constraint.ConstraintLayout>
