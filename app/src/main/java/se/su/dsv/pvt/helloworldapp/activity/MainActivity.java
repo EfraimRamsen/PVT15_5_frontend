@@ -21,13 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.Location;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
@@ -151,13 +150,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<OutdoorGym> call, Response<OutdoorGym> response) {
                 try {
-                    LatLng location = response.body().getLocation(); // formatet på LatLng?
+                    Double posX = response.body().getLocation().getX(); // formatet på LatLng?
+                    Double posY = response.body().getLocation().getY();
+                    Location location = new Location(posX, posY);
                     String name = response.body().getName();
                     int id = response.body().getId();
                     ArrayList<Challenge> challengeList = response.body().getChallengeList(); // kanske borde vara Array?
                     String description = response.body().getDescription();
 
-                    Log.d(TAG, "Received data: " + location + ", " + name + ", "  + id + ", " + challengeList + ", " + description);
+
+                    // TEST - SÄTTER ETT GYM PÅ KARTAN
+                    OutdoorGym outdoorGym = new OutdoorGym(location, name, id, description);
+                    MapViewFragment.addOutdoorGym(outdoorGym);
+                    // TEST END
+
+                    Log.d(TAG, "Received data: " + posX + ", " + posY + ", " + name + ", "  + id + ", " + challengeList + ", " + description);
                 } catch (NullPointerException e) {
                     System.out.println("API-data contained null.");
                     Log.d(TAG, "API-data contained null.");

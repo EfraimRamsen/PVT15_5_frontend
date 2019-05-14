@@ -23,10 +23,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.CustomMapMarker;
+import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
+    private static OutdoorGym outdoorGym; // tillfällig / FUL LÖSNING FÖR ATT TA EMOT GYMOBJEKT
 
     @Nullable
     @Override
@@ -50,7 +52,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // Denna här raden sätter sätter custommarker istället för standard:
-        map.setInfoWindowAdapter(new CustomMapMarker(getContext()));
+        googleMap.setInfoWindowAdapter(new CustomMapMarker(getContext()));
 
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(new LatLng(59.3246656, 18.0410247))
@@ -86,6 +88,17 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         ));
         marker.setTag(new String("this is not a gym"));
 
+
+        // TEST - SÄTTER ETT GYM PÅ KARTAN
+        Marker outdoorGymMarker = googleMap.addMarker((
+                new MarkerOptions().
+                        position(outdoorGym.getLocation().getLatLng())
+                        .title(outdoorGym.getName())
+                        .snippet(outdoorGym.getDescription())
+            )
+        );
+        // TEST END
+
         /*
         googleMap.addMarker((new MarkerOptions()
                 .position(new LatLng(59.357905, 17.865372))
@@ -104,6 +117,11 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         //        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); // icke-animerad
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); //animerad laddning av kartan
 
+    }
+
+    //  tillfällig ful lösning
+    public static void addOutdoorGym(OutdoorGym outdoorGymObject) {
+        outdoorGym = outdoorGymObject;
     }
 
     public static final int PERMISSIONS_REQUEST_LOCATION = 99;

@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class OutdoorGym extends Place {
     private String description;
 
-    public OutdoorGym(LatLng location, String name, int id, String description) {
+    public OutdoorGym(Location location, String name, int id, String description) {
         super(location, name, id);
         this.description = description;
     }
