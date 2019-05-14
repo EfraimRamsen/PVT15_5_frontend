@@ -1,18 +1,26 @@
 package se.su.dsv.pvt.helloworldapp.model;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Location {
 
-    private double x;
-    private double y;
+    @SerializedName("x")
+    @Expose
+    private Double x;
+    @SerializedName("y")
+    @Expose
+    private Double y;
+
     private LatLng latLng;
 
-    public Location(double lat, double lng) {
-        x = lat;
-        y = lng;
+    public Location(Double x, Double y) {
+        this.x = x;
+        this.y = y;
+    }
 
-        latLng = new LatLng(lat, lng);
+    public Location() {
     }
 
     public double getX() {
@@ -35,7 +43,12 @@ public class Location {
         this.y = y;
     }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
+    public void setLatLng(double x, double y) {
+        this.latLng = new LatLng(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "x: " + x + " y: " + y+ "latLng: " + latLng;
     }
 }

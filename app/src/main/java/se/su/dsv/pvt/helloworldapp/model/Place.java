@@ -1,19 +1,32 @@
 package se.su.dsv.pvt.helloworldapp.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public abstract class Place {
+    @SerializedName("location")
+    @Expose
     private Location location; // detta är en egen klass i backend-sidan, men detta är vad appen behöver.
+    @SerializedName("name")
+    @Expose
     private String name;
-    private int id;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     ArrayList<Challenge> challengeList = new ArrayList<>();
 
-    public Place(Location location, String name, int id) {
-        this.location = location;
+    public Place(Location location, String name, Integer id) {
+        super();
+        this.location =  location;
         this.name = name;
         this.id = id;
-
     }
+
+    public Place() {
+    }
+
     public void addChallange(Challenge newChallenge){
         challengeList.add(newChallenge);
     }
@@ -46,4 +59,8 @@ public abstract class Place {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + id + " " + location;
+    }
 }
