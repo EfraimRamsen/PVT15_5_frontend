@@ -22,14 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import se.su.dsv.pvt.helloworldapp.R;
-//import se.su.dsv.pvt.helloworldapp.model.Location;
-import se.su.dsv.pvt.helloworldapp.model.Location;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
@@ -58,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
         intent = getIntent();
-        if (intent.hasExtra("profile")) {
+        if (intent.hasExtra("my")) {
             bottomNavigation.setSelectedItemId(R.id.nav_challenges);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").commit();
             active = challengeFragment;
-        } else if (intent.hasExtra("my")) {
+        } else if (intent.hasExtra("add")) {
             bottomNavigation.setSelectedItemId(R.id.nav_add_challenge);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").hide(challengeFragment).commit();
