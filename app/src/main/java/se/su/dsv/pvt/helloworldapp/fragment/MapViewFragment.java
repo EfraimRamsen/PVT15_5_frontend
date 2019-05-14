@@ -81,14 +81,16 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
          * Denna tag läses sedan av i CustomMapMarker.java, under getInfoContents-metoden som har ett
          * Marker-objekt som argument.
          */
+        /*
         Marker marker = googleMap.addMarker((new MarkerOptions()
                 .position(new LatLng(59.344187, 18.099205))
                 .title("Utegym - Östermalm")
                 .snippet("Tessinparkens norra del nära parkleken.")
         ));
         marker.setTag(new String("this is not a gym"));
+        */
 
-
+        /*
         // TEST - SÄTTER ETT GYM PÅ KARTAN
         Marker outdoorGymMarker = googleMap.addMarker((
                 new MarkerOptions().
@@ -97,7 +99,16 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                         .snippet(outdoorGym.getDescription())
             )
         );
+
         // TEST END
+        */
+        // TEST NIKLAS
+        OutdoorGym oG = new OutdoorGym(outdoorGym.getLocation(), "majs", 25, "hejhej" );
+        Marker bengt = googleMap.addMarker(new MarkerOptions().position(oG.getLocation().getLatLng()));
+        bengt.setTag(oG);
+        // SLUT TEST
+
+
 
         /*
         googleMap.addMarker((new MarkerOptions()

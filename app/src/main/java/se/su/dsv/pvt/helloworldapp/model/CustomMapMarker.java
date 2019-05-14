@@ -44,6 +44,23 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         /**
          * få tag på information från markern här någonstans: String name, double betyg/stjärnor.
          */
+
+        LayoutInflater layoutInflater = LayoutInflater.from(c);
+        customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
+        Place place = (Place) m.getTag();
+
+        ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
+        ((TextView) customView.findViewById(R.id.gym_name)).setText(place.getName());
+
+        ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
+        setRatingStars(4); //HÅRDKODAT!!!
+        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(4)); //HÅRDKODAT!!!
+
+        ((TextView) customView.findViewById(R.id.gym_challenges)).setText(place.getChallengeList().size() + " utmaningar"); //Oerhört fult, but works.
+
+        return customView;
+
+        /*
         LayoutInflater layoutInflater = LayoutInflater.from(c);
         customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
         String name = m.getTitle();
@@ -57,6 +74,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ((TextView) customView.findViewById(R.id.gym_challenges)).setText(new String("12 inmaningar"));
 
         return customView;
+        */
     }
 
     private void setRatingStars(double rating) {
@@ -82,8 +100,6 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         if (rating >= 0.25) {
             for (int i = 0; i <= 4; i++) {
                 ImageView iT = ratingStars[i];
-                System.out.println(i);
-                System.out.println(rating);
                 if (rating >= 0.25){
                     iT.setImageResource(R.drawable.ic_star_half);
                 }
