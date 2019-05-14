@@ -77,7 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
-
     <Spinner
         android:id="@+id/locationPicker"
         android:layout_width="300dp"
@@ -92,12 +91,19 @@
         android:layout_height="wrap_content"
         android:text="@string/datum"
         android:onClick="showDatePickerDialog"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginStart="56dp"
         android:layout_alignParentStart="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationPicker"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:text="@string/datum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateButton"/>
 
     <Button
         android:id="@+id/timeButton"
@@ -111,6 +117,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationPicker"/>
 
+    <TextView
+        android:id="@+id/time"
+        android:text="@string/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateButton"/>
+
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="135dp"
@@ -120,7 +135,7 @@
         android:background="@drawable/rounded_button"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <Button
         android:id="@+id/createButton"
@@ -131,7 +146,7 @@
         android:background="@drawable/rounded_button2"
         android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
 
 </android.support.constraint.ConstraintLayout>
