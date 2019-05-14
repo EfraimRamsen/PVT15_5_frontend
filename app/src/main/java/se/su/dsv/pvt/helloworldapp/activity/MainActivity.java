@@ -11,6 +11,7 @@ import se.su.dsv.pvt.helloworldapp.fragment.*;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -124,13 +125,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    /**
-     * this corresponds with the button in the bottom of the custom marker-popup which shows
-     * "+ visa mer".
-     * @param v
-     */
-    public void markerButton(View v) {
-        ;
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     public void connectAndGetApiData() {
@@ -181,4 +178,9 @@ public class MainActivity extends AppCompatActivity {
 //    public List<OutdoorGym> getPlaces() {
 //        return outdoorGyms;
 //    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
 }

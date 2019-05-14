@@ -9,9 +9,15 @@
     <string name="find_challenges_start_page">Hitta \nutmaning</string>
     <string name="add_challenge">Skapa utmaning</string>
     <string name="back_button">Back_button</string>
-
     <string name="main_title">Utemaning</string>
     <string name="map_title">Hitta utmaning</string>
     <string name="profile_title">Profil</string>
     <string name="visa_mer">+ Visa mer</string>
+    <string name="description">* Beskrivning</string>
+    <string name="location">* Välj plats</string>
+    <string name="time">Tid</string>
+    <string name="datum">Datum</string>
+    <string name="challenge">* Utmaning</string>
+    <string name="cancel">Avbryt</string>
+    <string name="create">Skapa</string>
 </resources>

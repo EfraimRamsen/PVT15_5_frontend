@@ -3,6 +3,7 @@ package se.su.dsv.pvt.helloworldapp.model;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -72,7 +73,8 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
         ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(rating));
         ((TextView) customView.findViewById(R.id.gym_challenges)).setText(new String("12 inmaningar"));
-
+        Button button = (Button)customView.findViewById(R.id.gym_button_link);
+        button.setTag(new String("bajs"));
         return customView;
         */
     }
