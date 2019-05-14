@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gyms">
+        <item>Akalla Gårds utegym</item>
+        <item>Björkhagens utegym</item>
+        <item>Bredängs utegym</item>
+        <item>Brotorp utegym</item>
+        <item>Eriksdal utegym</item>
+        <item>Fagersjöskogens utegym</item>
+        <item>Farsta utegym</item>
+        <item>Farstanäsets utegym</item>
+        <item>Farstastrandsbadets utegym</item>
+        <item>Flatenbadet utegym</item>
+        <item>Fruängens utegym</item>
+        <item>Grimsta utegym</item>
+        <item>Grimstafältet - Grimsta mostionsspår</item>
+        <item>Gärdet utegym</item>
+        <item>Hammarby Sjöstads utegym</item>
+        <item>Hellasgårdens utegym</item>
+        <item>Hjorthagens utegym</item>
+        <item>Hornsbergs strands utegym</item>
+        <item>Hökarängsbadets utegym</item>
+        <item>Kaknäs utegym</item>
+        <item>Kanaanbadets utegym</item>
+        <item>Kronobergsparkens utegym</item>
+        <item>Kungsholms strandstigs utegym</item>
+        <item>Kärrtorp utegym</item>
+        <item>Lappkärrsbergets utegym, Docentbacken</item>
+        <item>Liljeholmens utegym</item>
+        <item>Lillsjöns utegym</item>
+        <item>Mellanbergsparkens utegym</item>
+        <item>Mälarhöjdsbadets utegym</item>
+        <item>Nytorpsgärdets utegym</item>
+        <item>Nälsta utegym</item>
+        <item>Oppundaparkens utegym</item>
+        <item>Pålsundsparkens utegym</item>
+        <item>Rålambshovsparkens utegym</item>
+        <item>Sannadalsparkens utegym</item>
+        <item>Skarpnäcksfältets utegym</item>
+        <item>Skärholmens utegym</item>
+        <item>Smedsuddsbadets utegym</item>
+        <item>Solviks utegym</item>
+        <item>Spånga utegym</item>
+        <item>Spånga IP utegym</item>
+        <item>Stora Mossens utegym</item>
+        <item>Stora Sköndals utegym</item>
+        <item>Stråkets utegym</item>
+        <item>Sätra IP utegym</item>
+        <item>Sätradals utegym</item>
+        <item>Sätrastrandsbadet utegym</item>
+        <item>Tanto strandbads utegym</item>
+        <item>Uteträffen i Tessinparken, utegym för seniorer</item>
+        <item>Vanadislundens utegym</item>
+        <item>Vasaparkens utegym</item>
+        <item>Vintervikens utegym</item>
+        <item>Vårgårdens utegym</item>
+        <item>Ågesta utegym</item>
+        <item>Årstaskogens utegym</item>
+        <item>Årstavikens utegym</item>
+        <item>Östberga utegym</item>
+    </string-array>
+</resources>
