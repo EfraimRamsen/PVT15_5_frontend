@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,13 +19,16 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+import java.util.List;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.CustomMapMarker;
+import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Place;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
+    private List<OutdoorGym> outdoorGyms;
 
     @Nullable
     @Override
@@ -46,11 +48,9 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
-
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
         // Denna här raden sätter sätter custommarker istället för standard:
-        map.setInfoWindowAdapter(new CustomMapMarker(getContext()));
+        googleMap.setInfoWindowAdapter(new CustomMapMarker(getContext()));
 
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(new LatLng(59.3246656, 18.0410247))
@@ -59,6 +59,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                 .tilt(0)
                 .build();
 
+
         /**
          * TODO:
          * - we should probably create a better way of reading and adding the markers to the map.
@@ -66,12 +67,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
          * - Are we always going to show every marker, or will we give the user the ability to show
          * every marker that's, say, 3 km from the users location?
          */
-        /*
-        googleMap.addMarker((new MarkerOptions()
-                .position(new LatLng(59.344187, 18.099205))
-                .title("Utegym - Östermalm")
-                .snippet("Tessinparkens norra del nära parkleken.")
-        ));*/
+
         /**
          * Om vi vill skicka med information med en marker gör man som följer.
          * Skillnaden gentemot innan är att man skapar en Marker som refererar till den MarkerOptions
@@ -79,20 +75,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
          * Denna tag läses sedan av i CustomMapMarker.java, under getInfoContents-metoden som har ett
          * Marker-objekt som argument.
          */
-        Marker marker = googleMap.addMarker((new MarkerOptions()
-                .position(new LatLng(59.344187, 18.099205))
-                .title("Utegym - Östermalm")
-                .snippet("Tessinparkens norra del nära parkleken.")
-        ));
-        marker.setTag(new String("this is not a gym"));
 
-
-        Marker marker1 = googleMap.addMarker((new MarkerOptions()
-                .position(new LatLng(59.357905, 17.865372))
-                .title("Grimsta utegym")
-                .snippet("Utegymmet är placerat invid Grimsta bollplan.")
-        ));
-        marker1.setTag(new String("detta är inte heller ett gym"));
+        // TEST NIKLAS
+//        OutdoorGym oG = new OutdoorGym(outdoorGym.getLocation(), "majs", 25, "hejhej" );
+//        Marker bengt = googleMap.addMarker(new MarkerOptions().position(oG.getLocation().getLatLng()));
+//        bengt.setTag(oG);
+        // SLUT TEST
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -115,6 +103,24 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+    }
+
+    public void addOutdoorGymList(List<OutdoorGym> outdoorGyms) {
+        // Två första raderna - om man vill komma åt activity-metoderna
+//        MainActivity mainActivity = (MainActivity) getActivity();
+//        outdoorGyms = mainActivity.getPlaces();
+        this.outdoorGyms = outdoorGyms;
+    }
+
+    public void addAllPlacesToMap() {
+        for (Place place : outdoorGyms) {
+            try {
+                Marker marker = googleMap.addMarker(new MarkerOptions().position(place.getLocation().getLatLng()));
+                marker.setTag(place);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Null i: " + place);
+            }
+        }
     }
 
     public static final int PERMISSIONS_REQUEST_LOCATION = 99;

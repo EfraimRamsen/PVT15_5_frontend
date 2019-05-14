@@ -1,20 +1,32 @@
 package se.su.dsv.pvt.helloworldapp.model;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 public abstract class Place {
-    private LatLng location; // detta är en egen klass i backend-sidan, men detta är vad appen behöver.
+    @SerializedName("location")
+    @Expose
+    private Location location; // detta är en egen klass i backend-sidan, men detta är vad appen behöver.
+    @SerializedName("name")
+    @Expose
     private String name;
-    private int id;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     ArrayList<Challenge> challengeList = new ArrayList<>();
 
-    public Place(LatLng location, String name, int id) {
-        this.location = location;
+    public Place(Location location, String name, Integer id) {
+        super();
+        this.location =  location;
         this.name = name;
         this.id = id;
     }
+
+    public Place() {
+    }
+
     public void addChallange(Challenge newChallenge){
         challengeList.add(newChallenge);
     }
@@ -24,11 +36,14 @@ public abstract class Place {
     public ArrayList<Challenge> getChallengeList() {
         return challengeList;
     }
+    public void setChallengeList(ArrayList<Challenge> challengeList) {
+        this.challengeList = challengeList;
+    }
 
-    public LatLng getLocation() {
+    public Location getLocation() {
         return location;
     }
-    public void setLocation(LatLng location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
     public String getName() {
@@ -42,5 +57,10 @@ public abstract class Place {
     }
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + id + " " + location;
     }
 }

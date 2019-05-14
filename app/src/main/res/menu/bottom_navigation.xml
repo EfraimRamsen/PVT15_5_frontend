@@ -5,7 +5,7 @@
     <item
         android:id="@+id/nav_map"
         android:icon="@drawable/map_pic"
-        android:title="@string/map"/>
+        android:title="@string/map" />
     <item
         android:id="@+id/nav_add_challenge"
         android:icon="@drawable/plus_symbol"
@@ -14,7 +14,7 @@
         android:id="@+id/nav_challenges"
         android:icon="@drawable/barbell_pic"
         android:title="@string/challenges"
-        android:titleCondensed="@string/challenges" />
+        android:titleCondensed="@string/challenges"/>
 
 
 </menu>
