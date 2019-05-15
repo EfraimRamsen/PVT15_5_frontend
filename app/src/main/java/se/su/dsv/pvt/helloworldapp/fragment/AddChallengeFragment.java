@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.Objects;
@@ -30,4 +31,5 @@ public class AddChallengeFragment extends Fragment {
 
         return view;
     }
+
 }

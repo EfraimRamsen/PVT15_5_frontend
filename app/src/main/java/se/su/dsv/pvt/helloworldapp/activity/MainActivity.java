@@ -20,12 +20,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
@@ -178,5 +180,17 @@ public class MainActivity extends AppCompatActivity {
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void createChallenge(View v){
+        EditText challengeTe = v.findViewById(R.id.challengeText);
+        EditText description = v.findViewById(R.id.descriptionText);
+        TextView date = v.findViewById(R.id.date);
+        TextView time = v.findViewById(R.id.time);
+        Challenge c = new Challenge(null, 0, null,null,0,0);
+    }
+
+    public void cancelChallenge(View v){
+
     }
 }
