@@ -21,4 +21,7 @@
     <string name="challenge">* Utmaning</string>
     <string name="cancel">Avbryt</string>
     <string name="create">Skapa</string>
+    <string name="logout">Logga ut</string>
+    <string name="active_challenges">Aktiva utmaningar</string>
+    <string name="completed_challenges">Avklarade utmaningar</string>
 </resources>
