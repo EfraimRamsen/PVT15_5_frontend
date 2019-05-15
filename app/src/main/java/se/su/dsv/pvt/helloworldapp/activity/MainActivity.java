@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         EditText description = v.findViewById(R.id.descriptionText);
         TextView date = v.findViewById(R.id.date);
         TextView time = v.findViewById(R.id.time);
-        Challenge c = new Challenge(null, 0, null,null,0,0);
+        Challenge c = new Challenge(null, null, 0,0,0,null);
     }
 
     public void cancelChallenge(View v){
