@@ -18,7 +18,7 @@ public class Challenge {
      */
     private String challenge, description;
     private int participants, challengeID, locationID;
-    private Date timeAndDate = new Date();
+    private Date timeAndDate;
 
     public Challenge(String challenge, String description, int participants, int challengeID, int locationID, Date timeAndDate){
         this.challenge = challenge;
@@ -47,6 +47,10 @@ public class Challenge {
 
     public int getLocationID(){
         return locationID;
+    }
+
+    public Date getTimeAndDate(){
+        return timeAndDate;
     }
 
 }
