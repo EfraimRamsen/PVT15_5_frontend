@@ -7,7 +7,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import se.su.dsv.pvt.helloworldapp.fragment.*;
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -33,6 +32,7 @@ import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int totalChallenges = 0;
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
@@ -183,11 +183,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createChallenge(View v){
-        EditText challengeTe = v.findViewById(R.id.challengeText);
+        EditText challenge = v.findViewById(R.id.challengeText);
+        String cString = challenge.getText().toString();
         EditText description = v.findViewById(R.id.descriptionText);
+        String dString = description.getText().toString();
         TextView date = v.findViewById(R.id.date);
         TextView time = v.findViewById(R.id.time);
-        Challenge c = new Challenge(null, null, 0,0,0,null);
+        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,null);
+        totalChallenges++;
+        active = challengeFragment;
     }
 
     public void cancelChallenge(View v){
