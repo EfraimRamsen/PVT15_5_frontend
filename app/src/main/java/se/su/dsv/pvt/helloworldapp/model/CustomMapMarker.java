@@ -3,7 +3,6 @@ package se.su.dsv.pvt.helloworldapp.model;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,11 +10,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 import se.su.dsv.pvt.helloworldapp.R;
-
-/**
- * TODO:
- * - Fix the "visa mer"-button, add an android:onClick to it: what is it supposed to do?
- */
 
 public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
@@ -34,17 +28,8 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         return null;
     }
 
-    /**
-     * här skriver man koden/skapar viewen som ska visas i kartan. ATM är allt hårdkodat.
-     * @param m is the marker which contains the marker-info.
-     * @return a View which has the custom needed.
-     */
     @Override
     public View getInfoContents(Marker m) {
-        // standardkod som kan återanvändas i framtiden:
-        /**
-         * få tag på information från markern här någonstans: String name, double betyg/stjärnor.
-         */
 
         LayoutInflater layoutInflater = LayoutInflater.from(c);
         customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
@@ -60,23 +45,6 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ((TextView) customView.findViewById(R.id.gym_challenges)).setText(place.getChallengeList().size() + " utmaningar"); //Oerhört fult, but works.
 
         return customView;
-
-        /*
-        LayoutInflater layoutInflater = LayoutInflater.from(c);
-        customView = layoutInflater.inflate(R.layout.custom_info_contents, null);
-        String name = m.getTitle();
-        double rating = 4.5;
-
-        ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
-        ((TextView) customView.findViewById(R.id.gym_name)).setText(m.getTitle());
-        setRatingStars(rating);
-
-        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(rating));
-        ((TextView) customView.findViewById(R.id.gym_challenges)).setText(new String("12 inmaningar"));
-        Button button = (Button)customView.findViewById(R.id.gym_button_link);
-        button.setTag(new String("bajs"));
-        return customView;
-        */
     }
 
     private void setRatingStars(double rating) {

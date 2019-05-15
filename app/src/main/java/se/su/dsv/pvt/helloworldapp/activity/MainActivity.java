@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             TextView titel = (TextView) findViewById(R.id.main_title_text);
