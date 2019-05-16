@@ -17,11 +17,12 @@ public abstract class Place {
     private Integer id;
     ArrayList<Challenge> challengeList = new ArrayList<>();
 
-    public Place(Location location, String name, Integer id) {
+    public Place(Location location, String name, Integer id, ArrayList<Challenge> challengeList) {
         super();
         this.location =  location;
         this.name = name;
         this.id = id;
+        this.challengeList = challengeList;
     }
 
     public Place() {
