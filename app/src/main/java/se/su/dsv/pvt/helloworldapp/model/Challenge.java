@@ -16,66 +16,41 @@ public class Challenge {
      * vi behöver i frontend när ändå bara namn ska visas? Alternativt att vi hämtar typ namn, bild,
      *  å länk till usern. Men ja. tbd.
      */
-    private String name;
-    private int numberOfParticipants, challengeID, workoutSpotID;
-    //private Object level;
-    //private Object workoutType;
-    private Date eventTimeAndDate = new Date();
-    private String description;
-    private ArrayList<String> participantList = new ArrayList<>();
+    private String challenge, description;
+    private int participants, challengeID, locationID;
+    private Date timeAndDate;
 
-    public Challenge(String name, int numberOfParticipants, Date eventTimeAndDate, String description,
-                     int challengeID, int workoutspotID){
-        this.name = name;
-        this.numberOfParticipants = numberOfParticipants;
-        this.challengeID = challengeID;
-        this.workoutSpotID = workoutspotID;
-        //this.level = level; //backend får bestämma.
-        //this.workoutType = workoutType; //backend får bestämma.
-        this.eventTimeAndDate = eventTimeAndDate;
+    public Challenge(String challenge, String description, int participants, int challengeID, int locationID, Date timeAndDate){
+        this.challenge = challenge;
         this.description = description;
+        this.participants = participants;
+        this.challengeID = challengeID;
+        this.locationID = locationID;
+        this.timeAndDate = timeAndDate;
     }
 
-    public String getName() {
-        return name;
+    public String getChallenge(){
+        return challenge;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getNumberOfParticipants() {
-        return numberOfParticipants;
-    }
-    public void setNumberOfParticipants(int numberOfParticipants) {
-        this.numberOfParticipants = numberOfParticipants;
-    }
-    public int getChallengeID() {
-        return challengeID;
-    }
-    public void setChallengeID(int challengeID) {
-        this.challengeID = challengeID;
-    }
-    public int getWorkoutSpotID() {
-        return workoutSpotID;
-    }
-    public void setWorkoutSpotID(int workoutSpotID) {
-        this.workoutSpotID = workoutSpotID;
-    }
-    public Date getEventTimeAndDate() {
-        return eventTimeAndDate;
-    }
-    public void setEventTimeAndDate(Date eventTimeAndDate) {
-        this.eventTimeAndDate = eventTimeAndDate;
-    }
-    public String getDescription() {
+
+    public String getDescription(){
         return description;
     }
-    public void setDescription(String description) {
-        this.description = description;
+
+    public int getParticipants(){
+        return participants;
     }
-    public ArrayList<String> getParticipantList() {
-        return participantList;
+
+    public int getChallengeID(){
+        return challengeID;
     }
-    public void setParticipantList(ArrayList<String> participantList) {
-        this.participantList = participantList;
+
+    public int getLocationID(){
+        return locationID;
     }
+
+    public Date getTimeAndDate(){
+        return timeAndDate;
+    }
+
 }

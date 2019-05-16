@@ -7,7 +7,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import se.su.dsv.pvt.helloworldapp.fragment.*;
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,17 +19,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int totalChallenges = 0;
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
@@ -178,5 +180,21 @@ public class MainActivity extends AppCompatActivity {
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void createChallenge(View v){
+        EditText challenge = v.findViewById(R.id.challengeText);
+        String cString = challenge.getText().toString();
+        EditText description = v.findViewById(R.id.descriptionText);
+        String dString = description.getText().toString();
+        TextView date = v.findViewById(R.id.date);
+        TextView time = v.findViewById(R.id.time);
+        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,null);
+        totalChallenges++;
+        active = challengeFragment;
+    }
+
+    public void cancelChallenge(View v){
+
     }
 }

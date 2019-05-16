@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textViewUtmaning"
@@ -64,67 +63,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/location"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
-
     <Spinner
         android:id="@+id/locationPicker"
         android:layout_width="300dp"
         android:layout_height="28dp"
         android:layout_marginStart="56dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
     <Button
         android:id="@+id/dateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/datum"
-        android:onClick="showDatePickerDialog"
-        android:layout_marginStart="56dp"
         android:layout_alignParentStart="true"
+        android:layout_marginStart="56dp"
+        android:onClick="showDatePickerDialog"
+        android:text="@string/datum"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationPicker"/>
+        app:layout_constraintTop_toBottomOf="@+id/locationPicker" />
 
     <TextView
         android:id="@+id/date"
-        android:text="@string/datum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 
     <Button
         android:id="@+id/timeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/time"
-        android:onClick="showTimePickerDialog"
         android:layout_below="@+id/dateButton"
-        android:layout_marginEnd="56dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginEnd="56dp"
+        android:onClick="showTimePickerDialog"
+        android:text="@string/time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationPicker"/>
+        app:layout_constraintTop_toBottomOf="@+id/locationPicker" />
 
     <TextView
         android:id="@+id/time"
-        android:text="@string/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -133,6 +117,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_button"
+        android:onClick="cancelChallenge"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
@@ -144,6 +129,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/rounded_button2"
+        android:onClick="createChallenge"
         android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
