@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,7 +31,7 @@ import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int totalChallenges = 0;
+    private int totalChallenges = 0; // TODO: detta bör fixas, dvs. kopplas ihop med databasen.
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
@@ -40,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = challengeFragment;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
-    List<Challenge> challengeList;
+    List<Challenge> activeChallengesList;
+    List<Challenge> completedChallengesList;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -206,10 +206,14 @@ public class MainActivity extends AppCompatActivity {
     public void setActive() {
         active = challengeFragment;
     }
-    public void addChallenge(Challenge c) {
-        challengeList.add(c);
+    public void addActiveChallenge(Challenge c) {
+        activeChallengesList.add(c);
     }
-    public void removeChallenge(Challenge c) {
-        challengeList.remove(c);
+    public void removeActiveChallenge(Challenge c) {
+        activeChallengesList.remove(c);
+    }
+    public void setChallengeToComplete(Challenge c) {
+        completedChallengesList.add(c);
+        removeActiveChallenge(c);
     }
 }

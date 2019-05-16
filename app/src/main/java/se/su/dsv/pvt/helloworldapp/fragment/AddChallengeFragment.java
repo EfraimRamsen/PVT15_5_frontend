@@ -1,9 +1,6 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
-import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.lang.reflect.Method;
 import java.util.Objects;
 
 import se.su.dsv.pvt.helloworldapp.R;
@@ -57,7 +53,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         Challenge c = new Challenge(cString, dString, 1,mainActivity.getChallengeNumber()+1,0,null);
         mainActivity.addChallengeNumber();
         mainActivity.setActive();
-        mainActivity.addChallenge(c);
-
+        mainActivity.addActiveChallenge(c);
     }
 }
