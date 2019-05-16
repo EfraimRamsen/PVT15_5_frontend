@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = challengeFragment;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
+    List<Challenge> challengeList;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -180,8 +181,9 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+    /*
     public void createChallenge(View v){
-        EditText challenge = v.findViewById(R.id.challengeText);
+        EditText challenge = (EditText) v.findViewById(R.id.challengeText);
         String cString = challenge.getText().toString();
         EditText description = v.findViewById(R.id.descriptionText);
         String dString = description.getText().toString();
@@ -190,9 +192,24 @@ public class MainActivity extends AppCompatActivity {
         Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,null);
         totalChallenges++;
         active = challengeFragment;
-    }
+    }*/
 
     public void cancelChallenge(View v){
-
+        ;
+    }
+    public void addChallengeNumber() {
+        totalChallenges++;
+    }
+    public int getChallengeNumber() {
+        return totalChallenges;
+    }
+    public void setActive() {
+        active = challengeFragment;
+    }
+    public void addChallenge(Challenge c) {
+        challengeList.add(c);
+    }
+    public void removeChallenge(Challenge c) {
+        challengeList.remove(c);
     }
 }
