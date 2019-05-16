@@ -54,5 +54,19 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         mainActivity.addChallengeNumber();
         mainActivity.setActive();
         mainActivity.addActiveChallenge(c);
+        debugAddChallenges();
+
+    }
+    public void debugAddChallenges() {
+        Challenge c = new Challenge("10k armhämtningar", "Jag är starkare än din pappa",
+                1, 1, 12, null);
+        Challenge d = new Challenge("Dricka alkohol", "Smuggla plunta in på Foobar",
+                25, 2, 10, null);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.addChallengeNumber();
+        mainActivity.addChallengeNumber();
+        mainActivity.setActive();
+        mainActivity.addActiveChallenge(c);
+        mainActivity.addActiveChallenge(d);
     }
 }

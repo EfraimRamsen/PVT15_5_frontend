@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = challengeFragment;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
-    List<Challenge> activeChallengesList;
-    List<Challenge> completedChallengesList;
+    List<Challenge> activeChallengesList = new ArrayList<>();
+    List<Challenge> completedChallengesList = new ArrayList<>();
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -202,6 +203,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public int getChallengeNumber() {
         return totalChallenges;
+    }
+    public int getCompletedChallangeNumber() {
+        try {
+            return completedChallengesList.size();
+        }
+        catch (Exception e) {
+            System.err.println(e);
+        }
+        return 0;
     }
     public void setActive() {
         active = challengeFragment;
