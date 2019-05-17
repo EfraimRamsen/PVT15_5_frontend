@@ -94,24 +94,17 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
 
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             TextView title = (TextView) findViewById(R.id.main_title_text);
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
-                    if (getFragmentManager().getBackStackEntryCount() > 0) {
-                        getFragmentManager().popBackStack("back", 0);
-                    }
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
-                    if (getFragmentManager().getBackStackEntryCount() > 0) {
-                        getFragmentManager().popBackStack();
-                    }
                     fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
                     active = addChallengeFragment;
                     title.setText(R.string.add_challenge);
@@ -206,8 +199,6 @@ public class MainActivity extends AppCompatActivity {
     public void cancelChallenge(View v){
 
     }
-
-
 
     public void showLocation() {
         Fragment locationViewFragment = new LocationViewFragment();
