@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.CustomMapMarker;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
@@ -74,10 +77,19 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         /**
          * Denna metod används när man klickar på popupen av en mapmarker!
          */
+
+
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                System.out.println("do stuff  -- " + marker.getTitle());
+               System.out.println("do stuff  -- " + marker.getTitle());
+                FragmentTransaction fm = getFragmentManager().beginTransaction();
+
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.showLocation();
+              //  fm.add(R.id.fragment_container, new LocationViewFragment()).commit();
+
+
             }
         });
 

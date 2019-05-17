@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             active = mapViewFragment;
         }
 
+
+
         //Lägger till fragmenten i fragment_container, och döljer fragment 2 och 3
 //        fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
 //        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
@@ -195,4 +197,13 @@ public class MainActivity extends AppCompatActivity {
     public void cancelChallenge(View v){
 
     }
+
+    public boolean showLocation() {
+        Fragment locationViewFragment =  new LocationViewFragment() ;
+        fm.beginTransaction().hide(active).show(locationViewFragment).commit();
+
+        return true;
+
+    }
+
 }
