@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();
+    BottomNavigationView bottomNavigation;
 
     Fragment active = challengeFragment;
     Intent intent;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
 
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
@@ -209,15 +210,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Fragment  f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (f instanceof LocationViewFragment) {
-            fm.popBackStack();
+        if (active instanceof LocationViewFragment) {
+            bottomNavigation.setSelectedItemId(R.id.nav_map);
             active = mapViewFragment;
-
-        }  else if (f instanceof MapViewFragment) {
-            super.onBackPressed();
-            fm.popBackStack();
-
-        }else {
+        }  else if (active instanceof MapViewFragment) {
+            finish();
+        } else if (active instanceof AddChallengeFragment) {
+            finish();
+        } else if (active instanceof ChallengeFragment) {
+            finish();
+        } else {
             super.onBackPressed();
         }
     }
