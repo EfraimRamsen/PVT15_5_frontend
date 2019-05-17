@@ -1,6 +1,5 @@
 package se.su.dsv.pvt.helloworldapp.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Challenge {
