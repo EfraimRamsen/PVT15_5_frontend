@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation"
-        />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -21,7 +22,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <android.widget.ImageView
             android:id="@+id/main_icon"
@@ -30,6 +31,7 @@
             android:layout_gravity="end"
             android:baselineAligned="false"
             android:foregroundGravity="right" />
+
         <TextView
             android:id="@+id/main_title_text"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
@@ -43,6 +45,7 @@
             tools:layout_editor_absoluteX="16dp" />
 
     </android.support.v7.widget.Toolbar>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -64,8 +67,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
         app:menu="@menu/bottom_navigation" />
 
-
-
+    <WebView
+        android:id="@+id/reportWebview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        tools:layout_editor_absoluteX="178dp" />
 
 
 </android.support.constraint.ConstraintLayout>

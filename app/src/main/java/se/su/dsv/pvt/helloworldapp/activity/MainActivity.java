@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -82,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
         connectAndGetApiData();
+
+
+        WebView reportGymWebView = (WebView) findViewById(R.id.reportWebview);
+        reportGymWebView.loadUrl("https://etjanster.stockholm.se/tycktill/?systemId=synpunktsportalen");
+        WebSettings webSettings = reportGymWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
     }
 
     //visar det valda fragmnetet och döljer det som va aktivt innan
