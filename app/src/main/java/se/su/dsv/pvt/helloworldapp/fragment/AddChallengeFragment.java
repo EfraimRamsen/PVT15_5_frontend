@@ -50,7 +50,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         String dString = description.getText().toString();
         TextView date = vy.findViewById(R.id.date);
         TextView time = vy.findViewById(R.id.time);
-        Challenge c = new Challenge(cString, dString, 1,mainActivity.getChallengeNumber()+1,0,null);
+        Challenge c = new Challenge(cString, dString, 1,mainActivity.getChallengeNumber()+1,0,"date", 0000);
         mainActivity.addChallengeNumber();
         mainActivity.setActive();
         mainActivity.addActiveChallenge(c);
@@ -59,9 +59,9 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
     }
     public void debugAddChallenges() {
         Challenge c = new Challenge("10k armhämtningar", "Jag är starkare än din pappa",
-                1, 1, 12, null);
+                1, 1, 12, "date", 0000);
         Challenge d = new Challenge("Dricka alkohol", "Smuggla plunta in på Foobar",
-                25, 2, 10, null);
+                25, 2, 10, "date", 0000);
         MainActivity mainActivity = (MainActivity) getActivity();
         mainActivity.addChallengeNumber();
         mainActivity.addChallengeNumber();
