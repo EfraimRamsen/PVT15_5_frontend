@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();
+
     Fragment active = challengeFragment;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
+
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -90,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -198,11 +202,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean showLocation() {
-        Fragment locationViewFragment =  new LocationViewFragment() ;
-        fm.beginTransaction().hide(active).show(locationViewFragment).commit();
 
-        return true;
+
+    public void showLocation() {
+
+        fm.beginTransaction().hide(active).add(R.id.fragment_container, new LocationViewFragment()).addToBackStack("back").commit();
+        active = mapViewFragment;
+
+
+
 
     }
 

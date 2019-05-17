@@ -83,7 +83,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onInfoWindowClick(Marker marker) {
                System.out.println("do stuff  -- " + marker.getTitle());
-                FragmentTransaction fm = getFragmentManager().beginTransaction();
+                //FragmentTransaction fm = getFragmentManager().beginTransaction();
 
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.showLocation();
