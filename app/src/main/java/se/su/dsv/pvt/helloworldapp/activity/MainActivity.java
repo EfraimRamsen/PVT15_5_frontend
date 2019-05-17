@@ -97,24 +97,30 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            TextView titel = (TextView) findViewById(R.id.main_title_text);
+            TextView title = (TextView) findViewById(R.id.main_title_text);
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
+                    if (getFragmentManager().getBackStackEntryCount() > 0) {
+                        getFragmentManager().popBackStack("back", 0);
+                    }
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
-                    titel.setText(R.string.challenges);
+                    title.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
+                    if (getFragmentManager().getBackStackEntryCount() > 0) {
+                        getFragmentManager().popBackStack();
+                    }
                     fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
                     active = addChallengeFragment;
-                    titel.setText(R.string.add_challenge);
+                    title.setText(R.string.add_challenge);
                     return true;
 
                 case R.id.nav_map:
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
-                    titel.setText(R.string.map);
+                    title.setText(R.string.map);
                     return true;
             }
             return false;
@@ -167,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("API-data contained null.");
                     Log.d(TAG, "API-data contained null.");
                 }
-
             }
             @Override
             public void onFailure(Call<List<OutdoorGym>> call, Throwable t) {
@@ -205,13 +210,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showLocation() {
-
-        fm.beginTransaction().hide(active).add(R.id.fragment_container, new LocationViewFragment()).addToBackStack("back").commit();
-        active = mapViewFragment;
-
-
-
-
+        Fragment locationViewFragment = new LocationViewFragment();
+        fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
+        active = locationViewFragment;
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment  f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (f instanceof LocationViewFragment) {
+            fm.popBackStack();
+            active = mapViewFragment;
+
+        }  else if (f instanceof MapViewFragment) {
+            super.onBackPressed();
+            fm.popBackStack();
+
+        }else {
+            super.onBackPressed();
+        }
+    }
 }
