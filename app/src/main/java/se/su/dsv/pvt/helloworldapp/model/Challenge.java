@@ -9,41 +9,48 @@ public class Challenge {
      * vi behöver i frontend när ändå bara namn ska visas? Alternativt att vi hämtar typ namn, bild,
      *  å länk till usern. Men ja. tbd.
      */
-    private String challenge, description;
-    private int participants, challengeID, locationID;
-    private Date timeAndDate;
+    private String name, description;
+    private int numberOfParticipants, challengeID, workoutSpotID;
+    private Date timeAndDate; // datum och tid nedan måste omvandlas till Date datatyp och sparas i denna variabel
+    private String eventTimeAndDate; //datum i JSON
+    private long time; // tid i JSON
 
-    public Challenge(String challenge, String description, int participants, int challengeID, int locationID, Date timeAndDate){
-        this.challenge = challenge;
+    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String eventTimeAndDate, long time){
+        this.name = challenge;
         this.description = description;
-        this.participants = participants;
+        this.numberOfParticipants = numberOfParticipants;
         this.challengeID = challengeID;
-        this.locationID = locationID;
-        this.timeAndDate = timeAndDate;
+        this.workoutSpotID = workoutSpotID;
+        this.eventTimeAndDate = eventTimeAndDate;
+        this.time = time;
     }
 
     public String getChallenge(){
-        return challenge;
+        return name;
     }
 
     public String getDescription(){
         return description;
     }
 
-    public int getParticipants(){
-        return participants;
+    public int getNumberOfParticipants(){
+        return numberOfParticipants;
     }
 
     public int getChallengeID(){
         return challengeID;
     }
 
-    public int getLocationID(){
-        return locationID;
+    public int getWorkoutSpotID(){
+        return workoutSpotID;
     }
 
     public Date getTimeAndDate(){
         return timeAndDate;
     }
 
+    @Override
+    public String toString() {
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + eventTimeAndDate + " " + time;
+    }
 }

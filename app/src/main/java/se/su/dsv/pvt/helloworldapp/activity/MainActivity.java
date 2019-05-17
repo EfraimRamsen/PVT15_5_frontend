@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         String dString = description.getText().toString();
         TextView date = v.findViewById(R.id.date);
         TextView time = v.findViewById(R.id.time);
-        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,null);
+        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,"date", 0000);
         totalChallenges++;
         active = challengeFragment;
     }*/
