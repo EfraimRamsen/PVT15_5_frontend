@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     final FragmentManager fm = getSupportFragmentManager();
 
     Fragment active = challengeFragment;
+    Fragment active2 = active;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
 
@@ -94,10 +95,12 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
 
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
             TextView titel = (TextView) findViewById(R.id.main_title_text);
+            fm.beginTransaction().hide(active2).commit();
+
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
@@ -202,16 +205,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     public void showLocation() {
 
-        fm.beginTransaction().hide(active).add(R.id.fragment_container, new LocationViewFragment()).addToBackStack("back").commit();
-        active = mapViewFragment;
+        Fragment locationViewFragment = new LocationViewFragment();
 
-
-
-
+        fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack(null).commit();
+        active2 = locationViewFragment;
+        
     }
 
 }
