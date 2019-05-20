@@ -4,6 +4,8 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 
@@ -13,4 +15,7 @@ public interface BackendApiService {
 
     @GET("allGyms")
     Call<List<OutdoorGym>> getAllGymsResponse();
+
+    @POST("createChallenge")
+    Call<Challenge> createNewChallengeRequest();
 }
