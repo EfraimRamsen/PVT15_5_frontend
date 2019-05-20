@@ -1,12 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
-    <item android:id="@+id/back_button"
-        android:title="@string/back_button"
-        android:icon="@drawable/ic_back_button"
+    <item android:id="@+id/update_map_item"
+        android:title="Uppdatera kartan"
         app:showAsAction="never" />
+
+    <item android:id="@+id/report_gym_item"
+        android:title="Rapportera utegym"
+        app:showAsAction="never" />
+
+    <!--<item android:id="@+id/back_button"-->
+        <!--android:title="@string/back_button"-->
+        <!--android:icon="@drawable/ic_back_button"-->
+        <!--app:showAsAction="never" />-->
+
+    <!--<item android:id="@+id/action_bar_spinner"-->
+        <!--android:icon="@drawable/more"-->
+        <!--android:title="Test"-->
+        <!--app:showAsAction="always"/>-->
 
 
 </menu>

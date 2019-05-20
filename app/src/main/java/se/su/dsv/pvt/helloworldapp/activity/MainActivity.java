@@ -13,15 +13,19 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,6 +38,7 @@ import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     private int totalChallenges = 0;
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
@@ -51,6 +56,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
+
+        toolbar = findViewById(R.id.my_toolbar);
+        toolbar.inflateMenu(R.menu.toptoolbar);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if(item.getItemId()==R.id.update_map_item)
+                {
+                    connectAndGetApiData();
+                    return true;
+                }
+                else if(item.getItemId()== R.id.report_gym_item)
+                {
+                    openReportWebPage();
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        });
+
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
@@ -84,13 +114,8 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
         connectAndGetApiData();
-
-
-        WebView reportGymWebView = (WebView) findViewById(R.id.reportWebview);
-        reportGymWebView.loadUrl("https://etjanster.stockholm.se/tycktill/?systemId=synpunktsportalen");
-        WebSettings webSettings = reportGymWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
     }
+
 
     //visar det valda fragmnetet och döljer det som va aktivt innan
 
@@ -126,7 +151,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_navigation, menu);
-        return super.onCreateOptionsMenu(menu);
+
+//        MenuItem item = menu.findItem(R.id.action_bar_spinner);
+//        Spinner spinner = (Spinner) item.getActionView();
+//
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_list_item_array, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        spinner.setAdapter(adapter);
+
+        return true;
     }
 
     public void showDatePickerDialog(View v) {
@@ -186,6 +220,16 @@ public class MainActivity extends AppCompatActivity {
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    private void openReportWebPage() {
+        // Tre raderna nedan är för om man implementerar webbsidan som fragment
+//        Fragment reportWebPage = new ReportWebPageFragment();
+//        fm.beginTransaction().hide(active).add(R.id.fragment_container, reportWebPage).addToBackStack("report").commit();
+//        active = reportWebPage;
+
+        Intent intent = new Intent(this, ReportWebPageActivity.class);
+        startActivity(intent);
     }
 
     public void createChallenge(View v){
