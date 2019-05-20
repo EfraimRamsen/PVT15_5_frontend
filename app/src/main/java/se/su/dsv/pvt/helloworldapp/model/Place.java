@@ -16,6 +16,7 @@ public abstract class Place {
     @Expose
     private Integer id;
     ArrayList<Challenge> challengeList = new ArrayList<>();
+    private double avrageRating;
 
     public Place(Location location, String name, Integer id, ArrayList<Challenge> challengeList) {
         super();
@@ -62,6 +63,6 @@ public abstract class Place {
 
     @Override
     public String toString() {
-        return name + " " + id + " " + location;
+        return name + " " + id + " " + location + " ArrayList: " + challengeList;
     }
 }

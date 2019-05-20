@@ -24,11 +24,13 @@
     <string name="logout">Logga ut</string>
     <string name="active_challenges">Aktiva utmaningar</string>
     <string name="completed_challenges">Avklarade utmaningar</string>
-
+    <string name="challenger_carla">@ChallengerCarla</string>
+  
     <!--<string-array name="spinner_list_item_array">-->
         <!--<item>Ett</item>-->
         <!--<item>Två</item>-->
         <!--<item>Tre</item>-->
         <!--<item>Fyra</item>-->
     <!--</string-array>-->
+    
 </resources>

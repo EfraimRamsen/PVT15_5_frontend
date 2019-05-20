@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +40,8 @@ import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private int totalChallenges = 0;
+    private int totalChallenges = 0; // TODO: detta bör fixas, dvs. kopplas ihop med databasen.
+  
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = challengeFragment;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
+    List<Challenge> activeChallengesList = new ArrayList<>();
+    List<Challenge> completedChallengesList = new ArrayList<>();
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -232,19 +236,49 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*
+
     public void createChallenge(View v){
-        EditText challenge = v.findViewById(R.id.challengeText);
+        EditText challenge = (EditText) v.findViewById(R.id.challengeText);
         String cString = challenge.getText().toString();
         EditText description = v.findViewById(R.id.descriptionText);
         String dString = description.getText().toString();
         TextView date = v.findViewById(R.id.date);
         TextView time = v.findViewById(R.id.time);
-        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,null);
+        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,"date", 0000);
         totalChallenges++;
         active = challengeFragment;
-    }
+    }*/
 
     public void cancelChallenge(View v){
-
+        ;
+    }
+    public void addChallengeNumber() {
+        totalChallenges++;
+    }
+    public int getChallengeNumber() {
+        return totalChallenges;
+    }
+    public int getCompletedChallangeNumber() {
+        try {
+            return completedChallengesList.size();
+        }
+        catch (Exception e) {
+            System.err.println(e);
+        }
+        return 0;
+    }
+    public void setActive() {
+        active = challengeFragment;
+    }
+    public void addActiveChallenge(Challenge c) {
+        activeChallengesList.add(c);
+    }
+    public void removeActiveChallenge(Challenge c) {
+        activeChallengesList.remove(c);
+    }
+    public void setChallengeToComplete(Challenge c) {
+        completedChallengesList.add(c);
+        removeActiveChallenge(c);
     }
 }
