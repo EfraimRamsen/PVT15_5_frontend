@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -21,7 +22,8 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:menu="@menu/toptoolbar">
 
         <android.widget.ImageView
             android:id="@+id/main_icon"
@@ -30,6 +32,7 @@
             android:layout_gravity="end"
             android:baselineAligned="false"
             android:foregroundGravity="right" />
+
         <TextView
             android:id="@+id/main_title_text"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
@@ -39,10 +42,10 @@
             android:gravity="center"
             android:text="@string/main_title"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            tools:layout_editor_absoluteX="16dp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     </android.support.v7.widget.Toolbar>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -63,9 +66,6 @@
         android:background="@color/babygul"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
         app:menu="@menu/bottom_navigation" />
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>
