@@ -35,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     List<OutdoorGym> outdoorGyms;
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
+
+    private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -303,6 +306,22 @@ public class MainActivity extends AppCompatActivity {
      * klasser som används för att koppla ihop fragment, mainactivity och backend slutar här.
      */
 
+    /**
+     * These three methods lets MapViewFragment send objects to LocationViewFragment.
+     * @return
+     * @author Niklas Edström
+     */
+    public Place getOpenThisPlaceFragment() {
+        Place p = openThisPlaceFragment;
+        removeOpenThisPlaceFragment();
+        return p;
+    }
+    public void setOpenThisPlaceFragment(Place openThisPlaceFragment) {
+        this.openThisPlaceFragment = openThisPlaceFragment;
+    }
+    public void removeOpenThisPlaceFragment() {
+        this.openThisPlaceFragment = null;
+    }
 
     public void showLocation() {
         Fragment locationViewFragment = new LocationViewFragment();
