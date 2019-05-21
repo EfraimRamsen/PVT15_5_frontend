@@ -11,6 +11,13 @@ import com.google.android.gms.maps.model.Marker;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
+
+/**
+ * Preferably, don't touch this! It's ugly.
+ * TODO: fix soon, when we've got rating added to gyms.
+ * @author Niklas Edström
+ *
+ */
 public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
     private View customView;
@@ -40,7 +47,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
 
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
         setRatingStars(4); //HÅRDKODAT!!!
-        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(4)); //HÅRDKODAT!!!
+        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(4)); // TODO: HÅRDKODAT!!!
 
         ((TextView) customView.findViewById(R.id.gym_challenges)).setText(place.getChallengeList().size() + " utmaningar"); //Oerhört fult, but works.
 

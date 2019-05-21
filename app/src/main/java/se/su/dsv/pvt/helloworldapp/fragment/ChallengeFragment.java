@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
+/**
+ * This is a mess. TODO: add a dynamic (or somewhat static) list of active challenges.
+ * @author Niklas Edström
+ */
 public class ChallengeFragment extends Fragment {
 
     @Nullable

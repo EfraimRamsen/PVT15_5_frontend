@@ -40,6 +40,11 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         return view;
     }
 
+    /**
+     * This is what creates the challenge, AND, adds it to MainActivity for checking in with backend.
+     * @param v standard thing, not used, can be ignored.
+     * @author Niklas Edström, mostly.
+     */
     @Override
     public void onClick(View v) {
 
@@ -57,6 +62,11 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         debugAddChallenges();
 
     }
+
+    /**
+     * This just adds a couple random challenges, can be removed when we can get challenges from backend.
+     * @author Niklas Edström
+     */
     public void debugAddChallenges() {
         Challenge c = new Challenge("10k armhämtningar", "Jag är starkare än din pappa",
                 1, 1, 12, "date", 0000);
