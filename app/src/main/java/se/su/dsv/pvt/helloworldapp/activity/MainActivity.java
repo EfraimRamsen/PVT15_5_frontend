@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
 
-
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
     private static Retrofit retrofit = null;
 
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
 
-        locationView
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         toolbar = findViewById(R.id.my_toolbar);
@@ -93,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
-        master
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
 
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
@@ -118,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").commit();
             active = mapViewFragment;
         }
-
-
 
         //Lägger till fragmenten i fragment_container, och döljer fragment 2 och 3
 //        fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
@@ -177,6 +172,13 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+     * Blabla detta är.........
+     * @param v = view  för någonting
+     * @return sak = returnerar en sak för blabla
+     * @author JD
+     */
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");

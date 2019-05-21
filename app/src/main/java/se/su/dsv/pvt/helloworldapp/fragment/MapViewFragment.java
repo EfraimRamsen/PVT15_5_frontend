@@ -113,7 +113,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    public static final int PERMISSIONS_REQUEST_LOCATION = 99;
+    public static final int PERMISSIONS_REQUEST_LOCATION = 99; // ignorera
 
 
     private void askPermission() {
