@@ -3,12 +3,7 @@ package se.su.dsv.pvt.helloworldapp.model;
 import java.util.Date;
 
 public class Challenge {
-    /**
-     * alla variabler av typen Object är sådana som backendsidan inte verkar ha bestämt sig för.
-     * ArrayListen participantList innehåller hos backend User, men känns inte som att det är något
-     * vi behöver i frontend när ändå bara namn ska visas? Alternativt att vi hämtar typ namn, bild,
-     *  å länk till usern. Men ja. tbd.
-     */
+
     private String name, description;
     private int numberOfParticipants, challengeID, workoutSpotID;
     private Date timeAndDate; // datum och tid nedan måste omvandlas till Date datatyp och sparas i denna variabel

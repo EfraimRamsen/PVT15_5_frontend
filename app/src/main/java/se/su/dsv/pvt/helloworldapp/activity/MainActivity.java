@@ -261,6 +261,12 @@ public class MainActivity extends AppCompatActivity {
         active = challengeFragment;
     }*/
 
+    /**
+     * Nedanstående metoder används för att koppla ihop olika fragment med MainActivity-klassen.
+     * TODO: koppla ihop dem med backenden.
+     *
+     */
+
     public void cancelChallenge(View v){
         ;
     }
@@ -292,6 +298,11 @@ public class MainActivity extends AppCompatActivity {
         completedChallengesList.add(c);
         removeActiveChallenge(c);
     }
+
+    /**
+     * klasser som används för att koppla ihop fragment, mainactivity och backend slutar här.
+     */
+
 
     public void showLocation() {
         Fragment locationViewFragment = new LocationViewFragment();

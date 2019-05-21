@@ -52,8 +52,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         googleMap = map;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        // Denna här raden sätter sätter custommarker istället för standard:
-        googleMap.setInfoWindowAdapter(new CustomMapMarker(getContext()));
+        googleMap.setInfoWindowAdapter(new CustomMapMarker(getContext())); //Use CustomMapMarker instead of the standard one.
 
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(new LatLng(59.3246656, 18.0410247))
@@ -79,7 +78,15 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
          */
 
 
+        /**
+         * Adds clickListener to each Marker marker.
+         */
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            /**
+             *
+             * @param marker is each specific marker.
+             * TODO: change so "+ visa mer" works and sends the user to the correct gym-fragment.
+             */
             @Override
             public void onInfoWindowClick(Marker marker) {
                System.out.println("do stuff  -- " + marker.getTitle());
