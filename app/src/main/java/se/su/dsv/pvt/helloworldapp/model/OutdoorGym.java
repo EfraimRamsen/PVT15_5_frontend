@@ -3,13 +3,15 @@ package se.su.dsv.pvt.helloworldapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class OutdoorGym extends Place {
     @SerializedName("description")
     @Expose
     private String description;
 
-    public OutdoorGym(Location location, String name, Integer id, String description) {
-        super(location, name, id);
+    public OutdoorGym(Location location, String name, Integer id, String description, ArrayList<Challenge> challengeList) {
+        super(location, name, id, challengeList);
         this.description = description;
     }
     public String getDescription() {
