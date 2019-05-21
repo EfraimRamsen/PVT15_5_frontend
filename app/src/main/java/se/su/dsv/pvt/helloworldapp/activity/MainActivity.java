@@ -13,7 +13,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +20,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
     private static Retrofit retrofit = null;
+    OkHttpClient okHttpClient;
+    BackendApiService backendApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(item.getItemId()==R.id.update_map_item)
                 {
-                    connectAndGetApiData();
+                    getGymApiData();
                     return true;
                 }
                 else if(item.getItemId()== R.id.report_gym_item)
@@ -121,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
-        connectAndGetApiData();
+        createConnectionToApi();
+        getGymApiData();
     }
 
 
@@ -184,9 +181,8 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    public void connectAndGetApiData() {
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    public void createConnectionToApi() {
+        okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(15, TimeUnit.SECONDS)
@@ -195,10 +191,11 @@ public class MainActivity extends AppCompatActivity {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build();
         }
+        backendApiService = retrofit.create(BackendApiService.class);
+    }
 
-        BackendApiService backendApiService = retrofit.create(BackendApiService.class);
+    public void getGymApiData() {
         Call<List<OutdoorGym>> call = backendApiService.getAllGymsResponse();
-
 
         call.enqueue(new Callback<List<OutdoorGym>>() {
             @Override
@@ -215,6 +212,35 @@ public class MainActivity extends AppCompatActivity {
 
                     ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
                     ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
+                } catch (NullPointerException e) {
+                    System.out.println("API-data contained null.");
+                    Log.d(TAG, "API-data contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<OutdoorGym>> call, Throwable t) {
+                Log.e(TAG, t.toString());
+            }
+        });
+    }
+
+    public void createChallengeApiData() {
+        Call<List<OutdoorGym>> call = backendApiService.getAllGymsResponse();
+
+        call.enqueue(new Callback<List<OutdoorGym>>() {
+            @Override
+            public void onResponse(Call<List<OutdoorGym>> call, Response<List<OutdoorGym>> response) {
+                try {
+                    outdoorGyms = response.body();
+
+                    // behövs för av någon anledning deklareras inte Location direkt när man hämtar från json
+                    for (OutdoorGym outdoorGym : outdoorGyms) {
+                        outdoorGym.getLocation().setLatLng(outdoorGym.getLocation().getX(), outdoorGym.getLocation().getY());
+                    }
+
+                    Log.d(TAG, "Sent data: " + outdoorGyms);
+
+
                 } catch (NullPointerException e) {
                     System.out.println("API-data contained null.");
                     Log.d(TAG, "API-data contained null.");
