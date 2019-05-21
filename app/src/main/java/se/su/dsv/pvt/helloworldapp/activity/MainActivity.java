@@ -46,11 +46,14 @@ public class MainActivity extends AppCompatActivity {
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();
+    BottomNavigationView bottomNavigation;
+
     Fragment active = challengeFragment;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
+
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -60,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
+
+        locationView
+        bottomNavigation = findViewById(R.id.bottom_navigation);
 
         toolbar = findViewById(R.id.my_toolbar);
         toolbar.inflateMenu(R.menu.toptoolbar);
@@ -87,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        master
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
 
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
@@ -112,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
             active = mapViewFragment;
         }
 
+
+
         //Lägger till fragmenten i fragment_container, och döljer fragment 2 och 3
 //        fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
 //        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
@@ -126,26 +135,27 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            TextView titel = (TextView) findViewById(R.id.main_title_text);
+            TextView title = (TextView) findViewById(R.id.main_title_text);
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
-                    titel.setText(R.string.challenges);
+                    title.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
                     fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
                     active = addChallengeFragment;
-                    titel.setText(R.string.add_challenge);
+                    title.setText(R.string.add_challenge);
                     return true;
 
                 case R.id.nav_map:
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
-                    titel.setText(R.string.map);
+                    title.setText(R.string.map);
                     return true;
             }
             return false;
@@ -207,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("API-data contained null.");
                     Log.d(TAG, "API-data contained null.");
                 }
-
             }
             @Override
             public void onFailure(Call<List<OutdoorGym>> call, Throwable t) {
@@ -280,5 +289,28 @@ public class MainActivity extends AppCompatActivity {
     public void setChallengeToComplete(Challenge c) {
         completedChallengesList.add(c);
         removeActiveChallenge(c);
+    }
+
+    public void showLocation() {
+        Fragment locationViewFragment = new LocationViewFragment();
+        fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
+        active = locationViewFragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment  f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (active instanceof LocationViewFragment) {
+            bottomNavigation.setSelectedItemId(R.id.nav_map);
+            active = mapViewFragment;
+        }  else if (active instanceof MapViewFragment) {
+            finish();
+        } else if (active instanceof AddChallengeFragment) {
+            finish();
+        } else if (active instanceof ChallengeFragment) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
