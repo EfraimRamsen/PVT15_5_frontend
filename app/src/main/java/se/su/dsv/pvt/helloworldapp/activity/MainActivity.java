@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         createConnectionToApi();
         getGymApiData();
+        testApiPost();
     }
 
 
@@ -206,6 +209,10 @@ public class MainActivity extends AppCompatActivity {
                     // behövs för av någon anledning deklareras inte Location direkt när man hämtar från json
                     for (OutdoorGym outdoorGym : outdoorGyms) {
                         outdoorGym.getLocation().setLatLng(outdoorGym.getLocation().getX(), outdoorGym.getLocation().getY());
+
+                        for (Challenge challenge : outdoorGym.getChallengeList()) {
+                            challenge.setTimeAndDate();
+                        }
                     }
 
                     Log.d(TAG, "Received data: " + outdoorGyms);
@@ -225,30 +232,58 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createChallengeApiData() {
-        Call<List<OutdoorGym>> call = backendApiService.getAllGymsResponse();
+        Challenge challenge = new Challenge("JDTest", "Beskrivning som är super", 0, 0, 75, "2019-05-25", 1558519200);
+        challenge.setTimeAndDate();
 
-        call.enqueue(new Callback<List<OutdoorGym>>() {
+        Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
+
+
+        call.enqueue(new Callback<Challenge>() {
             @Override
-            public void onResponse(Call<List<OutdoorGym>> call, Response<List<OutdoorGym>> response) {
+            public void onResponse(Call<Challenge> call, Response<Challenge> response) {
                 try {
-                    outdoorGyms = response.body();
 
-                    // behövs för av någon anledning deklareras inte Location direkt när man hämtar från json
-                    for (OutdoorGym outdoorGym : outdoorGyms) {
-                        outdoorGym.getLocation().setLatLng(outdoorGym.getLocation().getX(), outdoorGym.getLocation().getY());
-                    }
 
-                    Log.d(TAG, "Sent data: " + outdoorGyms);
+
+
+
+
+                    Log.d(TAG, "Sent data: " + response.body().toString());
 
 
                 } catch (NullPointerException e) {
-                    System.out.println("API-data contained null.");
-                    Log.d(TAG, "API-data contained null.");
+                    System.out.println("POST: API-data contained null.");
+                    Log.d(TAG, "POST: API-data contained null.");
                 }
             }
             @Override
-            public void onFailure(Call<List<OutdoorGym>> call, Throwable t) {
-                Log.e(TAG, t.toString());
+            public void onFailure(Call<Challenge> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    public void testApiPost() {
+        Call<String> call = backendApiService.testMethod("hej");
+
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+
+
+                    Log.d(TAG, "Sent data: " + response.body().toString());
+
+
+                } catch (NullPointerException e) {
+                    System.out.println("POST test: API-data contained null.");
+                    Log.d(TAG, "POST test: API-data contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });
     }

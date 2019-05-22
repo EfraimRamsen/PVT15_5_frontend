@@ -3,6 +3,7 @@ package se.su.dsv.pvt.helloworldapp.rest;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
@@ -17,5 +18,8 @@ public interface BackendApiService {
     Call<List<OutdoorGym>> getAllGymsResponse();
 
     @POST("createChallenge")
-    Call<Challenge> createNewChallengeRequest();
+    Call<Challenge> createNewChallengeRequest(@Body Challenge params);
+
+    @POST("addString")
+    Call<String> testMethod(@Body String params);
 }

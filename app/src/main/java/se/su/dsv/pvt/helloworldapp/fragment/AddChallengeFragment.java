@@ -61,6 +61,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         mainActivity.addActiveChallenge(c);
         debugAddChallenges();
 
+//        mainActivity.createChallengeApiData(c);
     }
 
     /**
