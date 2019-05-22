@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
 
     Fragment active = challengeFragment;
+    Fragment active2 = active;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
     List<Challenge> activeChallengesList = new ArrayList<>();
@@ -130,25 +131,33 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-
+        /**
+         * lyssnare till bottomnav
+         * @param item
+         * @author Gosia
+         */
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             TextView title = (TextView) findViewById(R.id.main_title_text);
+            fm.beginTransaction().hide(active2).commit();
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
+                    fm.popBackStack();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
                     fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
+                    fm.popBackStack();
                     active = addChallengeFragment;
                     title.setText(R.string.add_challenge);
                     return true;
 
                 case R.id.nav_map:
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
+                    fm.popBackStack();
                     active = mapViewFragment;
                     title.setText(R.string.map);
                     return true;
@@ -156,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -346,13 +356,17 @@ public class MainActivity extends AppCompatActivity {
         this.openThisPlaceFragment = null;
     }
 
+    /**
+     * Visar upp ett locationfragment som man kan backa ut från
+     * @author Gosia
+     */
     public void showLocation() {
         Fragment locationViewFragment = new LocationViewFragment();
         fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
-        active = locationViewFragment;
+        active2 = locationViewFragment;
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Fragment  f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (active instanceof LocationViewFragment) {
@@ -367,5 +381,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 }
