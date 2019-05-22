@@ -91,10 +91,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.setOpenThisPlaceFragment((Place) marker.getTag());
-                LocationViewFragment lwf = new LocationViewFragment();
-                FragmentTransaction fm = getFragmentManager().beginTransaction();
-                fm.add(R.id.fragment_container, lwf).commit();
+                mainActivity.showLocation();
+
+                //mainActivity.setOpenThisPlaceFragment((Place) marker.getTag());
+                //LocationViewFragment lwf = new LocationViewFragment();
+                //FragmentTransaction fm = getFragmentManager().beginTransaction();
+                //fm.add(R.id.fragment_container, lwf).commit();
 
 
             }
