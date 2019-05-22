@@ -26,6 +26,9 @@
     <string name="completed_challenges">Avklarade utmaningar</string>
     <string name="challenger_carla">\@ChallengerCarla</string>
     <string name="cancel_message">Du har osparade ändringar. \n Är du säker på att du vill avbryta?</string>
+    <string name="choose_amount_stars">Välj antal stjärnor</string>
+    <string name="cancel_rankgym">Hoppa över</string>
+    <string name="accept_rankgym">Ge betyg</string>
 
     <!--<string-array name="spinner_list_item_array">-->
         <!--<item>Ett</item>-->
