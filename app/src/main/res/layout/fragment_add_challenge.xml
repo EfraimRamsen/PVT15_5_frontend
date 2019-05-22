@@ -63,6 +63,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
+    <TextView
+        android:id="@+id/choose"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="* Välj plats"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
     <Spinner
         android:id="@+id/locationPicker"
         android:layout_width="300dp"
@@ -72,7 +85,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/choose" />
 
     <Button
         android:id="@+id/dateButton"
@@ -120,7 +133,6 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_button"
-        android:onClick="cancelChallenge"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
