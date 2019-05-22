@@ -142,22 +142,22 @@ public class MainActivity extends AppCompatActivity {
             fm.beginTransaction().hide(active2).commit();
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
-                    fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     fm.popBackStack();
+                    fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
-                    fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
                     fm.popBackStack();
+                    fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
                     active = addChallengeFragment;
                     title.setText(R.string.add_challenge);
                     return true;
 
                 case R.id.nav_map:
-                    fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     fm.popBackStack();
+                    fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);
                     return true;
