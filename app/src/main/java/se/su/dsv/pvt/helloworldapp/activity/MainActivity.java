@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.SignInButton;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,6 +35,8 @@ import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SignInButton googleSignInButton;
 
     private Toolbar toolbar;
     private int totalChallenges = 0; // TODO: detta bör fixas, dvs. kopplas ihop med databasen.
@@ -59,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        if (!userLoggedIn){
+//            super.onCreate(savedInstanceState);
+//            setContentView(R.layout.activity_login);
+//            googleSignInButton = findViewById(R.id.sign_in_button);
+//        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
 
