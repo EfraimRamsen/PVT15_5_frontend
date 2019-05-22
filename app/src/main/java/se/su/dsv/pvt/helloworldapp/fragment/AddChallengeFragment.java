@@ -1,5 +1,6 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -35,8 +37,12 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
-        Button b = (Button) view.findViewById(R.id.createButton);
-        b.setOnClickListener(this::onClick);
+
+        Button createButton = (Button) view.findViewById(R.id.createButton);
+        Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
+        createButton.setOnClickListener(this);
+        cancelButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -47,20 +53,50 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
      */
     @Override
     public void onClick(View v) {
-
         MainActivity mainActivity = (MainActivity) getActivity();
-        EditText challenge = (EditText) vy.findViewById(R.id.challengeText);
-        String cString = challenge.getText().toString();
+        switch (v.getId()) {
+            case R.id.createButton:
+                if (emptyField()){
+                    Toast.makeText(mainActivity, "tomt fält", Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    EditText challenge = vy.findViewById(R.id.challengeText);
+                    String cString = challenge.getText().toString();
+                    EditText description = vy.findViewById(R.id.descriptionText);
+                    String dString = description.getText().toString();
+                    TextView date = vy.findViewById(R.id.date);
+                    TextView time = vy.findViewById(R.id.time);
+                    Challenge c = new Challenge(cString, dString, 1, mainActivity.getChallengeNumber() + 1, 0, "date", 0000);
+                    mainActivity.addChallengeNumber();
+                    mainActivity.setActive();
+                    mainActivity.addActiveChallenge(c);
+                    debugAddChallenges();
+                    Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            case R.id.cancelButton:
+                MyCustomDialog mcd = new MyCustomDialog();
+                mcd.show(getFragmentManager(), "MyCustomDialog");
+                Toast.makeText(mainActivity, "avbryt", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    private boolean emptyField() {
+        EditText challenge = vy.findViewById(R.id.challengeText);
         EditText description = vy.findViewById(R.id.descriptionText);
-        String dString = description.getText().toString();
         TextView date = vy.findViewById(R.id.date);
         TextView time = vy.findViewById(R.id.time);
-        Challenge c = new Challenge(cString, dString, 1,mainActivity.getChallengeNumber()+1,0,"date", 0000);
-        mainActivity.addChallengeNumber();
-        mainActivity.setActive();
-        mainActivity.addActiveChallenge(c);
-        debugAddChallenges();
-
+        if (challenge.getText().equals("")) {
+            return true;
+        } else if (description.getText().equals("")) {
+            return true;
+        } else if (date.getText().equals("")) {
+            return true;
+        } else if (time.getText().equals("")) {
+            return true;
+        }
+        return false;
     }
 
     /**
