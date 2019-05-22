@@ -1,6 +1,7 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,11 +17,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -121,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
         createConnectionToApi();
         getGymApiData();
-        testApiPost();
+        createChallengeApiData();
+//        testApiPost();
     }
 
 
@@ -185,14 +191,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createConnectionToApi() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(15, TimeUnit.SECONDS)
                 .build();
 
         if (retrofit == null) {
-            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create(gson)).build();
         }
         backendApiService = retrofit.create(BackendApiService.class);
     }
@@ -232,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createChallengeApiData() {
-        Challenge challenge = new Challenge("JDTest", "Beskrivning som är super", 0, 0, 75, "2019-05-25", 1558519200);
+        Challenge challenge = new Challenge("JDTest", "Beskrivning som är super", 0, 0, 74, "2019-05-25", 1558519200);
         challenge.setTimeAndDate();
 
         Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
@@ -242,11 +256,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Challenge> call, Response<Challenge> response) {
                 try {
-
-
-
-
-
 
                     Log.d(TAG, "Sent data: " + response.body().toString());
 
@@ -264,18 +273,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testApiPost() {
-        Call<String> call = backendApiService.testMethod("hej");
+        Call<String> call = backendApiService.testMethod("");
 
 
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 try {
-
-
-                    Log.d(TAG, "Sent data: " + response.body().toString());
-
-
+                    Log.d(TAG, "Sent data: " + response.body());
                 } catch (NullPointerException e) {
                     System.out.println("POST test: API-data contained null.");
                     Log.d(TAG, "POST test: API-data contained null.");
