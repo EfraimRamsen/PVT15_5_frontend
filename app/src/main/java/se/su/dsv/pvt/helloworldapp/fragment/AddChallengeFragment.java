@@ -4,24 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
+import android.view.*;
+import android.widget.*;
+import java.util.*;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
@@ -38,7 +23,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                 };
         vy = view;
         Spinner spinner = view.findViewById(R.id.locationPicker);
-        ArrayAdapter<String> LTRadapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
+        ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
         Button createButton = (Button) view.findViewById(R.id.createButton);
@@ -164,7 +149,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
             case "Farsta utegym":
                 id = 93;
                 break;
-
             case "Farstanäsets utegym":
                 id = 112;
                 break;
@@ -317,21 +301,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                 break;
         }
         return id;
-    }
-
-    private static class StringWithTag {
-        public String string;
-        public Object tag;
-
-        public StringWithTag(String string, Object tag) {
-            this.string = string;
-            this.tag = tag;
-        }
-
-        @Override
-        public String toString() {
-            return string;
-        }
     }
 
 }
