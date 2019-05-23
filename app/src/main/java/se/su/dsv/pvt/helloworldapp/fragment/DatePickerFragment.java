@@ -68,6 +68,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
                 månad = "december";
                 break;
         }
-        date.setText(view.getDayOfMonth() + " " + månad + " " + view.getYear());
+        date.setText(view.getYear() + " / " + view.getMonth() + " / " + view.getDayOfMonth());
     }
 }
