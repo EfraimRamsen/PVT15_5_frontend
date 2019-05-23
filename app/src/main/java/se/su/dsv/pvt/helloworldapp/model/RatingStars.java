@@ -43,7 +43,7 @@ public class RatingStars {
     /**
      * Sets one OnClickListener to several ImageViews at once.
      * @param imageViews list of ImageViews, in order!
-     * @param listener listener to be added to them, declared elsewhere. 
+     * @param listener listener to be added to them, declared elsewhere.
      */
     public static void setListeners(ImageView[] imageViews, ImageView.OnClickListener listener) {
         for (ImageView iV : imageViews) {

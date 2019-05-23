@@ -79,6 +79,8 @@ public class LocationViewFragment extends Fragment {
         @Override
         public void onClick(View v) {
             /**
+             * TODO:
+             * Detta förutsätter att jag kan hantera ratings härifrån till databasen:
              * a) Läs av clickedStar,
              * b) Addera användarens betyg (clickedStar) till databasen.
              */
@@ -87,12 +89,15 @@ public class LocationViewFragment extends Fragment {
     }
     public class starButtonListener implements ImageView.OnClickListener {
         @Override
+        /**
+         * This is uglier than God knows what. It sets clickedStar to the, well, clicked star, using
+         * the last character in the text id of all the stars.
+         */
         public void onClick(View v) {
-            /**
-             * sätt clickedStar
-             * kanske markera aktuell stjärna på ngt vis?
-             */
-            ;
+            String textID = v.getResources().getResourceName(v.getId());
+            clickedStar = Integer.parseInt(String.valueOf(textID.charAt(textID.length() - 1)));
+            System.out.println(clickedStar);
+            // TODO: markera aktuell stjärna?
         }
     }
 }
