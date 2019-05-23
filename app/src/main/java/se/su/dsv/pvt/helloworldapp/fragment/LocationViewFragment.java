@@ -1,6 +1,8 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,13 +27,26 @@ public class LocationViewFragment extends Fragment {
         /**
          * this is for trying out/debugging the popup dialog!
          * TODO: make something nicer of it.
-         */
+
         AlertDialog.Builder adb = new AlertDialog.Builder(getContext());
         adb.setView(R.layout.rank_gym_dialog);
         adb.create();
         adb.show();
+         */
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(R.layout.rank_gym_dialog);
+        // builder.setItems();
+        AlertDialog alertDialog = builder.create();
 
         //System.err.println(clickedPlace.getName()); // tested if we got a Place.
         return inflater.inflate(R.layout.fragment_location_view, container, false);
+    }
+
+    class cancelButtonListener implements DialogInterface.OnClickListener {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            ;
+
+        }
     }
 }
