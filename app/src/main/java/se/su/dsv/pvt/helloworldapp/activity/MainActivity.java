@@ -170,14 +170,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_navigation, menu);
 
-//        MenuItem item = menu.findItem(R.id.action_bar_spinner);
-//        Spinner spinner = (Spinner) item.getActionView();
-//
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_list_item_array, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        spinner.setAdapter(adapter);
-
         return true;
     }
 
@@ -265,11 +257,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Används ej för tillfället
-//    public List<OutdoorGym> getPlaces() {
-//        return outdoorGyms;
-//    }
-
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -285,35 +272,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
-
-    public void createChallenge(View v){
-        EditText challenge = (EditText) v.findViewById(R.id.challengeText);
-        String cString = challenge.getText().toString();
-        EditText description = v.findViewById(R.id.descriptionText);
-        String dString = description.getText().toString();
-        TextView date = v.findViewById(R.id.date);
-        TextView time = v.findViewById(R.id.time);
-        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,"date", 0000);
-        totalChallenges++;
-        active = challengeFragment;
-    }*/
-
-    /**
-     * Nedanstående metoder används för att koppla ihop olika fragment med MainActivity-klassen.
-     * TODO: koppla ihop dem med backenden.
-     *
-     */
-
-    public int getCompletedChallangeNumber() {
-        try {
-            return completedChallengesList.size();
-        }
-        catch (Exception e) {
-            System.err.println(e);
-        }
-        return 0;
-    }
     public void setActive() {
         active = challengeFragment;
     }
@@ -359,20 +317,4 @@ public class MainActivity extends AppCompatActivity {
         active2 = locationViewFragment;
     }
 
-    /*@Override
-    public void onBackPressed() {
-        Fragment  f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (active instanceof LocationViewFragment) {
-            bottomNavigation.setSelectedItemId(R.id.nav_map);
-            active = mapViewFragment;
-        }  else if (active instanceof MapViewFragment) {
-            finish();
-        } else if (active instanceof AddChallengeFragment) {
-            finish();
-        } else if (active instanceof ChallengeFragment) {
-            finish();
-        } else {
-            super.onBackPressed();
-        }
-    }*/
 }

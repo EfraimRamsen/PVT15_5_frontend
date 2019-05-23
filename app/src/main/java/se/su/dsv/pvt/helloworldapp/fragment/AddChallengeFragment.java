@@ -1,6 +1,5 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,7 +38,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
-
         Button createButton = (Button) view.findViewById(R.id.createButton);
         Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
         createButton.setOnClickListener(this);
@@ -69,7 +67,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     Challenge c = new Challenge(cString, dString, 0, 0, 0, parseDate());
                     mainActivity.setActive();
                     mainActivity.addActiveChallenge(c);
-                  //  debugAddChallenges();
                     Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -81,6 +78,11 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         }
     }
 
+
+    /**
+     * check för att inget av textfälten är tomma när man försöker skapa ett objekt
+     * @return true om ett obligatoriskt fält inte är ifyllt.
+     */
     private boolean emptyField() {
         EditText challenge = vy.findViewById(R.id.challengeText);
         EditText description = vy.findViewById(R.id.descriptionText);
@@ -107,6 +109,10 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         return false;
     }
 
+    /**
+     * gör om alla textfält till ett Datum-objekt för att skapa ett Challenge-objekt
+     * @return datum (java.util.Date) som väljs i Date- och Time-pickern av användaren
+     */
     private Date parseDate(){
         TextView y = vy.findViewById(R.id.year);
         TextView m = vy.findViewById(R.id.month);
@@ -129,19 +135,4 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         return cal.getTime();
     }
 
-    /**
-     * This just adds a couple random challenges, can be removed when we can get challenges from backend.
-     * @author Niklas Edström
-
-    public void debugAddChallenges() {
-        Challenge c = new Challenge("10k armhämtningar", "Jag är starkare än din pappa",
-                1, 1, 12, "date", 0000);
-        Challenge d = new Challenge("Dricka alkohol", "Smuggla plunta in på Foobar",
-                25, 2, 10, "date", 0000);
-        MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.setActive();
-        mainActivity.addActiveChallenge(c);
-        mainActivity.addActiveChallenge(d);
-    }
-    */
 }
