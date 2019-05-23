@@ -35,7 +35,6 @@ import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private int totalChallenges = 0; // TODO: detta bör fixas, dvs. kopplas ihop med databasen.
   
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
@@ -306,12 +305,6 @@ public class MainActivity extends AppCompatActivity {
      *
      */
 
-    public void addChallengeNumber() {
-        totalChallenges++;
-    }
-    public int getChallengeNumber() {
-        return totalChallenges;
-    }
     public int getCompletedChallangeNumber() {
         try {
             return completedChallengesList.size();

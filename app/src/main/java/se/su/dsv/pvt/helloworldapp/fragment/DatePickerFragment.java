@@ -28,46 +28,12 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        TextView date = (TextView) getActivity().findViewById(R.id.date);
-        String månad = null;
-        switch (view.getMonth()){
-            case 1:
-                månad = "januari";
-                break;
-            case 2:
-                månad = "februari";
-                break;
-            case 3:
-                månad = "mars";
-                break;
-            case 4:
-                månad = "april";
-                break;
-            case 5:
-                månad = "maj";
-                break;
-            case 6:
-                månad = "juni";
-                break;
-            case 7:
-                månad = "juli";
-                break;
-            case 8:
-                månad = "augusti";
-                break;
-            case 9:
-                månad = "september";
-                break;
-            case 10:
-                månad = "oktober";
-                break;
-            case 11:
-                månad = "november";
-                break;
-            case 12:
-                månad = "december";
-                break;
-        }
-        date.setText(view.getDayOfMonth() + " " + månad + " " + view.getYear());
+        TextView y = (TextView) getActivity().findViewById(R.id.year);
+        TextView m = (TextView) getActivity().findViewById(R.id.month);
+        TextView d = (TextView) getActivity().findViewById(R.id.day);
+        y.setText(view.getYear() + "");
+        m.setText(view.getMonth() + "");
+        d.setText(view.getDayOfMonth() + "");
     }
+
 }
