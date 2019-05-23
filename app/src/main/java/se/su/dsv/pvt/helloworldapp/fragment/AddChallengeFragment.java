@@ -14,8 +14,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import se.su.dsv.pvt.helloworldapp.R;
@@ -30,12 +34,11 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_challenge, container, false);
-        String[] values =
-                {"Välj plats", "Akalla Gårds utegym", "Björkhagens utegym", "Bredängs utegym", "Brotorp utegym", "Eriksdal utegym", "Fagersjöskogens utegym", "Farsta utegym", "Farstanäsets utegym", "Farstastrandsbadets utegym", "Flatenbadet utegym", "Fruängens utegym", "Grimsta utegym", "Grimstafältet - Grimsta mostionsspår", "Gärdet utegym", "Hammarby Sjöstads utegym", "Hellasgårdens utegym", "Hjorthagens utegym", "Hornsbergs strands utegym", "Hökarängsbadets utegym", "Kaknäs utegym", "Kanaanbadets utegym", "Kronobergsparkens utegym", "Kungsholms strandstigs utegym", "Kärrtorp utegym", "Lappkärrsbergets utegym, Docentbacken", "Liljeholmens utegym", "Lillsjöns utegym", "Mellanbergsparkens utegym", "Mälarhöjdsbadets utegym", "Nytorpsgärdets utegym", "Nälsta utegym", "Oppundaparkens utegym", "Pålsundsparkens utegym", "Rålambshovsparkens utegym", "Sannadalsparkens utegym", "Skarpnäcksfältets utegym", "Skärholmens utegym", "Smedsuddsbadets utegym", "Solviks utegym", "Spånga utegym", "Spånga IP utegym", "Stora Mossens utegym", "Stora Sköndals utegym", "Stråkets utegym", "Sätra IP utegym", "Sätradals utegym", "Sätrastrandsbadet utegym", "Tanto strandbads utegym", "Uteträffen i Tessinparken, utegym för seniorer", "Vanadislundens utegym", "Vasaparkens utegym", "Vintervikens utegym", "Vårgårdens utegym", "Ågesta utegym", "Årstaskogens utegym", "Årstavikens utegym", "Östberga utegym"
+        String[] values = {"Välj plats", "Akalla Gårds utegym", "Björkhagens utegym", "Bredängs utegym", "Brotorp utegym", "Eriksdal utegym", "Fagersjöskogens utegym", "Farsta utegym", "Farstanäsets utegym", "Farstastrandsbadets utegym", "Flatenbadet utegym", "Fruängens utegym", "Grimsta utegym", "Grimstafältet - Grimsta mostionsspår", "Gärdet utegym", "Hammarby Sjöstads utegym", "Hellasgårdens utegym", "Hjorthagens utegym", "Hornsbergs strands utegym", "Hökarängsbadets utegym", "Kaknäs utegym", "Kanaanbadets utegym", "Kronobergsparkens utegym", "Kungsholms strandstigs utegym", "Kärrtorp utegym", "Lappkärrsbergets utegym, Docentbacken", "Liljeholmens utegym", "Lillsjöns utegym", "Mellanbergsparkens utegym", "Mälarhöjdsbadets utegym", "Nytorpsgärdets utegym", "Nälsta utegym", "Oppundaparkens utegym", "Pålsundsparkens utegym", "Rålambshovsparkens utegym", "Sannadalsparkens utegym", "Skarpnäcksfältets utegym", "Skärholmens utegym", "Smedsuddsbadets utegym", "Solviks utegym", "Spånga utegym", "Spånga IP utegym", "Stora Mossens utegym", "Stora Sköndals utegym", "Stråkets utegym", "Sätra IP utegym", "Sätradals utegym", "Sätrastrandsbadet utegym", "Tanto strandbads utegym", "Uteträffen i Tessinparken, utegym för seniorer", "Vanadislundens utegym", "Vasaparkens utegym", "Vintervikens utegym", "Vårgårdens utegym", "Ågesta utegym", "Årstaskogens utegym", "Årstavikens utegym", "Östberga utegym"
                 };
         vy = view;
         Spinner spinner = view.findViewById(R.id.locationPicker);
-        ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
+        ArrayAdapter<String> LTRadapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
         Button createButton = (Button) view.findViewById(R.id.createButton);
@@ -64,7 +67,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     String cString = challenge.getText().toString();
                     EditText description = vy.findViewById(R.id.descriptionText);
                     String dString = description.getText().toString();
-                    Challenge c = new Challenge(cString, dString, 0, 0, 0, parseDate());
+                    Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
                     mainActivity.setActive();
                     mainActivity.addActiveChallenge(c);
                     Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
@@ -133,6 +136,202 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
+    }
+
+    private int getID(){
+        Spinner mySpinner = vy.findViewById(R.id.locationPicker);
+        String text = mySpinner.getSelectedItem().toString();
+        int id = 0;
+        switch (text){
+            case "Akalla Gårds utegym":
+                id = 106;
+                break;
+            case "Björkhagens utegym":
+                id = 69;
+                break;
+            case "Bredängs utegym":
+                id = 58;
+                break;
+            case "Brotorp utegym":
+                id = 82;
+                break;
+            case "Eriksdal utegym":
+                id = 85;
+                break;
+            case "Fagersjöskogens utegym":
+                id = 101;
+                break;
+            case "Farsta utegym":
+                id = 93;
+                break;
+
+            case "Farstanäsets utegym":
+                id = 112;
+                break;
+            case "Farstastrandsbadets utegym":
+                id = 68;
+                break;
+            case "Flatenbadet utegym":
+                id = 59;
+                break;
+            case "Fruängens utegym":
+                id = 60;
+                break;
+            case "Grimsta utegym":
+                id = 111;
+                break;
+            case "Grimstafältet - Grimsta mostionsspår":
+                id = 72;
+                break;
+            case "Gärdet utegym":
+                id = 65;
+                break;
+            case "Hammarby Sjöstads utegym":
+                id = 99;
+                break;
+            case "Hellasgårdens utegym":
+                id = 94;
+                break;
+            case "Hjorthagens utegym":
+                id = 89;
+                break;
+            case "Hornsbergs strands utegym":
+                id = 70;
+                break;
+            case "Hökarängsbadets utegym":
+                id = 97;
+                break;
+            case "Kaknäs utegym":
+                id = 103;
+                break;
+            case "Kanaanbadets utegym":
+                id = 105;
+                break;
+            case "Kronobergsparkens utegym":
+                id = 77;
+                break;
+            case "Kungsholms strandstigs utegym":
+                id = 57;
+                break;
+            case "Kärrtorp utegym":
+                id = 100;
+                break;
+            case "Lappkärrsbergets utegym, Docentbacken":
+                id = 62;
+                break;
+            case "Liljeholmens utegym":
+                id = 81;
+                break;
+            case "Lillsjöns utegym":
+                id = 84;
+                break;
+            case "Mellanbergsparkens utegym":
+                id = 88;
+                break;
+            case "Mälarhöjdsbadets utegym":
+                id = 104;
+                break;
+            case "Nytorpsgärdets utegym":
+                id = 66;
+                break;
+            case "Nälsta utegym":
+                id = 107;
+                break;
+            case "Oppundaparkens utegym":
+                id = 71;
+                break;
+            case "Pålsundsparkens utegym":
+                id = 109;
+                break;
+            case "Rålambshovsparkens utegym":
+                id = 90;
+                break;
+            case "Sannadalsparkens utegym":
+                id = 61;
+                break;
+            case "Skarpnäcksfältets utegym":
+                id = 75;
+                break;
+            case "Skärholmens utegym":
+                id = 92;
+                break;
+            case "Smedsuddsbadets utegym":
+                id = 102;
+                break;
+            case "Solviks utegym":
+                id = 80;
+                break;
+            case "Spånga utegym":
+                id = 98;
+                break;
+            case "Spånga IP utegym":
+                id = 56;
+                break;
+            case "Stora Mossens utegym":
+                id = 91;
+                break;
+            case "Stora Sköndals utegym":
+                id = 95;
+                break;
+            case "Stråkets utegym":
+                id = 78;
+                break;
+            case "Sätra IP utegym":
+                id = 108;
+                break;
+            case "Sätradals utegym":
+                id = 83;
+                break;
+            case "Sätrastrandsbadet utegym":
+                id = 73;
+                break;
+            case "Tanto strandbads utegym":
+                id = 79;
+                break;
+            case "Uteträffen i Tessinparken, utegym för seniorer":
+                id = 100;
+                break;
+            case "Vanadislundens utegym":
+                id = 96;
+                break;
+            case "Vasaparkens utegym":
+                id = 64;
+                break;
+            case "Vintervikens utegym":
+                id = 67;
+                break;
+            case "Vårgårdens utegym":
+                id = 63;
+                break;
+            case "Ågesta utegym":
+                id = 74;
+                break;
+            case "Årstaskogens utegym":
+                id = 86;
+                break;
+            case "Årstavikens utegym":
+                id = 76;
+                break;
+            case "Östberga utegym":
+                id = 87;
+                break;
+        }
+        return id;
+    }
+
+    private static class StringWithTag {
+        public String string;
+        public Object tag;
+
+        public StringWithTag(String string, Object tag) {
+            this.string = string;
+            this.tag = tag;
+        }
+
+        @Override
+        public String toString() {
+            return string;
+        }
     }
 
 }
