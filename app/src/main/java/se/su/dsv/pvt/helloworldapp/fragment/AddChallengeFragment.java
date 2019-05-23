@@ -164,7 +164,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
             case "Farsta utegym":
                 id = 93;
                 break;
-
             case "Farstanäsets utegym":
                 id = 112;
                 break;
