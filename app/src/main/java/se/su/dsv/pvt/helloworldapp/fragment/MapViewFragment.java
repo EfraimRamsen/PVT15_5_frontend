@@ -50,6 +50,9 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap map) {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.getGymApiData();
+
         googleMap = map;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setInfoWindowAdapter(new CustomMapMarker(getContext())); //Use CustomMapMarker instead of the standard one.
@@ -114,7 +117,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
             try {
                 Marker marker = googleMap.addMarker(new MarkerOptions().position(place.getLocation().getLatLng()));
                 marker.setTag(place);
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println("Null i: " + place);
             }
         }
