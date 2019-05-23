@@ -26,6 +26,7 @@ public class LocationViewFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
         Place clickedPlace = mainActivity.getOpenThisPlaceFragment();
         //System.err.println(clickedPlace.getName()); // tested if we got a Place.
+
         /**
          * this is for trying out/debugging the popup dialog!
          * TODO: make something nicer of it.
@@ -44,7 +45,7 @@ public class LocationViewFragment extends Fragment {
         confirmButton.setOnClickListener(new confirmButtonListener());
 
         starButtonListener starbl = new starButtonListener();
-
+        
         ImageView ib1 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton1);
         ImageView ib2 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton2);
         ImageView ib3 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton3);
