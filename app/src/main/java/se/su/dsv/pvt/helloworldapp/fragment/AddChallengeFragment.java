@@ -38,7 +38,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                 };
         vy = view;
         Spinner spinner = view.findViewById(R.id.locationPicker);
-        ArrayAdapter<String> LTRadapter = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
+        ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
         Button createButton = (Button) view.findViewById(R.id.createButton);
