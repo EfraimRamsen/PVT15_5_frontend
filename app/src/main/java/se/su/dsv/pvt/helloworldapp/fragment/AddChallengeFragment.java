@@ -318,19 +318,4 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         return id;
     }
 
-    private static class StringWithTag {
-        public String string;
-        public Object tag;
-
-        public StringWithTag(String string, Object tag) {
-            this.string = string;
-            this.tag = tag;
-        }
-
-        @Override
-        public String toString() {
-            return string;
-        }
-    }
-
 }
