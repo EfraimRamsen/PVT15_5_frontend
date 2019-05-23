@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import se.su.dsv.pvt.helloworldapp.R;
@@ -64,13 +66,10 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     String cString = challenge.getText().toString();
                     EditText description = vy.findViewById(R.id.descriptionText);
                     String dString = description.getText().toString();
-                    TextView date = vy.findViewById(R.id.date);
-                    TextView time = vy.findViewById(R.id.time);
-                    Challenge c = new Challenge(cString, dString, 1, mainActivity.getChallengeNumber() + 1, 0, "date", 0000);
-                    mainActivity.addChallengeNumber();
+                    Challenge c = new Challenge(cString, dString, 0, 0, 0, parseDate());
                     mainActivity.setActive();
                     mainActivity.addActiveChallenge(c);
-                    debugAddChallenges();
+                  //  debugAddChallenges();
                     Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -85,34 +84,64 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
     private boolean emptyField() {
         EditText challenge = vy.findViewById(R.id.challengeText);
         EditText description = vy.findViewById(R.id.descriptionText);
-        TextView date = vy.findViewById(R.id.date);
-        TextView time = vy.findViewById(R.id.time);
+        TextView y = vy.findViewById(R.id.year);
+        TextView m = vy.findViewById(R.id.month);
+        TextView d = vy.findViewById(R.id.day);
+        TextView h = vy.findViewById(R.id.hour);
+        TextView min = vy.findViewById(R.id.minute);
         if (challenge.getText().equals("")) {
             return true;
         } else if (description.getText().equals("")) {
             return true;
-        } else if (date.getText().equals("")) {
+        } else if (y.getText().equals("")) {
             return true;
-        } else if (time.getText().equals("")) {
+        } else if (m.getText().equals("")) {
+            return true;
+        } else if (d.getText().equals("")){
+            return true;
+        } else if (h.getText().equals("")){
+            return true;
+        } else if (min.getText().equals("")){
             return true;
         }
         return false;
     }
 
+    private Date parseDate(){
+        TextView y = vy.findViewById(R.id.year);
+        TextView m = vy.findViewById(R.id.month);
+        TextView d = vy.findViewById(R.id.day);
+        TextView h = vy.findViewById(R.id.hour);
+        TextView min = vy.findViewById(R.id.minute);
+        String stringY = y.getText().toString();
+        String stringM = m.getText().toString();
+        String stringD = d.getText().toString();
+        String stringH = h.getText().toString();
+        String stringMin = min.getText().toString();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Integer.parseInt(stringY));
+        cal.set(Calendar.MONTH, Integer.parseInt(stringM));
+        cal.set(Calendar.DATE, Integer.parseInt(stringD));
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stringH));
+        cal.set(Calendar.MINUTE, Integer.parseInt(stringMin));
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
+
     /**
      * This just adds a couple random challenges, can be removed when we can get challenges from backend.
      * @author Niklas Edström
-     */
+
     public void debugAddChallenges() {
         Challenge c = new Challenge("10k armhämtningar", "Jag är starkare än din pappa",
                 1, 1, 12, "date", 0000);
         Challenge d = new Challenge("Dricka alkohol", "Smuggla plunta in på Foobar",
                 25, 2, 10, "date", 0000);
         MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.addChallengeNumber();
-        mainActivity.addChallengeNumber();
         mainActivity.setActive();
         mainActivity.addActiveChallenge(c);
         mainActivity.addActiveChallenge(d);
     }
+    */
 }

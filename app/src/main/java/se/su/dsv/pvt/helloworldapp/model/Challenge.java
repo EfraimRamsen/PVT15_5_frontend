@@ -6,18 +6,15 @@ public class Challenge {
 
     private String name, description;
     private int numberOfParticipants, challengeID, workoutSpotID;
-    private Date timeAndDate; // datum och tid nedan måste omvandlas till Date datatyp och sparas i denna variabel
-    private String date; //datum i JSON
-    private long time; // tid i JSON
+    private Date date;
 
-    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String date, long time){
+    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, Date date){
         this.name = challenge;
         this.description = description;
         this.numberOfParticipants = numberOfParticipants;
         this.challengeID = challengeID;
         this.workoutSpotID = workoutSpotID;
         this.date = date;
-        this.time = time;
     }
 
     public String getChallenge(){
@@ -40,12 +37,12 @@ public class Challenge {
         return workoutSpotID;
     }
 
-    public Date getTimeAndDate(){
-        return timeAndDate;
+    public Date getDate(){
+        return date;
     }
 
     @Override
     public String toString() {
-        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + time;
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date;
     }
 }
