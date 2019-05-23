@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Place;
+import se.su.dsv.pvt.helloworldapp.model.RatingStars;
 
 public class LocationViewFragment extends Fragment {
 
@@ -45,19 +46,21 @@ public class LocationViewFragment extends Fragment {
         confirmButton.setOnClickListener(new confirmButtonListener());
 
         starButtonListener starbl = new starButtonListener();
-        
+
         ImageView ib1 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton1);
         ImageView ib2 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton2);
         ImageView ib3 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton3);
         ImageView ib4 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton4);
         ImageView ib5 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton5);
-
-        ib1.setOnClickListener(starbl);
-        ib2.setOnClickListener(starbl);
-        ib3.setOnClickListener(starbl);
-        ib4.setOnClickListener(starbl);
-        ib5.setOnClickListener(starbl);
-
+        ImageView[] imageViews = new ImageView[5];
+        imageViews[0] = ib1;
+        imageViews[1] = ib2;
+        imageViews[2] = ib3;
+        imageViews[3] = ib4;
+        imageViews[4] = ib5;
+        // TODO: sluta hårdkoda ratings!
+        RatingStars.setRatingStars(2.6, inflater.inflate(R.layout.rank_gym_dialog, null), imageViews);
+        RatingStars.setListeners(imageViews, starbl);
 
         return inflater.inflate(R.layout.fragment_location_view, container, false);
     }
@@ -85,10 +88,11 @@ public class LocationViewFragment extends Fragment {
     public class starButtonListener implements ImageView.OnClickListener {
         @Override
         public void onClick(View v) {
-            int id = v.getId();
-            System.out.println(id);
-            ImageView iV = v.findViewById(id);
-            iV.setImageResource(R.drawable.ic_back_button);
+            /**
+             * sätt clickedStar
+             * kanske markera aktuell stjärna på ngt vis?
+             */
+            ;
         }
     }
 }

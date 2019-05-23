@@ -55,14 +55,12 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
     }
 
     private void setRatingStars(double rating) {
-
         ImageView[] ratingStars = new ImageView[5];
         ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
         ratingStars[1] = (ImageView) customView.findViewById(R.id.gym_star_2);
         ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
         ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
         ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
-
         RatingStars.setRatingStars(rating, customView, ratingStars);
     }
 }
