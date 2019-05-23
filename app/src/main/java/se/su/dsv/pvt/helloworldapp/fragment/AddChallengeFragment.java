@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.*;
 import java.util.*;
-
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
