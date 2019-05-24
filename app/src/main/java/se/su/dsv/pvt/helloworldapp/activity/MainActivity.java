@@ -72,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
 
-        bottomNavigation = findViewById(R.id.bottom_navigation);
 
+
+        bottomNavigation = findViewById(R.id.bottom_navigation);
         toolbar = findViewById(R.id.my_toolbar);
         toolbar.inflateMenu(R.menu.toptoolbar);
 
