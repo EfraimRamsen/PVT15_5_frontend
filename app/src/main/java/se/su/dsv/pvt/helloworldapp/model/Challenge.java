@@ -4,9 +4,10 @@ import java.util.Date;
 
 public class Challenge {
 
-    private String name, description;
+    private String name, description, d;
     private int numberOfParticipants, challengeID, workoutSpotID;
     private Date date;
+    private long t;
 
     public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, Date date){
         this.name = challenge;
