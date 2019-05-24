@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 
 public class MyCustomDialog extends DialogFragment {
 
@@ -22,6 +24,8 @@ public class MyCustomDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
+        MainActivity mainActivity = (MainActivity) getActivity();
+        AddChallengeFragment acf = new AddChallengeFragment();
         View view = inflater.inflate(R.layout.dialog_cancel, container, false);
         Button yes = view.findViewById(R.id.yes);
         Button no = view.findViewById(R.id.no);
@@ -29,6 +33,7 @@ public class MyCustomDialog extends DialogFragment {
         yes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Toast.makeText(mainActivity, "yes", Toast.LENGTH_SHORT).show();
                 getDialog().dismiss();
             }
         });
@@ -36,6 +41,7 @@ public class MyCustomDialog extends DialogFragment {
         no.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Toast.makeText(mainActivity, "no", Toast.LENGTH_SHORT).show();
                 getDialog().dismiss();
             }
         });

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     final FragmentManager fm = getSupportFragmentManager();
     BottomNavigationView bottomNavigation;
 
-    Fragment active = challengeFragment;
+    public Fragment active = challengeFragment;
     Fragment active2 = active;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
