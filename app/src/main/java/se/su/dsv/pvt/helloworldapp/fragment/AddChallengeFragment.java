@@ -65,7 +65,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         }
     }
 
-
+//        mainActivity.createChallengeApiData(c);
     /**
      * check för att inget av textfälten är tomma när man försöker skapa ett objekt
      * @return true om ett obligatoriskt fält inte är ifyllt.
