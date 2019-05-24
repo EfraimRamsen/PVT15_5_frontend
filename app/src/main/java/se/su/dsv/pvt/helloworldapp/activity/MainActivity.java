@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     final FragmentManager fm = getSupportFragmentManager();
     BottomNavigationView bottomNavigation;
 
-    public Fragment active = challengeFragment;
+    Fragment active = challengeFragment;
     Fragment active2 = active;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
@@ -272,9 +272,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void setActive() {
-        active = challengeFragment;
+    public void handleNewChallenge(Challenge c){
+
     }
+
     public void addActiveChallenge(Challenge c) {
         activeChallengesList.add(c);
     }
