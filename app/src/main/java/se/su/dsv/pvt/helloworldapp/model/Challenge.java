@@ -13,15 +13,15 @@ public class Challenge {
     private String date; //datum i JSON
     private long time; // tid i JSON
 
-    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String date, long time) {
-        this.name = challenge;
-        this.description = description;
-        this.numberOfParticipants = numberOfParticipants;
-        this.challengeID = challengeID;
-        this.workoutSpotID = workoutSpotID;
-        this.date = date;
-        this.time = time;
-    }
+//    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String date, long time) {
+//        this.name = challenge;
+//        this.description = description;
+//        this.numberOfParticipants = numberOfParticipants;
+//        this.challengeID = challengeID;
+//        this.workoutSpotID = workoutSpotID;
+//        this.date = date;
+//        this.time = time;
+//    }
 
 //    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID){
 //        this.name = challenge;

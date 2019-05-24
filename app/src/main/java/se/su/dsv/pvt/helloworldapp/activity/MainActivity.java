@@ -250,28 +250,28 @@ public class MainActivity extends AppCompatActivity {
 //        Challenge challenge = new Challenge("JDTest2", "Beskrivning som är super", 0, 0, 74, "2019-05-25", 1558519200000L);
 //        Challenge challenge = new Challenge("JDTest3", "Beskrivning som är super", 0, 0, 74, "2019-05-25", Calendar.getInstance().getTimeInMillis());
 //        challenge.setTimeAndDate();
-//
-//        Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
-//
-//
-//        call.enqueue(new Callback<Challenge>() {
-//            @Override
-//            public void onResponse(Call<Challenge> call, Response<Challenge> response) {
-//                try {
-//
-//                    Log.d(TAG, "Sent data: " + response.body().toString());
-//
-//
-//                } catch (NullPointerException e) {
-//                    System.out.println("POST: API-data contained null.");
-//                    Log.d(TAG, "POST: API-data contained null.");
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<Challenge> call, Throwable t) {
-//                Log.e(TAG, "Felmeddelande: " +  t.toString());
-//            }
-//        });
+
+        Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
+
+
+        call.enqueue(new Callback<Challenge>() {
+            @Override
+            public void onResponse(Call<Challenge> call, Response<Challenge> response) {
+                try {
+
+                    Log.d(TAG, "Sent data: " + response.body().toString());
+
+
+                } catch (NullPointerException e) {
+                    System.out.println("POST: API-data contained null.");
+                    Log.d(TAG, "POST: API-data contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<Challenge> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
     }
 
     public void testApiPost() {
