@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         createConnectionToApi();
 //        getGymApiData();
-        createChallengeApiData();
+//        createChallengeApiData();
 //        testApiPost();
     }
 
@@ -250,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void createChallengeApiData() {
-//        Challenge challenge = new Challenge("JDTest2", "Beskrivning som är super", 0, 0, 74, "2019-05-25", 1558519200000L);
+    public void createChallengeApiData(Challenge challenge) {
+//        Challenge challenge = new Challenge("JDTest10", "Beskrivning som är super duper", 0, 0, 74, "2019-05-25", Date);
 //        Challenge challenge = new Challenge("JDTest3", "Beskrivning som är super", 0, 0, 74, "2019-05-25", Calendar.getInstance().getTimeInMillis());
 //        challenge.setTimeAndDate();
 
@@ -314,9 +314,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void handleNewChallenge(Challenge c){
+    /*public void handleNewChallenge(Challenge c){
 
-    }
+    }*/
 
     public void addActiveChallenge(Challenge c) {
         activeChallengesList.add(c);

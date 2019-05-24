@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.*;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
@@ -53,7 +55,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     EditText description = vy.findViewById(R.id.descriptionText);
                     String dString = description.getText().toString();
                     Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
-                    mainActivity.handleNewChallenge(c);
+                    mainActivity.createChallengeApiData(c);
                     Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -101,25 +103,50 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
      * @return datum (java.util.Date) som väljs i Date- och Time-pickern av användaren
      */
     private Date parseDate(){
-        TextView y = vy.findViewById(R.id.year);
-        TextView m = vy.findViewById(R.id.month);
-        TextView d = vy.findViewById(R.id.day);
-        TextView h = vy.findViewById(R.id.hour);
-        TextView min = vy.findViewById(R.id.minute);
-        String stringY = y.getText().toString();
-        String stringM = m.getText().toString();
-        String stringD = d.getText().toString();
-        String stringH = h.getText().toString();
-        String stringMin = min.getText().toString();
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, Integer.parseInt(stringY));
-        cal.set(Calendar.MONTH, Integer.parseInt(stringM));
-        cal.set(Calendar.DATE, Integer.parseInt(stringD));
-        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stringH));
-        cal.set(Calendar.MINUTE, Integer.parseInt(stringMin));
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        return cal.getTime();
+
+
+        try {
+                        TextView y = vy.findViewById(R.id.year);
+            TextView m = vy.findViewById(R.id.month);
+            TextView d = vy.findViewById(R.id.day);
+            TextView h = vy.findViewById(R.id.hour);
+            TextView min = vy.findViewById(R.id.minute);
+
+            String stringY = y.getText().toString();
+            String stringM = m.getText().toString();
+            String stringD = d.getText().toString();
+            String stringH = h.getText().toString();
+            String stringMin = min.getText().toString();
+
+            // ta bort
+            System.out.println("Resultat: " +
+                    stringY + " " + stringM + " " + stringD + " " + stringH + " " + stringMin);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
+            String dateTime = stringY + "-" + stringM + "-" + stringD + ", " + stringH + ":" + stringMin;
+            Date date = dateFormat.parse(dateTime);
+
+            // ta bort print
+            System.out.println("datum: " + dateFormat.format(date));
+            System.out.println(date);
+            System.out.println(date.getTime());
+
+//            date.setTime(time);
+            return date;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.YEAR, Integer.parseInt(stringY));
+//        cal.set(Calendar.MONTH, Integer.parseInt(stringM));
+//        cal.set(Calendar.DATE, Integer.parseInt(stringD));
+//        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stringH));
+//        cal.set(Calendar.MINUTE, Integer.parseInt(stringMin));
+//        cal.set(Calendar.SECOND, 0);
+//        cal.set(Calendar.MILLISECOND, 0);
+
+//        return cal.getTime();
     }
 
     private int getID(){
