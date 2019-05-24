@@ -22,12 +22,12 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         String[] values = {"Välj plats", "Akalla Gårds utegym", "Björkhagens utegym", "Bredängs utegym", "Brotorp utegym", "Eriksdal utegym", "Fagersjöskogens utegym", "Farsta utegym", "Farstanäsets utegym", "Farstastrandsbadets utegym", "Flatenbadet utegym", "Fruängens utegym", "Grimsta utegym", "Grimstafältet - Grimsta mostionsspår", "Gärdet utegym", "Hammarby Sjöstads utegym", "Hellasgårdens utegym", "Hjorthagens utegym", "Hornsbergs strands utegym", "Hökarängsbadets utegym", "Kaknäs utegym", "Kanaanbadets utegym", "Kronobergsparkens utegym", "Kungsholms strandstigs utegym", "Kärrtorp utegym", "Lappkärrsbergets utegym, Docentbacken", "Liljeholmens utegym", "Lillsjöns utegym", "Mellanbergsparkens utegym", "Mälarhöjdsbadets utegym", "Nytorpsgärdets utegym", "Nälsta utegym", "Oppundaparkens utegym", "Pålsundsparkens utegym", "Rålambshovsparkens utegym", "Sannadalsparkens utegym", "Skarpnäcksfältets utegym", "Skärholmens utegym", "Smedsuddsbadets utegym", "Solviks utegym", "Spånga utegym", "Spånga IP utegym", "Stora Mossens utegym", "Stora Sköndals utegym", "Stråkets utegym", "Sätra IP utegym", "Sätradals utegym", "Sätrastrandsbadet utegym", "Tanto strandbads utegym", "Uteträffen i Tessinparken, utegym för seniorer", "Vanadislundens utegym", "Vasaparkens utegym", "Vintervikens utegym", "Vårgårdens utegym", "Ågesta utegym", "Årstaskogens utegym", "Årstavikens utegym", "Östberga utegym"
                 };
         vy = view;
-        Spinner spinner = view.findViewById(R.id.locationPicker);
+        Spinner spinner = vy.findViewById(R.id.locationPicker);
         ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
-        Button createButton = (Button) view.findViewById(R.id.createButton);
-        Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
+        Button createButton = view.findViewById(R.id.createButton);
+        Button cancelButton = view.findViewById(R.id.cancelButton);
         createButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
 
@@ -61,11 +61,9 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
             case R.id.cancelButton:
                 MyCustomDialog mcd = new MyCustomDialog();
                 mcd.show(getFragmentManager(), "MyCustomDialog");
-                Toast.makeText(mainActivity, "avbryt", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
 
     /**
      * check för att inget av textfälten är tomma när man försöker skapa ett objekt
@@ -302,5 +300,6 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         }
         return id;
     }
+
 
 }
