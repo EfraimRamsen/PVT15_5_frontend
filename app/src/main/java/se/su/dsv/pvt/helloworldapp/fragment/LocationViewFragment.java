@@ -1,5 +1,6 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
+import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.model.RatingStars;
 
@@ -20,26 +23,68 @@ public class LocationViewFragment extends Fragment {
 
     protected AlertDialog alertDialog;
     private int clickedStar;
+    protected ImageView latestStar;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Place clickedPlace = mainActivity.getOpenThisPlaceFragment();
-        //System.err.println(clickedPlace.getName()); // tested if we got a Place.
 
-        /**
-         * this is for trying out/debugging the popup dialog!
-         * TODO: make something nicer of it.
-         */
+        View view = inflater.inflate(R.layout.fragment_location_view, container, false);
+        TextView title = (TextView) mainActivity.findViewById(R.id.main_title_text);
+        title.setText(clickedPlace.getName());
+        TextView textRating = (TextView) view.findViewById(R.id.location_view_gymrating);
+        textRating.setText("blargh"); //TODO: sluta hårdkoda ratings
+        TextView address = (TextView) view.findViewById(R.id.gym_view_adress);
+        address.setText("Vägvägen 69, 16161, Ödeshög"); // TODO: hårdkodad adress!
+        if (clickedPlace instanceof OutdoorGym) {
+            TextView description = (TextView) view.findViewById(R.id.gymview_description);
+            if (((OutdoorGym) clickedPlace).getDescription() == null) {
+                description.setText(R.string.no_descr_avail);
+            }
+            description.setText(((OutdoorGym) clickedPlace).getDescription());
+        }
+        else {
+            TextView descr = (TextView) view.findViewById(R.id.gymview_description);
+            descr.setText(getString(R.string.no_descr_avail));
+        }
+
+        Button rateGym = (Button) view.findViewById(R.id.rate_gym_popup_button);
+        rateGym.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rateGymPopupCreate(inflater);
+            }
+        });
+
+         // I'm so sorry for this.
+        ImageView iV1 = (ImageView) view.findViewById(R.id.gym_star_m1);
+        ImageView iV2 = (ImageView) view.findViewById(R.id.gym_star_m2);
+        ImageView iV3 = (ImageView) view.findViewById(R.id.gym_star_m3);
+        ImageView iV4 = (ImageView) view.findViewById(R.id.gym_star_m4);
+        ImageView iV5 = (ImageView) view.findViewById(R.id.gym_star_m5);
+        ImageView[] imageViews = new ImageView[5];
+        imageViews[0] = iV1;
+        imageViews[1] = iV2;
+        imageViews[2] = iV3;
+        imageViews[3] = iV4;
+        imageViews[4] = iV5;
+        RatingStars.setRatingStars(4.2, view, imageViews); //TODO: sluta hårdkoda ratings!
+
+        return view;
+    }
+    /**
+     * Creates and shows the popup for rating a gym.
+     * @param inflater
+     * @author Niklas Edström
+     */
+    private void rateGymPopupCreate(@NonNull LayoutInflater inflater) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(R.layout.rank_gym_dialog);
         alertDialog = builder.create();
         alertDialog.show();
-        /**
-         * Creates listeners for the buttons and stars
-         * @author Niklas Edström
-         */
         Button cancelButton = (Button) alertDialog.findViewById(R.id.rankgym_button_cancel);
         cancelButton.setOnClickListener(new cancelButtonListener());
         Button confirmButton = (Button) alertDialog.findViewById(R.id.rankgym_button_ok);
@@ -61,8 +106,6 @@ public class LocationViewFragment extends Fragment {
         // TODO: sluta hårdkoda ratings!
         RatingStars.setRatingStars(2.6, inflater.inflate(R.layout.rank_gym_dialog, null), imageViews);
         RatingStars.setListeners(imageViews, starbl);
-
-        return inflater.inflate(R.layout.fragment_location_view, container, false);
     }
 
     /**
@@ -85,6 +128,7 @@ public class LocationViewFragment extends Fragment {
              * b) Addera användarens betyg (clickedStar) till databasen.
              */
             ;
+            alertDialog.cancel();
         }
     }
     public class starButtonListener implements ImageView.OnClickListener {
@@ -94,9 +138,14 @@ public class LocationViewFragment extends Fragment {
          * the last character in the text id of all the stars.
          */
         public void onClick(View v) {
+            if (latestStar != null) {
+                latestStar.clearColorFilter();
+            }
             String textID = v.getResources().getResourceName(v.getId());
+            ImageView iV = (ImageView) v.findViewById(v.getId());
             clickedStar = Integer.parseInt(String.valueOf(textID.charAt(textID.length() - 1)));
-            System.out.println(clickedStar);
+            iV.setColorFilter(Color.RED);
+            latestStar = iV;
             // TODO: markera aktuell stjärna?
         }
     }
