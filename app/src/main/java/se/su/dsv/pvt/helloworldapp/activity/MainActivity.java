@@ -285,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
         completedChallengesList.add(c);
         removeActiveChallenge(c);
     }
-
     /**
      * klasser som används för att koppla ihop fragment, mainactivity och backend slutar här.
      */

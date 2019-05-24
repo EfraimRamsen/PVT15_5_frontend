@@ -93,7 +93,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.showLocation();
 
-                //mainActivity.setOpenThisPlaceFragment((Place) marker.getTag());
+                mainActivity.setOpenThisPlaceFragment((Place) marker.getTag());
                 //LocationViewFragment lwf = new LocationViewFragment();
                 //FragmentTransaction fm = getFragmentManager().beginTransaction();
                 //fm.add(R.id.fragment_container, lwf).commit();
