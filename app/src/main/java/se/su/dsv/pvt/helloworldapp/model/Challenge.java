@@ -7,12 +7,12 @@ import java.util.Date;
 
 public class Challenge {
 
-    private String name, description;
+    private String name, description, d;
     private int numberOfParticipants, challengeID, workoutSpotID;
-    private Date timeAndDate; // datum och tid nedan måste omvandlas till Date datatyp och sparas i denna variabel
-    private String date; //datum i JSON
-    private long time; // tid i JSON
+    private Date date;
+    private long t;
 
+// from create_challenge_to_api branch
 //    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String date, long time) {
 //        this.name = challenge;
 //        this.description = description;
@@ -23,6 +23,8 @@ public class Challenge {
 //        this.time = time;
 //    }
 
+  
+// from create_challenge_to_api branch
 //    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID){
 //        this.name = challenge;
 //        this.description = description;
@@ -32,6 +34,14 @@ public class Challenge {
 //        timeAndDate = new Date(Calendar.getInstance().getTimeInMillis());
 //    }
 
+    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, Date date){
+        this.name = challenge;
+        this.description = description;
+        this.numberOfParticipants = numberOfParticipants;
+        this.challengeID = challengeID;
+        this.workoutSpotID = workoutSpotID;
+        this.date = date;
+    }
 
     public String getName() {
         return name;
@@ -81,16 +91,12 @@ public class Challenge {
         this.time = time;
     }
 
-    public String getDate() {
-        return date;
-    }
-
     public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getTimeAndDate(){
-        return timeAndDate;
+    public Date getDate(){
+        return date;
     }
 
     public void setTimeAndDate(Date timeAndDate) {
@@ -109,6 +115,6 @@ public class Challenge {
 
     @Override
     public String toString() {
-        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + timeAndDate + " " + timeAndDate.getTime() + " " + time;
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date;
     }
 }

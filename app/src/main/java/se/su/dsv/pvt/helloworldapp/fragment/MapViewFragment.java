@@ -32,6 +32,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
     private List<OutdoorGym> outdoorGyms;
+    private final Fragment locationViewFragment = new LocationViewFragment();
 
     @Nullable
     @Override
@@ -92,12 +93,13 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
              */
             @Override
             public void onInfoWindowClick(Marker marker) {
-               System.out.println("do stuff  -- " + marker.getTitle());
-                //FragmentTransaction fm = getFragmentManager().beginTransaction();
-
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.showLocation();
-              //  fm.add(R.id.fragment_container, new LocationViewFragment()).commit();
+
+                mainActivity.setOpenThisPlaceFragment((Place) marker.getTag());
+                //LocationViewFragment lwf = new LocationViewFragment();
+                //FragmentTransaction fm = getFragmentManager().beginTransaction();
+                //fm.add(R.id.fragment_container, lwf).commit();
 
 
             }

@@ -36,12 +36,12 @@ import java.util.concurrent.TimeUnit;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private int totalChallenges = 0; // TODO: detta bör fixas, dvs. kopplas ihop med databasen.
   
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
@@ -50,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
 
     Fragment active = challengeFragment;
+    Fragment active2 = active;
     Intent intent;
     List<OutdoorGym> outdoorGyms;
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
+
+    private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
@@ -136,24 +139,32 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-
+        /**
+         * lyssnare till bottomnav
+         * @param item
+         * @author Gosia
+         */
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             TextView title = (TextView) findViewById(R.id.main_title_text);
+            fm.beginTransaction().hide(active2).commit();
             switch (item.getItemId()) {
                 case R.id.nav_challenges:
+                    fm.popBackStack();
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
                     return true;
 
                 case R.id.nav_add_challenge:
+                    fm.popBackStack();
                     fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
                     active = addChallengeFragment;
                     title.setText(R.string.add_challenge);
                     return true;
 
                 case R.id.nav_map:
+                    fm.popBackStack();
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);
@@ -163,17 +174,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_navigation, menu);
-
-//        MenuItem item = menu.findItem(R.id.action_bar_spinner);
-//        Spinner spinner = (Spinner) item.getActionView();
-//
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_list_item_array, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        spinner.setAdapter(adapter);
 
         return true;
     }
@@ -295,11 +299,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Används ej för tillfället
-//    public List<OutdoorGym> getPlaces() {
-//        return outdoorGyms;
-//    }
-
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -315,47 +314,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
+    public void handleNewChallenge(Challenge c){
 
-    public void createChallenge(View v){
-        EditText challenge = (EditText) v.findViewById(R.id.challengeText);
-        String cString = challenge.getText().toString();
-        EditText description = v.findViewById(R.id.descriptionText);
-        String dString = description.getText().toString();
-        TextView date = v.findViewById(R.id.date);
-        TextView time = v.findViewById(R.id.time);
-        Challenge c = new Challenge(cString, dString, 1,totalChallenges+1,0,"date", 0000);
-        totalChallenges++;
-        active = challengeFragment;
-    }*/
+    }
 
-    /**
-     * Nedanstående metoder används för att koppla ihop olika fragment med MainActivity-klassen.
-     * TODO: koppla ihop dem med backenden.
-     *
-     */
-
-    public void cancelChallenge(View v){
-        ;
-    }
-    public void addChallengeNumber() {
-        totalChallenges++;
-    }
-    public int getChallengeNumber() {
-        return totalChallenges;
-    }
-    public int getCompletedChallangeNumber() {
-        try {
-            return completedChallengesList.size();
-        }
-        catch (Exception e) {
-            System.err.println(e);
-        }
-        return 0;
-    }
-    public void setActive() {
-        active = challengeFragment;
-    }
     public void addActiveChallenge(Challenge c) {
         activeChallengesList.add(c);
     }
@@ -366,32 +328,35 @@ public class MainActivity extends AppCompatActivity {
         completedChallengesList.add(c);
         removeActiveChallenge(c);
     }
-
     /**
      * klasser som används för att koppla ihop fragment, mainactivity och backend slutar här.
      */
 
+    /**
+     * These three methods lets MapViewFragment send objects to LocationViewFragment.
+     * @return
+     * @author Niklas Edström
+     */
+    public Place getOpenThisPlaceFragment() {
+        Place p = openThisPlaceFragment;
+        removeOpenThisPlaceFragment();
+        return p;
+    }
+    public void setOpenThisPlaceFragment(Place openThisPlaceFragment) {
+        this.openThisPlaceFragment = openThisPlaceFragment;
+    }
+    public void removeOpenThisPlaceFragment() {
+        this.openThisPlaceFragment = null;
+    }
 
+    /**
+     * Visar upp ett locationfragment som man kan backa ut från
+     * @author Gosia
+     */
     public void showLocation() {
         Fragment locationViewFragment = new LocationViewFragment();
         fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
-        active = locationViewFragment;
+        active2 = locationViewFragment;
     }
 
-    @Override
-    public void onBackPressed() {
-        Fragment  f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (active instanceof LocationViewFragment) {
-            bottomNavigation.setSelectedItemId(R.id.nav_map);
-            active = mapViewFragment;
-        }  else if (active instanceof MapViewFragment) {
-            finish();
-        } else if (active instanceof AddChallengeFragment) {
-            finish();
-        } else if (active instanceof ChallengeFragment) {
-            finish();
-        } else {
-            super.onBackPressed();
-        }
-    }
 }

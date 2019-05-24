@@ -46,7 +46,7 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ((TextView) customView.findViewById(R.id.gym_name)).setText(place.getName());
 
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
-        setRatingStars(4); //HÅRDKODAT!!!
+        setRatingStars(2.6); //HÅRDKODAT!!!
         ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(4)); // TODO: HÅRDKODAT!!!
 
         ((TextView) customView.findViewById(R.id.gym_challenges)).setText(place.getChallengeList().size() + " utmaningar"); //Oerhört fult, but works.
@@ -55,37 +55,12 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
     }
 
     private void setRatingStars(double rating) {
-
         ImageView[] ratingStars = new ImageView[5];
         ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
         ratingStars[1] = (ImageView) customView.findViewById(R.id.gym_star_2);
         ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
         ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
         ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
-
-        ((ImageView) customView.findViewById(R.id.gym_star_1)).setImageResource(R.drawable.ic_star_empty);
-        ((ImageView) customView.findViewById(R.id.gym_star_2)).setImageResource(R.drawable.ic_star_empty);
-        ((ImageView) customView.findViewById(R.id.gym_star_3)).setImageResource(R.drawable.ic_star_empty);
-        ((ImageView) customView.findViewById(R.id.gym_star_4)).setImageResource(R.drawable.ic_star_empty);
-        ((ImageView) customView.findViewById(R.id.gym_star_5)).setImageResource(R.drawable.ic_star_empty);
-        ratingStars[0] = (ImageView) customView.findViewById(R.id.gym_star_1);
-        ratingStars[1] = (ImageView) customView.findViewById(R.id.gym_star_2);
-        ratingStars[2] = (ImageView) customView.findViewById(R.id.gym_star_3);
-        ratingStars[3] = (ImageView) customView.findViewById(R.id.gym_star_4);
-        ratingStars[4] = (ImageView) customView.findViewById(R.id.gym_star_5);
-
-        if (rating >= 0.25) {
-            for (int i = 0; i <= 4; i++) {
-                ImageView iT = ratingStars[i];
-                if (rating >= 0.25){
-                    iT.setImageResource(R.drawable.ic_star_half);
-                }
-                if (rating >= 0.75) {
-                    iT.setImageResource(R.drawable.ic_star_full);
-                }
-
-                rating = rating - 1.0;
-            }
-        }
+        RatingStars.setRatingStars(rating, customView, ratingStars);
     }
 }
