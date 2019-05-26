@@ -7,41 +7,32 @@ public class Challenge {
 
     private String name, description;
     private int numberOfParticipants, challengeID, workoutSpotID;
-    private Date timeAndDate;
     private long time;
+
+    // Används ej för tillfället
+    private Date timeAndDate;
     private String date;
 
-// from create_challenge_to_api branch
-//    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String date, long time) {
+    // Gamla konstruktorn
+//    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, Date timeAndDate){
 //        this.name = challenge;
 //        this.description = description;
 //        this.numberOfParticipants = numberOfParticipants;
 //        this.challengeID = challengeID;
 //        this.workoutSpotID = workoutSpotID;
-//        this.date = date;
-//        this.time = time;
+//        this.timeAndDate = timeAndDate;
+//
+////        prepareOutgoingDateTime();
+//        setTime();
 //    }
 
-  
-// from create_challenge_to_api branch
-//    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID){
-//        this.name = challenge;
-//        this.description = description;
-//        this.numberOfParticipants = numberOfParticipants;
-//        this.challengeID = challengeID;
-//        this.workoutSpotID = workoutSpotID;
-//        timeAndDate = new Date(Calendar.getInstance().getTimeInMillis());
-//    }
-
-    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, Date timeAndDate){
+    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, long time){
         this.name = challenge;
         this.description = description;
         this.numberOfParticipants = numberOfParticipants;
         this.challengeID = challengeID;
         this.workoutSpotID = workoutSpotID;
-        this.timeAndDate = timeAndDate;
-
-        prepareOutgoingDateTime();
+        this.time = time;
     }
 
     // ********************************************************************************
@@ -49,7 +40,6 @@ public class Challenge {
     public String getName() {
         return name;
     }
-
 
     public String getDescription(){
         return description;
@@ -69,67 +59,30 @@ public class Challenge {
 
     // ********************************************************************************
 
-
-//    public String getDate() {
-//        return date;
-//    }
-
-    public Date getTimeAndDate() {
-        return timeAndDate;
-    }
-
-//    public long getTime() {
-//        return timeAndDate.getTime();
-//    }
-
-    //    public String getDate() {
-//        date = timeAndDate.toString();
-//        return date;
-//    }
-//
-//    public Date getDate() {
-//        System.out.println("test i getDate");
-//        return timeAndDate;
-//    }
-
     // INKOMMANDE JSON
 
-    // KORTA NER?
     /**
      * Denna metod deklarerar innehållet i Date-objektet med det datum och tid som challenge-objektet har.
      * @author JD
      */
-    public void setTimeAndDate() {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-            timeAndDate = dateFormat.parse(date);
-            timeAndDate.setTime(time);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+//    public void setTimeAndDate() {
+//        try {
+//            timeAndDate = new Date(0);
+//            timeAndDate.setTime(time);
+//        } catch (Exception e) {
+//            System.out.println("Fel: " + e);
+//        }
+//    }
 
     // UTGÅENDE JSON
 
-    // ÄNDRAS
-    public void prepareOutgoingDateTime() {
-        setTime();
-        setDate();
-    }
-
-    // ANVÄNDS
-    public void setTime() {
-        this.time = timeAndDate.getTime();
-    }
-
-    // KAN TAS BORT?
-    public void setDate() {
-        String dateText = new SimpleDateFormat("yyyy-MM-dd").format(timeAndDate);
-        this.date = dateText;
-    }
+//    public void setTime() {
+//        this.time = timeAndDate.getTime();
+//    }
 
     @Override
     public String toString() {
-        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + "time" + " " + timeAndDate;
+//        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + time + " " + timeAndDate;
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + time;
     }
 }

@@ -21,7 +21,4 @@ public interface BackendApiService {
 
     @POST("createChallenge")
     Call<Challenge> createNewChallengeRequest(@Body Challenge params);
-
-    @POST("addString")
-    Call<String> testMethod(@Body String params);
 }
