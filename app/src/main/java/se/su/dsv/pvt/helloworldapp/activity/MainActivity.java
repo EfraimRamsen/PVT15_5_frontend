@@ -52,14 +52,21 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = challengeFragment;
     Fragment active2 = active;
     Intent intent;
+
+    // Här sparas alla hämtade gym. /JD
     List<OutdoorGym> outdoorGyms;
+
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
+    //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
+
+    // API:ns grundläggande URL. /JD
     public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
+
     private static Retrofit retrofit = null;
     OkHttpClient okHttpClient;
     BackendApiService backendApiService;
@@ -101,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
+        // Nedan if-satser hämtar intent från föregående activity. Innehållet i intent säger vilket fragment som ska visas först. /JD
         intent = getIntent();
         if (intent.hasExtra("my")) {
             bottomNavigation.setSelectedItemId(R.id.nav_challenges);
@@ -194,6 +202,10 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    /**
+     * Denna metod instansierar själva HTTP-handlern samt JSON-handlern. Dessutom läggs en interceptor till för att läsa av requests och responses via HTTP.
+     * @author JD
+     */
     public void createConnectionToApi() {
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -215,6 +227,10 @@ public class MainActivity extends AppCompatActivity {
         backendApiService = retrofit.create(BackendApiService.class);
     }
 
+    /**
+     * Denna metod hämtar alla gym från API:n, sparar de i en lista och anropar metoderna som sätter ut gym på kartan.
+     * @author JD
+     */
     public void getGymApiData() {
         Call<List<OutdoorGym>> call = backendApiService.getAllGymsResponse();
 
@@ -250,6 +266,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Denna metod anropas när man skapat ett gym. Metoden skickar med ett challenge-objekt i HTTP-request till backend.
+     * @param challenge
+     * @author JD
+     */
     public void createChallengeApiData(Challenge challenge) {
 //        Challenge challenge = new Challenge("JDTest10", "Beskrivning som är super duper", 0, 0, 74, "2019-05-25", Date);
 //        Challenge challenge = new Challenge("JDTest3", "Beskrivning som är super", 0, 0, 74, "2019-05-25", Calendar.getInstance().getTimeInMillis());
@@ -278,32 +299,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void testApiPost() {
-        Call<String> call = backendApiService.testMethod("");
-
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    Log.d(TAG, "Sent data: " + response.body());
-                } catch (NullPointerException e) {
-                    System.out.println("POST test: API-data contained null.");
-                    Log.d(TAG, "POST test: API-data contained null.");
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e(TAG, "Felmeddelande: " +  t.toString());
-            }
-        });
-    }
+    // Test-metod för anrop till API. /JD
+//    public void testApiPost() {
+//        Call<String> call = backendApiService.testMethod("");
+//
+//
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                try {
+//                    Log.d(TAG, "Sent data: " + response.body());
+//                } catch (NullPointerException e) {
+//                    System.out.println("POST test: API-data contained null.");
+//                    Log.d(TAG, "POST test: API-data contained null.");
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Log.e(TAG, "Felmeddelande: " +  t.toString());
+//            }
+//        });
+//    }
 
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+    /**
+     * Metoden skickar användaren till ny activity som öppnar en webbsida till Stockholm Stads rapporteringssida.
+     * @author JD
+     */
     private void openReportWebPage() {
         // Tre raderna nedan är för om man implementerar webbsidan som fragment
 //        Fragment reportWebPage = new ReportWebPageFragment();

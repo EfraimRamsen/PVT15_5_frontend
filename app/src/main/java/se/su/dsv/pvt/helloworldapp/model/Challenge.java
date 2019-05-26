@@ -95,6 +95,10 @@ public class Challenge {
     // INKOMMANDE JSON
 
     // KORTA NER?
+    /**
+     * Denna metod deklarerar innehållet i Date-objektet med det datum och tid som challenge-objektet har.
+     * @author JD
+     */
     public void setTimeAndDate() {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");

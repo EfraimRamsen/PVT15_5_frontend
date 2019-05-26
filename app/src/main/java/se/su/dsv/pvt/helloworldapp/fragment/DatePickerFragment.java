@@ -31,7 +31,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         TextView y = (TextView) getActivity().findViewById(R.id.year);
         TextView m = (TextView) getActivity().findViewById(R.id.month);
         TextView d = (TextView) getActivity().findViewById(R.id.day);
-        int correctedMonth = view.getMonth() + 1;
+        int correctedMonth = view.getMonth() + 1; // Adderar 1 så att månad visas korrekt eftersom januari börjar på 0. /JD
         y.setText(view.getYear() + "");
         m.setText(correctedMonth + "");
         d.setText(view.getDayOfMonth() + "");

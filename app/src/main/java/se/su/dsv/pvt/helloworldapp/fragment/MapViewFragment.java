@@ -28,10 +28,11 @@ import se.su.dsv.pvt.helloworldapp.model.CustomMapMarker;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 
+// Detta fragment är Google Maps-kartan som visas. /JD
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
-    private List<OutdoorGym> outdoorGyms;
+    private List<OutdoorGym> outdoorGyms; // Denna lista sparar alla utegym som hämtats från API. /JD
     private final Fragment locationViewFragment = new LocationViewFragment();
 
     @Nullable
@@ -52,7 +53,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap map) {
         MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.getGymApiData();
+        mainActivity.getGymApiData();  // Hämtar alla gym när kartan är färdig laddad. /JD
 
         googleMap = map;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -66,6 +67,8 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                 .build();
 
 
+        // Kontrollerar om behörighet för att hämta enhetens GPS-position har godkänts eller ej.
+        // Syftet är att kunna visa användarens position på kartan. Om inte, begär om behörighet. /JD
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
@@ -107,6 +110,11 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    /**
+     * Denna metod används för att hämta gym-listan från MainActivity och sparar den i en lista i detta fragment.
+     * @param outdoorGyms
+     * @author JD
+     */
     public void addOutdoorGymList(List<OutdoorGym> outdoorGyms) {
         // Två första raderna - om man vill komma åt activity-metoderna
 //        MainActivity mainActivity = (MainActivity) getActivity();
@@ -114,6 +122,10 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         this.outdoorGyms = outdoorGyms;
     }
 
+    /**
+     * Placerar varje gym-objekt på kartan, representerad som en marker.
+     * @author JD
+     */
     public void addAllPlacesToMap() {
         for (Place place : outdoorGyms) {
             try {
@@ -125,9 +137,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    public static final int PERMISSIONS_REQUEST_LOCATION = 99; // ignorera
+    public static final int PERMISSIONS_REQUEST_LOCATION = 99; // ignorera - tilldelar bara ett nummer till denna specifika behörighet /JD
 
-
+    /**
+     * Denna metod skickar själva begäran till användaren om att godkänna behörigheten för appen.
+     * @author JD
+     */
     private void askPermission() {
         requestPermissions(
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -135,6 +150,13 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         );
     }
 
+    /**
+     * Denna metod hämtar resultatet av behörighetsbegäran som gjordes. Den kontrollerar om behörighet för enhetens GPS-position har godkändes eller ej av användaren.
+     * @author JD
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

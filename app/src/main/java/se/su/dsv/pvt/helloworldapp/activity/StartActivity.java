@@ -10,6 +10,7 @@ import se.su.dsv.pvt.helloworldapp.R;
 
 public class StartActivity extends Activity implements View.OnClickListener {
 
+    // konstanter som motsvarar fragmentet knappen leder till /JD
     final int ADD_CHALLENGES_VIEW = 1;
     final int MY_CHALLENGES_VIEW = 2;
     final int FIND_CHALLENGES_VIEW = 3;
@@ -27,6 +28,7 @@ public class StartActivity extends Activity implements View.OnClickListener {
         findChallangesBtn.setOnClickListener(this);
     }
 
+    // Knapparna på startsidan som leder till specifika fragment. Intent används för att nästa activity ska avgöra vilket fragment som ska visas. /JD
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.plusBtn) {

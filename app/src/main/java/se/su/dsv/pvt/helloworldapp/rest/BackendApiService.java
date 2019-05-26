@@ -10,6 +10,8 @@ import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 
+// Detta interface deklarerar vilka API-anrop som kan göras och typ av HTTP-request.
+// Här definieras adress vilken adress anropet görs till och namnet på tillhörande metod som ska köras. /JD
 public interface BackendApiService {
 //    @GET("outdoorgymtest?gymID=60") // allGyms/
 //    Call<OutdoorGym> getJsonResponse();
