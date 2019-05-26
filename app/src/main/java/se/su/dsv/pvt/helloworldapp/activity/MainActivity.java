@@ -136,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
         createConnectionToApi();
-//        getGymApiData();
-//        createChallengeApiData();
-//        testApiPost();
     }
 
 
@@ -190,13 +187,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
-    /**
-     * Blabla detta är.........
-     * @param v = view  för någonting
-     * @return sak = returnerar en sak för blabla
-     * @author JD
-     */
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -272,24 +262,16 @@ public class MainActivity extends AppCompatActivity {
      * @author JD
      */
     public void createChallengeApiData(Challenge challenge) {
-//        Challenge challenge = new Challenge("JDTest10", "Beskrivning som är super duper", 0, 0, 74, "2019-05-25", Date);
-//        Challenge challenge = new Challenge("JDTest3", "Beskrivning som är super", 0, 0, 74, "2019-05-25", Calendar.getInstance().getTimeInMillis());
-//        challenge.setTimeAndDate();
-
         Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
-
 
         call.enqueue(new Callback<Challenge>() {
             @Override
             public void onResponse(Call<Challenge> call, Response<Challenge> response) {
                 try {
-
                     Log.d(TAG, "Sent data: " + response.body().toString());
-
-
                 } catch (NullPointerException e) {
-                    System.out.println("POST: API-data contained null.");
-                    Log.d(TAG, "POST: API-data contained null.");
+                    System.out.println("POST - create challenge: API-data contained null.");
+                    Log.d(TAG, "POST - create challenge: API-data contained null.");
                 }
             }
             @Override
@@ -298,28 +280,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    // Test-metod för anrop till API. /JD
-//    public void testApiPost() {
-//        Call<String> call = backendApiService.testMethod("");
-//
-//
-//        call.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                try {
-//                    Log.d(TAG, "Sent data: " + response.body());
-//                } catch (NullPointerException e) {
-//                    System.out.println("POST test: API-data contained null.");
-//                    Log.d(TAG, "POST test: API-data contained null.");
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Log.e(TAG, "Felmeddelande: " +  t.toString());
-//            }
-//        });
-//    }
 
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
@@ -339,10 +299,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ReportWebPageActivity.class);
         startActivity(intent);
     }
-
-    /*public void handleNewChallenge(Challenge c){
-
-    }*/
 
     public void addActiveChallenge(Challenge c) {
         activeChallengesList.add(c);
