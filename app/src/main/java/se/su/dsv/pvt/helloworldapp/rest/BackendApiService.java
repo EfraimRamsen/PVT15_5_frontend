@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
@@ -21,4 +22,7 @@ public interface BackendApiService {
 
     @POST("createChallenge")
     Call<Challenge> createNewChallengeRequest(@Body Challenge params);
+
+    @POST("createParticipation/user/{userID}/challenge/{challengeID}")
+    Call<String> createParticipation(@Path("userID") int userID, @Path("challengeID")  int challengeID);
 }

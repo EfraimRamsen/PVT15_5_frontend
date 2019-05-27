@@ -173,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);
-                    getGymApiData();
                     return true;
             }
             return false;
@@ -240,13 +239,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    Log.d(TAG, "Received data: " + outdoorGyms);
+                    Log.d(TAG, "Response data: " + outdoorGyms);
 
                     ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
                     ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
                 } catch (NullPointerException e) {
-                    System.out.println("API-data contained null.");
-                    Log.d(TAG, "API-data contained null.");
+                    System.out.println("API-response contained null.");
+                    Log.d(TAG, "API-response contained null.");
                     System.out.println("error: " + e);
                 }
             }
@@ -269,14 +268,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Challenge> call, Response<Challenge> response) {
                 try {
-                    Log.d(TAG, "Sent data: " + response.body().toString());
+                    Log.d(TAG, "Response data: " + response.body().toString());
                 } catch (NullPointerException e) {
-                    System.out.println("POST - create challenge: API-data contained null.");
-                    Log.d(TAG, "POST - create challenge: API-data contained null.");
+                    System.out.println("POST - create challenge: API-response contained null.");
+                    Log.d(TAG, "POST - create challenge: API-response contained null.");
                 }
             }
             @Override
             public void onFailure(Call<Challenge> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    public void createChallengeParticipation(int userID, int challengeID) {
+        Call<String> call = backendApiService.createParticipation(userID, challengeID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("POST - create participation: API-response contained null.");
+                    Log.d(TAG, "POST - create participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });
