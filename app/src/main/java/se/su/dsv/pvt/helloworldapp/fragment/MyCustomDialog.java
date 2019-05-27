@@ -43,7 +43,7 @@ public class MyCustomDialog extends DialogFragment {
             @Override
             public void onClick(View v){
                 Toast.makeText(mainActivity, "yes", Toast.LENGTH_SHORT).show();
-                mainActivity.cancelAddChallenge();
+                mainActivity.clearAddChallenge();
                 getDialog().dismiss();
             }
         });
