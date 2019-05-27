@@ -36,11 +36,9 @@ import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SignInButton googleSignInButton;
-
-    private Toolbar toolbar;
+ private Toolbar toolbar;
     private int totalChallenges = 0; // TODO: detta bör fixas, dvs. kopplas ihop med databasen.
-  
+
     final Fragment challengeFragment = new ChallengeFragment();
     final Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
@@ -63,18 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        if (!userLoggedIn){
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_login);
-//            googleSignInButton = findViewById(R.id.sign_in_button);
-//        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Här väljs vy-fil! Finns i /res/toptoolbar-mappen.
 
-
-
         bottomNavigation = findViewById(R.id.bottom_navigation);
+
         toolbar = findViewById(R.id.my_toolbar);
         toolbar.inflateMenu(R.menu.toptoolbar);
 
