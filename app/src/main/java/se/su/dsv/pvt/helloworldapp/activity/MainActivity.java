@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,14 +27,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Participation;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
@@ -58,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
+
+    // Här sparas alla deltagande-objekt med de utmaningar en viss användare är med i. /JD
+    List<Participation> participationList;
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(item.getItemId()==R.id.update_map_item)
                 {
-                    getGymApiData();
+                    getAllGymsCall();
                     return true;
                 }
                 else if(item.getItemId()== R.id.report_gym_item)
@@ -192,6 +193,15 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    //*******************************************************************************************************************
+    //************************************ BEGINNING OF API-CALLS *******************************************************
+    //*******************************************************************************************************************
+
     /**
      * Denna metod instansierar själva HTTP-handlern samt JSON-handlern. Dessutom läggs en interceptor till för att läsa av requests och responses via HTTP.
      * @author JD
@@ -221,8 +231,8 @@ public class MainActivity extends AppCompatActivity {
      * Denna metod hämtar alla gym från API:n, sparar de i en lista och anropar metoderna som sätter ut gym på kartan.
      * @author JD
      */
-    public void getGymApiData() {
-        Call<List<OutdoorGym>> call = backendApiService.getAllGymsResponse();
+    public void getAllGymsCall() {
+        Call<List<OutdoorGym>> call = backendApiService.getAllGyms();
 
         call.enqueue(new Callback<List<OutdoorGym>>() {
             @Override
@@ -239,13 +249,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    Log.d(TAG, "Received data: " + outdoorGyms);
+                    Log.d(TAG, "Response data: " + outdoorGyms);
 
                     ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
                     ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
                 } catch (NullPointerException e) {
-                    System.out.println("API-data contained null.");
-                    Log.d(TAG, "API-data contained null.");
+                    System.out.println("GET - all gyms: API-response contained null.");
+                    Log.d(TAG, "GET - all gyms: API-response contained null.");
                     System.out.println("error: " + e);
                 }
             }
@@ -257,21 +267,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Denna metod skickar värdet för rankningen som en användare valt att ranka ett visst gym.
+     * @author JD
+     * @param gymID
+     * @param userID
+     * @param rate
+     */
+    public void rateGymCall(int gymID, int userID, int rate) {
+        Call<String> call = backendApiService.rateGym(gymID, userID, rate);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("POST - rate gym: API-response contained null.");
+                    Log.d(TAG, "POST - rate gym: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
      * Denna metod anropas när man skapat ett gym. Metoden skickar med ett challenge-objekt i HTTP-request till backend.
      * @param challenge
      * @author JD
      */
-    public void createChallengeApiData(Challenge challenge) {
+    public void createChallengeCall(Challenge challenge) {
         Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
 
         call.enqueue(new Callback<Challenge>() {
             @Override
             public void onResponse(Call<Challenge> call, Response<Challenge> response) {
                 try {
-                    Log.d(TAG, "Sent data: " + response.body().toString());
+                    Log.d(TAG, "Response data: " + response.body().toString());
                 } catch (NullPointerException e) {
-                    System.out.println("POST - create challenge: API-data contained null.");
-                    Log.d(TAG, "POST - create challenge: API-data contained null.");
+                    System.out.println("POST - create challenge: API-response contained null.");
+                    Log.d(TAG, "POST - create challenge: API-response contained null.");
                 }
             }
             @Override
@@ -281,10 +318,136 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+    /**
+     * Denna metod tar bort en existerande utmaning från databasen.
+     * @author JD
+     * @param challengeID
+     */
+    public void removeChallengeCall(int challengeID) {
+        Call<String> call = backendApiService.removeChallenge(challengeID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("PUT - remove challenge: API-response contained null.");
+                    Log.d(TAG, "PUT - remove challenge: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
     }
+
+    /**
+     * Denna metod markerar att en specifik utmaning är slutförd av en viss användare.
+     * @author JD
+     * @param participationID
+     */
+    public void completeChallengeCall(int participationID) {
+        Call<String> call = backendApiService.completeChallenge(participationID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("PUT - complete challenge: API-response contained null.");
+                    Log.d(TAG, "PUT - complete challenge: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
+     * Denna metod anger att en specifik användare vill gå med i en viss utmaning.
+     * @author JD
+     * @param userID
+     * @param challengeID
+     */
+    public void createChallengeParticipationCall(int userID, int challengeID) {
+        Call<String> call = backendApiService.createParticipation(userID, challengeID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("POST - create participation: API-response contained null.");
+                    Log.d(TAG, "POST - create participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
+     * Denna metod hämtar en lista över alla utmaningar en viss användare är med som deltagare i.
+     * @author JD
+     * @param userID
+     */
+    public void getParticipationCall(int userID) {
+        Call<ArrayList<Participation>> call = backendApiService.getParticipation(userID);
+
+        call.enqueue(new Callback<ArrayList<Participation>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Participation>> call, Response<ArrayList<Participation>> response) {
+                try {
+                    participationList = response.body();
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("GET - user participation: API-response contained null.");
+                    Log.d(TAG, "GET - user participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Participation>> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
+     * Denna metod tar bort en viss användare som deltagare på en utmaning.
+     * @author JD
+     * @param participationID
+     */
+    public void removeParticipationCall(int participationID) {
+        Call<String> call = backendApiService.removeParticipation(participationID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("PUT - remove participation: API-response contained null.");
+                    Log.d(TAG, "PUT - remove participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    //*******************************************************************************************************************
+    //****************************************** END OF API-CALLS *******************************************************
+    //*******************************************************************************************************************
 
     /**
      * Metoden skickar användaren till ny activity som öppnar en webbsida till Stockholm Stads rapporteringssida.
