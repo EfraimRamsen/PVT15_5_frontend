@@ -21,8 +21,6 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
     private static class ViewHolder {
         TextView name;
         TextView description;
-        TextView date;
-        TextView gym;
     }
 
     public CustomAdapter(ArrayList<Challenge> data, Context context) {
@@ -50,8 +48,6 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
             convertView = inflater.inflate(R.layout.list_item, parent, false);
             viewHolder.name = convertView.findViewById(R.id.challenge_name);
             viewHolder.description = convertView.findViewById(R.id.description);
-            viewHolder.date = convertView.findViewById(R.id.date);
-            viewHolder.gym = convertView.findViewById(R.id.gym);
 
             result=convertView;
 
