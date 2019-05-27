@@ -115,7 +115,7 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="187dp"
+        android:layout_width="match_parent"
         android:layout_height="180dp"
         tools:layout_editor_absoluteX="112dp"
         tools:layout_editor_absoluteY="295dp"
