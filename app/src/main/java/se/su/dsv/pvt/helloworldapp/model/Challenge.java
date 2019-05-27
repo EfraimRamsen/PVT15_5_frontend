@@ -66,6 +66,10 @@ public class Challenge {
         this.time = timeAndDate.getTime();
     }
 
+    public Date getTimeAndDate(){
+        return timeAndDate;
+    }
+
     @Override
     public String toString() {
         return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + time + " " + timeAndDate;
