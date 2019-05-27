@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
   
     final Fragment challengeFragment = new ChallengeFragment();
-    final Fragment addChallengeFragment = new AddChallengeFragment();
+    Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();
     BottomNavigationView bottomNavigation;
@@ -339,6 +339,17 @@ public class MainActivity extends AppCompatActivity {
         Fragment locationViewFragment = new LocationViewFragment();
         fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
         active2 = locationViewFragment;
+    }
+
+    /**
+     * Skapar ett nytt addChallengefragment utan att störa de existerande fragmenten
+     * @author Gosia
+     */
+    public void clearAddChallenge(){
+        addChallengeFragment = new AddChallengeFragment();
+        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
+        fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
+        active = addChallengeFragment;
     }
 
 }

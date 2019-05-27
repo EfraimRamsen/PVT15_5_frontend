@@ -112,6 +112,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview25" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="187dp"
+        android:layout_height="180dp"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="295dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gymview_description" />
+
 </android.support.constraint.ConstraintLayout>
 
   </ScrollView>
