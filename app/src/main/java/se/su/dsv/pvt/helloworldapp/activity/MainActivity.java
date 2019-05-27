@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        createConnectionToApi();
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
@@ -135,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
 //        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
-
-        createConnectionToApi();
     }
 
 
@@ -171,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.nav_map:
                     fm.popBackStack();
+                    getGymApiData(); // kan behöva ladda om fragmentet för att visa nya utmaningar och ny info om gymmen
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);

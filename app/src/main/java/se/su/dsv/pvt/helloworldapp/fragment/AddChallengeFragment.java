@@ -56,13 +56,11 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     String dString = description.getText().toString();
                     Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
                     mainActivity.createChallengeCall(c);
-                    Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
                     break;
                 }
             case R.id.cancelButton:
                 MyCustomDialog mcd = new MyCustomDialog();
                 mcd.show(getFragmentManager(), "MyCustomDialog");
-                Toast.makeText(mainActivity, "avbryt", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
