@@ -11,6 +11,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Participation;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 
 // Detta interface deklarerar vilka API-anrop som kan göras och typ av HTTP-request.

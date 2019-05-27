@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Participation;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
