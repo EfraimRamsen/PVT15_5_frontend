@@ -6,52 +6,31 @@
     android:background="@drawable/rounded_edittext"
     android:padding="2dp" >
 
-    <ImageView
-        android:id="@+id/barbell"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/barbell_pic" />
-
     <TextView
         android:id="@+id/challenge_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/barbell"
         android:paddingBottom="10dp"
         android:text="txt"
         android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/calendar"
-        android:layout_toRightOf="@+id/challenge_name"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/calendar" />
-
-    <TextView
+   <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/calendar"
+        android:layout_toRightOf="@+id/challenge_name"
         android:paddingBottom="10dp"
         android:text="txt"
         android:textSize="20sp" />
-
-    <ImageView
-        android:id="@+id/clock"
-        android:layout_toRightOf="@+id/date"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/clock" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/clock"
+        android:layout_toRightOf="@+id/date"
         android:paddingBottom="10dp"
         android:text="txt"
         android:textSize="20sp" />

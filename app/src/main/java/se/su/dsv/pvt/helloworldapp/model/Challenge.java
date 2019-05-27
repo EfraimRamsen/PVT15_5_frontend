@@ -18,7 +18,6 @@ public class Challenge {
         this.challengeID = challengeID;
         this.workoutSpotID = workoutSpotID;
         this.timeAndDate = timeAndDate;
-
         setTime();
     }
 
@@ -27,7 +26,6 @@ public class Challenge {
     public String getName() {
         return name;
     }
-
 
     public String getDescription(){
         return description;
