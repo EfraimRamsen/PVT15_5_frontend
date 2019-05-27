@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
         createConnectionToApi();
+        
     }
 
 
@@ -329,6 +330,26 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NullPointerException e) {
                     System.out.println("PUT - remove participation: API-response contained null.");
                     Log.d(TAG, "PUT - remove participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    public void completeChallengeCall(int participationID) {
+        Call<String> call = backendApiService.completeChallenge(participationID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("PUT - complete challenge: API-response contained null.");
+                    Log.d(TAG, "PUT - complete challenge: API-response contained null.");
                 }
             }
             @Override
