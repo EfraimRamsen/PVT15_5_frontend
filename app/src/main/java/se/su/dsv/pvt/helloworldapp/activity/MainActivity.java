@@ -341,6 +341,10 @@ public class MainActivity extends AppCompatActivity {
         active2 = locationViewFragment;
     }
 
+    /**
+     * Skapar ett nytt addChallengefragment utan att störa de existerande fragmenten
+     * @author Gosia
+     */
     public void cancelAddChallenge(){
         addChallengeFragment = new AddChallengeFragment();
         fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
