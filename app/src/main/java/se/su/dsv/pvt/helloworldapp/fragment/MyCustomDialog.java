@@ -34,7 +34,6 @@ public class MyCustomDialog extends DialogFragment {
         no.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(mainActivity, "no", Toast.LENGTH_SHORT).show();
                 getDialog().dismiss();
             }
         });
@@ -42,7 +41,6 @@ public class MyCustomDialog extends DialogFragment {
         yes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(mainActivity, "yes", Toast.LENGTH_SHORT).show();
                 mainActivity.clearAddChallenge();
                 getDialog().dismiss();
             }
