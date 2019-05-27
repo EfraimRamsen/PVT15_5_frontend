@@ -11,10 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
+import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 import se.su.dsv.pvt.helloworldapp.model.RatingStars;
@@ -24,7 +30,9 @@ public class LocationViewFragment extends Fragment {
     protected AlertDialog alertDialog;
     private int clickedStar;
     protected ImageView latestStar;
-
+    ArrayList<Challenge> challenges;
+    ListView lv;
+    private static CustomAdapter adapter;
 
     @Nullable
     @Override
@@ -33,6 +41,19 @@ public class LocationViewFragment extends Fragment {
         Place clickedPlace = mainActivity.getOpenThisPlaceFragment();
 
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
+
+        lv = view.findViewById(R.id.list);
+        challenges = new ArrayList<>();
+
+        Date d = Calendar.getInstance().getTime();
+
+        challenges.add(new Challenge("namn", "beskrivning", 0,0,106, d));
+        challenges.add(new Challenge("namn2", "beskrivning", 0,0,106, d));
+
+
+        adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
+
+        lv.setAdapter(adapter);
         TextView title = (TextView) mainActivity.findViewById(R.id.main_title_text);
         title.setText(clickedPlace.getName());
         TextView textRating = (TextView) view.findViewById(R.id.location_view_gymrating);
