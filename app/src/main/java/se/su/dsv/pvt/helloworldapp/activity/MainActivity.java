@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
         createConnectionToApi();
-
     }
 
 
@@ -379,6 +378,26 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<Participation>> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    public void rateGymCall(int gymID, int userID, int rate) {
+        Call<String> call = backendApiService.rateGym(gymID, userID, rate);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("POST - rate gym: API-response contained null.");
+                    Log.d(TAG, "POST - rate gym: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });

@@ -40,4 +40,7 @@ public interface BackendApiService {
 
     @GET("getParticipation/{userID}")
     Call<ArrayList<Participation>> getParticipation(@Path("userID") int userID);
+
+    @POST("rateGym/gym/{gymID}/user/{userID}/rate/{rate}")
+    Call<String> rateGym(@Path("gymID") int gymID, @Path("userID") int userID, @Path("rate") int rate);
 }
