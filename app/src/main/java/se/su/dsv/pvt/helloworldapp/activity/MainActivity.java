@@ -193,6 +193,15 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    //*******************************************************************************************************************
+    //************************************ BEGINNING OF API-CALLS *******************************************************
+    //*******************************************************************************************************************
+
     /**
      * Denna metod instansierar själva HTTP-handlern samt JSON-handlern. Dessutom läggs en interceptor till för att läsa av requests och responses via HTTP.
      * @author JD
@@ -258,6 +267,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Denna metod skickar värdet för rankningen som en användare valt att ranka ett visst gym.
+     * @author JD
+     * @param gymID
+     * @param userID
+     * @param rate
+     */
+    public void rateGymCall(int gymID, int userID, int rate) {
+        Call<String> call = backendApiService.rateGym(gymID, userID, rate);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("POST - rate gym: API-response contained null.");
+                    Log.d(TAG, "POST - rate gym: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
      * Denna metod anropas när man skapat ett gym. Metoden skickar med ett challenge-objekt i HTTP-request till backend.
      * @param challenge
      * @author JD
@@ -282,26 +318,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void createChallengeParticipationCall(int userID, int challengeID) {
-        Call<String> call = backendApiService.createParticipation(userID, challengeID);
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    Log.d(TAG, "Response data: " + response.body());
-                } catch (NullPointerException e) {
-                    System.out.println("POST - create participation: API-response contained null.");
-                    Log.d(TAG, "POST - create participation: API-response contained null.");
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e(TAG, "Felmeddelande: " +  t.toString());
-            }
-        });
-    }
-
+    /**
+     * Denna metod tar bort en existerande utmaning från databasen.
+     * @author JD
+     * @param challengeID
+     */
     public void removeChallengeCall(int challengeID) {
         Call<String> call = backendApiService.removeChallenge(challengeID);
 
@@ -322,26 +343,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void removeParticipationCall(int participationID) {
-        Call<String> call = backendApiService.removeParticipation(participationID);
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    Log.d(TAG, "Response data: " + response.body());
-                } catch (NullPointerException e) {
-                    System.out.println("PUT - remove participation: API-response contained null.");
-                    Log.d(TAG, "PUT - remove participation: API-response contained null.");
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e(TAG, "Felmeddelande: " +  t.toString());
-            }
-        });
-    }
-
+    /**
+     * Denna metod markerar att en specifik utmaning är slutförd av en viss användare.
+     * @author JD
+     * @param participationID
+     */
     public void completeChallengeCall(int participationID) {
         Call<String> call = backendApiService.completeChallenge(participationID);
 
@@ -362,6 +368,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Denna metod anger att en specifik användare vill gå med i en viss utmaning.
+     * @author JD
+     * @param userID
+     * @param challengeID
+     */
+    public void createChallengeParticipationCall(int userID, int challengeID) {
+        Call<String> call = backendApiService.createParticipation(userID, challengeID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("POST - create participation: API-response contained null.");
+                    Log.d(TAG, "POST - create participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
+     * Denna metod hämtar en lista över alla utmaningar en viss användare är med som deltagare i.
+     * @author JD
+     * @param userID
+     */
     public void getParticipationCall(int userID) {
         Call<ArrayList<Participation>> call = backendApiService.getParticipation(userID);
 
@@ -383,8 +420,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void rateGymCall(int gymID, int userID, int rate) {
-        Call<String> call = backendApiService.rateGym(gymID, userID, rate);
+    /**
+     * Denna metod tar bort en viss användare som deltagare på en utmaning.
+     * @author JD
+     * @param participationID
+     */
+    public void removeParticipationCall(int participationID) {
+        Call<String> call = backendApiService.removeParticipation(participationID);
 
         call.enqueue(new Callback<String>() {
             @Override
@@ -392,8 +434,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Log.d(TAG, "Response data: " + response.body());
                 } catch (NullPointerException e) {
-                    System.out.println("POST - rate gym: API-response contained null.");
-                    Log.d(TAG, "POST - rate gym: API-response contained null.");
+                    System.out.println("PUT - remove participation: API-response contained null.");
+                    Log.d(TAG, "PUT - remove participation: API-response contained null.");
                 }
             }
             @Override
@@ -403,10 +445,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
+    //*******************************************************************************************************************
+    //****************************************** END OF API-CALLS *******************************************************
+    //*******************************************************************************************************************
 
     /**
      * Metoden skickar användaren till ny activity som öppnar en webbsida till Stockholm Stads rapporteringssida.

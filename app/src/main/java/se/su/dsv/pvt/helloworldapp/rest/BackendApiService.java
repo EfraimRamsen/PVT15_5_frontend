@@ -17,30 +17,27 @@ import se.su.dsv.pvt.helloworldapp.model.Place;
 // Detta interface deklarerar vilka API-anrop som kan göras och typ av HTTP-request.
 // Här definieras adress vilken adress anropet görs till och namnet på tillhörande metod som ska köras. /JD
 public interface BackendApiService {
-//    @GET("outdoorgymtest?gymID=60")
-//    Call<OutdoorGym> getJsonResponse();
-
     @GET("allGyms")
     Call<List<OutdoorGym>> getAllGyms();
+
+    @POST("rateGym/gym/{gymID}/user/{userID}/rate/{rate}")
+    Call<String> rateGym(@Path("gymID") int gymID, @Path("userID") int userID, @Path("rate") int rate);
 
     @POST("createChallenge")
     Call<Challenge> createNewChallengeRequest(@Body Challenge params);
 
-    @POST("createParticipation/user/{userID}/challenge/{challengeID}")
-    Call<String> createParticipation(@Path("userID") int userID, @Path("challengeID")  int challengeID);
-
     @PUT("removeChallenge/{challengeID}")
     Call<String> removeChallenge(@Path("challengeID") int challengeID);
-
-    @PUT("removeParticipation/{participationID}")
-    Call<String> removeParticipation(@Path("participationID") int participationID);
 
     @PUT("completeChallenge/{participationID}")
     Call<String> completeChallenge(@Path("participationID") int participationID);
 
+    @POST("createParticipation/user/{userID}/challenge/{challengeID}")
+    Call<String> createParticipation(@Path("userID") int userID, @Path("challengeID")  int challengeID);
+
     @GET("getParticipation/{userID}")
     Call<ArrayList<Participation>> getParticipation(@Path("userID") int userID);
 
-    @POST("rateGym/gym/{gymID}/user/{userID}/rate/{rate}")
-    Call<String> rateGym(@Path("gymID") int gymID, @Path("userID") int userID, @Path("rate") int rate);
+    @PUT("removeParticipation/{participationID}")
+    Call<String> removeParticipation(@Path("participationID") int participationID);
 }
