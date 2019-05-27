@@ -21,9 +21,13 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         String[] listItems = {"Hej1", "Hej2", "Hej3"};
 
-        ListView listView = view.findViewById(R.id.list);
+        ListView listView = view.findViewById(R.id.listofActiveChallenges);
 
+        ArrayAdapter<String> listViewAdapter  = new ArrayAdapter<> (
+                getActivity(), android.R.layout.simple_list_item_1, listItems
+        );
 
+        listView.setAdapter(listViewAdapter);
 
         return view;
     }

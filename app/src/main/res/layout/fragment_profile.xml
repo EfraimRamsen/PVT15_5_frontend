@@ -50,12 +50,11 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_ID" />
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/listofActiveChallenges"
         android:layout_width="187dp"
         android:layout_height="180dp"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="295dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/active" />
 
@@ -65,7 +64,7 @@
         android:layout_height="wrap_content"
         android:text="@string/completed_challenges"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toBottomOf="@+id/list"
+        app:layout_constraintTop_toBottomOf="@+id/listofActiveChallenges"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
