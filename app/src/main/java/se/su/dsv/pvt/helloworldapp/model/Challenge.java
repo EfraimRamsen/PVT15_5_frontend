@@ -70,6 +70,6 @@ public class Challenge {
 
     @Override
     public String toString() {
-        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + time + " " + timeAndDate;
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + time + " " + timeAndDate;
     }
 }
