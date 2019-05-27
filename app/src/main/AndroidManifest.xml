@@ -16,16 +16,18 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyALi_Iknci7NsmD5NSkk_WCEtt1tjCeMeo"/>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.StartActivity">
+
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.StartActivity">
+        </activity>
         <activity android:name=".activity.ReportWebPageActivity" />
-        <activity android:name=".activity.LoginActivity" />
     </application>
 
 

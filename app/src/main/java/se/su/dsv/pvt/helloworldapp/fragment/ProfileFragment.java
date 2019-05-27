@@ -12,6 +12,8 @@ import se.su.dsv.pvt.helloworldapp.R;
 
 public class ProfileFragment extends Fragment {
 
+    public static final String GOOGLE_ACCOUNT = "google_account_test";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
