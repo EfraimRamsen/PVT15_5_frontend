@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
      * Skapar ett nytt addChallengefragment utan att störa de existerande fragmenten
      * @author Gosia
      */
-    public void cancelAddChallenge(){
+    public void clearAddChallenge(){
         addChallengeFragment = new AddChallengeFragment();
         fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
         fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
