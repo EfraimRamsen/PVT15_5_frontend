@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,8 +27,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(item.getItemId()==R.id.update_map_item)
                 {
-                    getGymApiData();
+                    getAllGymsCall();
                     return true;
                 }
                 else if(item.getItemId()== R.id.report_gym_item)
@@ -221,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
      * Denna metod hämtar alla gym från API:n, sparar de i en lista och anropar metoderna som sätter ut gym på kartan.
      * @author JD
      */
-    public void getGymApiData() {
-        Call<List<OutdoorGym>> call = backendApiService.getAllGymsResponse();
+    public void getAllGymsCall() {
+        Call<List<OutdoorGym>> call = backendApiService.getAllGyms();
 
         call.enqueue(new Callback<List<OutdoorGym>>() {
             @Override
@@ -244,8 +241,8 @@ public class MainActivity extends AppCompatActivity {
                     ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
                     ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
                 } catch (NullPointerException e) {
-                    System.out.println("API-response contained null.");
-                    Log.d(TAG, "API-response contained null.");
+                    System.out.println("GET - all gyms: API-response contained null.");
+                    Log.d(TAG, "GET - all gyms: API-response contained null.");
                     System.out.println("error: " + e);
                 }
             }
@@ -261,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
      * @param challenge
      * @author JD
      */
-    public void createChallengeApiData(Challenge challenge) {
+    public void createChallengeCall(Challenge challenge) {
         Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
 
         call.enqueue(new Callback<Challenge>() {
@@ -281,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void createChallengeParticipation(int userID, int challengeID) {
+    public void createChallengeParticipationCall(int userID, int challengeID) {
         Call<String> call = backendApiService.createParticipation(userID, challengeID);
 
         call.enqueue(new Callback<String>() {
@@ -292,6 +289,26 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NullPointerException e) {
                     System.out.println("POST - create participation: API-response contained null.");
                     Log.d(TAG, "POST - create participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    public void removeChallengeCall(int challengeID) {
+        Call<String> call = backendApiService.removeChallenge(challengeID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("PUT - remove challenge: API-response contained null.");
+                    Log.d(TAG, "PUT - remove challenge: API-response contained null.");
                 }
             }
             @Override

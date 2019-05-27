@@ -55,7 +55,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     EditText description = vy.findViewById(R.id.descriptionText);
                     String dString = description.getText().toString();
                     Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
-                    mainActivity.createChallengeApiData(c);
+                    mainActivity.createChallengeCall(c);
                     Toast.makeText(mainActivity, c.toString(), Toast.LENGTH_SHORT).show();
                     break;
                 }
