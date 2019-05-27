@@ -18,7 +18,6 @@ public class Challenge {
         this.challengeID = challengeID;
         this.workoutSpotID = workoutSpotID;
         this.timeAndDate = timeAndDate;
-
         setTime();
     }
 
@@ -27,7 +26,6 @@ public class Challenge {
     public String getName() {
         return name;
     }
-
 
     public String getDescription(){
         return description;
@@ -68,8 +66,12 @@ public class Challenge {
         this.time = timeAndDate.getTime();
     }
 
+    public Date getTimeAndDate(){
+        return timeAndDate;
+    }
+
     @Override
     public String toString() {
-        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + time + " " + timeAndDate;
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + time + " " + timeAndDate;
     }
 }

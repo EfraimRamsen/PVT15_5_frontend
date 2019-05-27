@@ -92,11 +92,11 @@ public class LocationViewFragment extends Fragment {
 
         starButtonListener starbl = new starButtonListener();
 
-        ImageView ib1 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton1);
-        ImageView ib2 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton2);
-        ImageView ib3 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton3);
-        ImageView ib4 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton4);
-        ImageView ib5 = (ImageView) alertDialog.findViewById(R.id.rankgym_imageButton5);
+        ImageView ib1 = (ImageView) alertDialog.findViewById(R.id.star1);
+        ImageView ib2 = (ImageView) alertDialog.findViewById(R.id.star2);
+        ImageView ib3 = (ImageView) alertDialog.findViewById(R.id.star3);
+        ImageView ib4 = (ImageView) alertDialog.findViewById(R.id.star4);
+        ImageView ib5 = (ImageView) alertDialog.findViewById(R.id.star5);
         ImageView[] imageViews = new ImageView[5];
         imageViews[0] = ib1;
         imageViews[1] = ib2;
