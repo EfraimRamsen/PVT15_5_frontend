@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ReportWebPageActivity" />
+        <activity android:name=".activity.LoginActivity" />
     </application>
 
 
