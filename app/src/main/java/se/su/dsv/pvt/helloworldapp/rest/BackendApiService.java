@@ -1,5 +1,6 @@
 package se.su.dsv.pvt.helloworldapp.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,4 +36,7 @@ public interface BackendApiService {
 
     @PUT("completeChallenge/{participationID}")
     Call<String> completeChallenge(@Path("participationID") int participationID);
+
+    @GET("getParticipation/{userID}")
+    Call<ArrayList<Participation>> getParticipation(@Path("userID") int userID);
 }

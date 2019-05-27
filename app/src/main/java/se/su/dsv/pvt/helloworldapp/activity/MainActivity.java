@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
     List<Challenge> activeChallengesList = new ArrayList<>();
     List<Challenge> completedChallengesList = new ArrayList<>();
 
+    // Här sparas alla deltagande-objekt med de utmaningar en viss användare är med i. /JD
+    List<Participation> participationList;
+
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
 
         createConnectionToApi();
-        
+
     }
 
 
@@ -354,6 +357,27 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    public void getParticipationCall(int userID) {
+        Call<ArrayList<Participation>> call = backendApiService.getParticipation(userID);
+
+        call.enqueue(new Callback<ArrayList<Participation>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Participation>> call, Response<ArrayList<Participation>> response) {
+                try {
+                    participationList = response.body();
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("GET - user participation: API-response contained null.");
+                    Log.d(TAG, "GET - user participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Participation>> call, Throwable t) {
                 Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });
