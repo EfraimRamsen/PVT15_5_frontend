@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.nav_map:
                     fm.popBackStack();
-                    getGymApiData(); // kan behöva ladda om fragmentet för att visa nya utmaningar och ny info om gymmen
+                    getAllGymsCall(); // kan behöva ladda om fragmentet för att visa nya utmaningar och ny info om gymmen
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);
