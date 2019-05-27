@@ -173,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);
-                    getGymApiData();
                     return true;
             }
             return false;
