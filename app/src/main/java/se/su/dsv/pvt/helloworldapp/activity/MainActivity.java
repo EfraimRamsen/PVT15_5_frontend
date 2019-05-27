@@ -318,6 +318,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void removeParticipationCall(int participationID) {
+        Call<String> call = backendApiService.removeParticipation(participationID);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("PUT - remove participation: API-response contained null.");
+                    Log.d(TAG, "PUT - remove participation: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");

@@ -29,4 +29,7 @@ public interface BackendApiService {
 
     @PUT("removeChallenge/{challengeID}")
     Call<String> removeChallenge(@Path("challengeID") int challengeID);
+
+    @PUT("removeParticipation/{participationID}")
+    Call<String> removeParticipation(@Path("participationID") int participationID);
 }
