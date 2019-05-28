@@ -38,6 +38,7 @@ public class ChallengeFragment extends Fragment {
         // Får ej denna metod att fungera
 //        MainActivity mainActivity = (MainActivity) getActivity();
 //        challenges = mainActivity.getUserChallenges(30); // lägg till nuvarande userID här
+        challenges = new ArrayList<>();
 
         Date d = Calendar.getInstance().getTime();
 
