@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
@@ -35,19 +36,10 @@ public class MyProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         lv = view.findViewById(R.id.listofActiveChallenges);
-        challenges = new ArrayList<>();
 
-        Date d = Calendar.getInstance().getTime();
-
-        challenges.add(new Challenge("namn", "beskrivning", 0,0,0, d));
-        challenges.add(new Challenge("namn2", "beskrivning", 0,0,0, d));
-
-
-        adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
-
-        lv.setAdapter(adapter);
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -60,5 +52,55 @@ public class MyProfileFragment extends Fragment {
         */
         //TODO: här någonstans måste vi lägga in aktiva challenges i den layouten som heter
         //showchallengesprofile
+    }
+
+//    private class GetTask extends AsyncTask<String, Void, String> {
+//        MainActivity mainActivity = (MainActivity) getActivity();
+//        @Override
+//        protected String doInBackground(String... params) {
+//            mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
+//
+//            return "Executed";
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            challenges = mainActivity.getUserChallenges();
+//
+//            System.out.println("challenges: " + challenges);
+//
+//            if (challenges != null) {
+//                adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
+//
+//                lv.setAdapter(adapter);
+//            } else {
+//                System.out.println("challenges är fortfarande null");
+//            }
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Void... values) {
+//        }
+//    }
+
+    public void showUsersChallenges() {
+//        MainActivity mainActivity = (MainActivity) getActivity();
+//        mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
+
+        if (challenges != null) {
+            adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
+
+            lv.setAdapter(adapter);
+        } else {
+            System.out.println("challenges är null");
+        }
+    }
+
+    public void setChallenges(ArrayList<Challenge> challenges) {
+        this.challenges = challenges;
     }
 }

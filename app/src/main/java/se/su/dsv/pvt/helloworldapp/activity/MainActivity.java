@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     // Här sparas alla deltagande-objekt med de utmaningar en viss användare är med i. /JD
     List<Participation> participationList;
 
+    // Här sparas alla utmaningar en viss användare är med i. /JD
+    ArrayList<Challenge> userChallengesList;
+
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
@@ -159,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
+                    getUserChallengesCall(1); // UserID går in här
                     return true;
 
                 case R.id.nav_add_challenge:
@@ -343,6 +347,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Denna metod hämtar alla utmaningar som en specifik användare är med i.
+     * @author JD
+     * @param userID
+     */
+    public void getUserChallengesCall(int userID) {
+        Call<ArrayList<Challenge>> call = backendApiService.getUserChallenges(userID);
+
+        call.enqueue(new Callback<ArrayList<Challenge>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Challenge>> call, Response<ArrayList<Challenge>> response) {
+                try {
+                    userChallengesList = response.body();
+
+                    for (Challenge challenge : userChallengesList) {
+                        challenge.setTimeAndDate();
+                    }
+
+                    Log.d(TAG, "Response data: " + response.body());
+
+                    ((MyProfileFragment) challengeFragment).setChallenges(userChallengesList);
+                    ((MyProfileFragment) challengeFragment).showUsersChallenges();
+
+                } catch (NullPointerException e) {
+                    System.out.println("GET - user challenges: API-response contained null.");
+                    Log.d(TAG, "GET - user challenges: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Challenge>> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
      * Denna metod markerar att en specifik utmaning är slutförd av en viss användare.
      * @author JD
      * @param participationID
@@ -519,4 +558,46 @@ public class MainActivity extends AppCompatActivity {
         ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
     }
 
+//    public List<OutdoorGym> getOutdoorGyms() {
+//        return outdoorGyms;
+//    }
+
+//    public List<Challenge> getChallengeList(int gymID) {
+//
+//        OutdoorGym outdoorGym = null;
+//
+//        for (int i = 0; i < outdoorGyms.size(); i++) {
+//            if (outdoorGyms.get(i).getId() == gymID) {
+//                outdoorGym = outdoorGyms.get(i);
+//                break;
+//            }
+//        }
+//
+//        return outdoorGym.getChallengeList();
+//    }
+
+//    public List<Challenge> getChallengeList(int index) {
+//        return outdoorGyms.get(index).getChallengeList();
+//    }
+
+    // fungerar ej  - null i outdoorGyms
+//    public ArrayList<Challenge> getUserChallenges(int userID) {
+//        getParticipationCall(userID);
+//        ArrayList<Challenge> userChallengeList = new ArrayList<>();
+//        List<Challenge> allGymChallenges = null; // behövs nog inte
+//
+//        // osäker om jag tänkt rätt här - finns säkert bättre sätt
+//        for (int i = 0; i < outdoorGyms.size(); i++) {
+//            for (int n = 0; n < participationList.size(); n++) {
+//                if (participationList.get(n).getChallengeID() == getChallengeList(i).get(i).getChallengeID()) {
+//                    userChallengeList.add(getChallengeList(i).get(i));
+//                }
+//            }
+//        }
+//        return userChallengeList;
+//    }
+
+//    public ArrayList<Challenge> getUserChallenges() {
+//        return userChallengesList;
+//    }
 }
