@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
   
-    final Fragment challengeFragment = new ChallengeFragment();
+    final Fragment challengeFragment = new MyProfileFragment();
     Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();

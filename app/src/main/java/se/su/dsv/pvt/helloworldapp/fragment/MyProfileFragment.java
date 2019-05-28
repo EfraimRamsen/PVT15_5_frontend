@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import se.su.dsv.pvt.helloworldapp.model.Challenge;
  * This is a mess. TODO: add a dynamic (or somewhat static) list of active challenges.
  * @author Niklas Edström
  */
-public class ChallengeFragment extends Fragment {
+public class MyProfileFragment extends Fragment {
 
     ArrayList<Challenge> challenges;
     ListView lv;
@@ -30,7 +29,7 @@ public class ChallengeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         lv = view.findViewById(R.id.listofActiveChallenges);
         challenges = new ArrayList<>();
