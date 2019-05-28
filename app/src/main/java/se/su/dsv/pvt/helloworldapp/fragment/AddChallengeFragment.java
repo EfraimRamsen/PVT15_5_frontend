@@ -56,6 +56,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     String dString = description.getText().toString();
                     Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
                     mainActivity.createChallengeCall(c);
+                    mainActivity.clearAddChallenge();
                     break;
                 }
             case R.id.cancelButton:
