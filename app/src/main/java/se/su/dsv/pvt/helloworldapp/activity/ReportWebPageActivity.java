@@ -13,7 +13,7 @@ public class ReportWebPageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reportwebpage);
+        setContentView(R.layout.activity_report_webpage);
 
         WebView reportGymWebView = findViewById(R.id.reportWebview);
         reportGymWebView.loadUrl("https://etjanster.stockholm.se/tycktill/?systemId=synpunktsportalen");
