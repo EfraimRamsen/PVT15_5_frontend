@@ -494,13 +494,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Visar upp ett locationfragment som man kan backa ut från
+     * Visar upp ett fragment som man kan backa ut från
      * @author Gosia
      */
-    public void showLocation() {
-        Fragment locationViewFragment = new LocationViewFragment();
-        fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
-        active2 = locationViewFragment;
+    public void showSomeFragment(Fragment someFragment) {
+
+        fm.beginTransaction().hide(active).add(R.id.fragment_container, someFragment).addToBackStack("back").commit();
+        active2 = someFragment;
     }
 
     /**
