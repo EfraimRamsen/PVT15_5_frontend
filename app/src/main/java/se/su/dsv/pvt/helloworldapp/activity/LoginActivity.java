@@ -31,20 +31,20 @@ public class LoginActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_login);
 
 		googleSignInButton = findViewById(R.id.sign_in_button);
+
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//				.requestIdToken()
 				.requestEmail()
 				.build();
 
-		googleSignInClient = GoogleSignIn.getClient(this, gso);
-		googleSignInButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent signInIntent = googleSignInClient.getSignInIntent();
-				startActivityForResult(signInIntent, 101);
+	googleSignInClient = GoogleSignIn.getClient(this, gso);
+	googleSignInButton.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Intent signInIntent = googleSignInClient.getSignInIntent();
+			startActivityForResult(signInIntent, 101);
 			}
 		});
 	}
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		System.out.println("sout "+requestCode+ " " + resultCode);
 		if (resultCode == Activity.RESULT_OK)
 			switch (requestCode) {
 				case 101:
@@ -67,11 +68,14 @@ public class LoginActivity extends AppCompatActivity {
 					}
 					break;
 			}
+		else {
+			System.out.println("failed signin");
+		}
 	}
 
 	private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
-		Intent intent = new Intent(this, ProfileFragment.class);
-		intent.putExtra(ProfileFragment.GOOGLE_ACCOUNT, googleSignInAccount);
+		Intent intent = new Intent(this, StartActivity.class);
+		intent.putExtra(ProfileActivity.GOOGLE_ACCOUNT, googleSignInAccount);
 
 		startActivity(intent);
 		finish();
@@ -88,24 +92,5 @@ public class LoginActivity extends AppCompatActivity {
 			Log.d(TAG, "Not logged in");
 		}
 	}
-
-	signOut.setOnClickListener(new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-              /*
-              Sign-out is initiated by simply calling the googleSignInClient.signOut API. We add a
-              listener which will be invoked once the sign out is the successful
-               */
-			googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-				@Override
-				public void onComplete(@NonNull Task<Void> task) {
-					//On Succesfull signout we navigate the user back to LoginActivity
-					Intent intent=new Intent(ProfileActivity.this,MainActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-				}
-			});
-		}
-	});
-
 }
+
