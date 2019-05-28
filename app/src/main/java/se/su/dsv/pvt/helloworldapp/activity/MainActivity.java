@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     List<Participation> participationList;
 
     // Här sparas alla utmaningar en viss användare är med i. /JD
-    List<Challenge> userChallengesList;
+    ArrayList<Challenge> userChallengesList;
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
+                    getUserChallengesCall(1); // UserID går in här
                     return true;
 
                 case R.id.nav_add_challenge:
@@ -359,7 +360,16 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Challenge>> call, Response<ArrayList<Challenge>> response) {
                 try {
                     userChallengesList = response.body();
+
+                    for (Challenge challenge : userChallengesList) {
+                        challenge.setTimeAndDate();
+                    }
+
                     Log.d(TAG, "Response data: " + response.body());
+
+                    ((ChallengeFragment) challengeFragment).setChallenges(userChallengesList);
+                    ((ChallengeFragment) challengeFragment).showUsersChallenges();
+
                 } catch (NullPointerException e) {
                     System.out.println("GET - user challenges: API-response contained null.");
                     Log.d(TAG, "GET - user user challenges: API-response contained null.");
@@ -562,24 +572,28 @@ public class MainActivity extends AppCompatActivity {
 //        return outdoorGym.getChallengeList();
 //    }
 
-    public List<Challenge> getChallengeList(int index) {
-        return outdoorGyms.get(index).getChallengeList();
-    }
+//    public List<Challenge> getChallengeList(int index) {
+//        return outdoorGyms.get(index).getChallengeList();
+//    }
 
     // fungerar ej  - null i outdoorGyms
-    public ArrayList<Challenge> getUserChallenges(int userID) {
-        getParticipationCall(userID);
-        ArrayList<Challenge> userChallengeList = new ArrayList<>();
-        List<Challenge> allGymChallenges = null; // behövs nog inte
+//    public ArrayList<Challenge> getUserChallenges(int userID) {
+//        getParticipationCall(userID);
+//        ArrayList<Challenge> userChallengeList = new ArrayList<>();
+//        List<Challenge> allGymChallenges = null; // behövs nog inte
+//
+//        // osäker om jag tänkt rätt här - finns säkert bättre sätt
+//        for (int i = 0; i < outdoorGyms.size(); i++) {
+//            for (int n = 0; n < participationList.size(); n++) {
+//                if (participationList.get(n).getChallengeID() == getChallengeList(i).get(i).getChallengeID()) {
+//                    userChallengeList.add(getChallengeList(i).get(i));
+//                }
+//            }
+//        }
+//        return userChallengeList;
+//    }
 
-        // osäker om jag tänkt rätt här - finns säkert bättre sätt
-        for (int i = 0; i < outdoorGyms.size(); i++) {
-            for (int n = 0; n < participationList.size(); n++) {
-                if (participationList.get(n).getChallengeID() == getChallengeList(i).get(i).getChallengeID()) {
-                    userChallengeList.add(getChallengeList(i).get(i));
-                }
-            }
-        }
-        return userChallengeList;
-    }
+//    public ArrayList<Challenge> getUserChallenges() {
+//        return userChallengesList;
+//    }
 }
