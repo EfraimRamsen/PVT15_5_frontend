@@ -39,8 +39,6 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
         Challenge challenge = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
-        ImageButton more = vy.findViewById(R.id.more);
-        more.setOnClickListener((View.OnClickListener) this);
 
         final View result;
 
