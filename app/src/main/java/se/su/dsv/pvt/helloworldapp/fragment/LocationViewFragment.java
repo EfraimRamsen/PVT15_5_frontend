@@ -58,8 +58,6 @@ public class LocationViewFragment extends Fragment {
         title.setText(clickedPlace.getName());
         TextView textRating = (TextView) view.findViewById(R.id.location_view_gymrating);
         textRating.setText("blargh"); //TODO: sluta hårdkoda ratings
-        TextView address = (TextView) view.findViewById(R.id.gym_view_adress);
-        address.setText("Vägvägen 69, 16161, Ödeshög"); // TODO: hårdkodad adress!
         if (clickedPlace instanceof OutdoorGym) {
             TextView description = (TextView) view.findViewById(R.id.gymview_description);
             if (((OutdoorGym) clickedPlace).getDescription() == null) {
