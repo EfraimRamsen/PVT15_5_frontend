@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         // Nedan if-satser hämtar intent från föregående activity. Innehållet i intent säger vilket fragment som ska visas först. /JD
         intent = getIntent();
         if (intent.hasExtra("my")) {
-            bottomNavigation.setSelectedItemId(R.id.nav_challenges);
+            bottomNavigation.setSelectedItemId(R.id.nav_my_profile);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").commit();
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             TextView title = (TextView) findViewById(R.id.main_title_text);
             fm.beginTransaction().hide(active2).commit();
             switch (item.getItemId()) {
-                case R.id.nav_challenges:
+                case R.id.nav_my_profile:
                     fm.popBackStack();
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
