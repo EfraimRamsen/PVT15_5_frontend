@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 
 /**
@@ -43,7 +46,6 @@ public class MyProfileFragment extends Fragment {
         adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
 
         lv.setAdapter(adapter);
-
         return view;
     }
     @Override
