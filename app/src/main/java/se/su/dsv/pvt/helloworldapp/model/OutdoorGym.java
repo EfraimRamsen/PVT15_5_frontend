@@ -10,8 +10,8 @@ public class OutdoorGym extends Place {
     @Expose
     private String description;
 
-    public OutdoorGym(Location location, String name, Integer id, String description, ArrayList<Challenge> challengeList) {
-        super(location, name, id, challengeList);
+    public OutdoorGym(Location location, String name, Integer id, String description, ArrayList<Challenge> challengeList, double avgRating) {
+        super(location, name, id, challengeList, avgRating);
         this.description = description;
     }
     public String getDescription() {

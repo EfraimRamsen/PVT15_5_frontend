@@ -94,8 +94,9 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
              */
             @Override
             public void onInfoWindowClick(Marker marker) {
+                Fragment locationViewFragment = new LocationViewFragment();
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.showLocation();
+                mainActivity.showSomeFragment(locationViewFragment);
 
                 mainActivity.setOpenThisPlaceFragment((Place) marker.getTag());
                 //LocationViewFragment lwf = new LocationViewFragment();
@@ -125,6 +126,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
      * @author JD
      */
     public void addAllPlacesToMap() {
+        googleMap.clear();
         for (Place place : outdoorGyms) {
             try {
                 Marker marker = googleMap.addMarker(new MarkerOptions().position(place.getLocation().getLatLng()));

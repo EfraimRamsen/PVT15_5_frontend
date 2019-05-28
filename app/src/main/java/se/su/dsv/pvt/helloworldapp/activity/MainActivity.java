@@ -251,8 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d(TAG, "Response data: " + outdoorGyms);
 
-                    ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
-                    ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
+                    addGymToMapMarkers();
                 } catch (NullPointerException e) {
                     System.out.println("GET - all gyms: API-response contained null.");
                     Log.d(TAG, "GET - all gyms: API-response contained null.");
@@ -495,13 +494,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Visar upp ett locationfragment som man kan backa ut från
+     * Visar upp ett fragment som man kan backa ut från
      * @author Gosia
      */
-    public void showLocation() {
-        Fragment locationViewFragment = new LocationViewFragment();
-        fm.beginTransaction().hide(active).add(R.id.fragment_container, locationViewFragment).addToBackStack("back").commit();
-        active2 = locationViewFragment;
+    public void showSomeFragment(Fragment someFragment) {
+
+        fm.beginTransaction().hide(active).add(R.id.fragment_container, someFragment).addToBackStack("back").commit();
+        active2 = someFragment;
     }
 
     /**
@@ -513,6 +512,11 @@ public class MainActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
         fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
         active = addChallengeFragment;
+    }
+
+    private void addGymToMapMarkers() {
+        ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
+        ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
     }
 
 }

@@ -30,7 +30,6 @@
     <string name="cancel_rankgym">Hoppa över</string>
     <string name="accept_rankgym">Ge betyg</string>
     <string name="rank_gym_button">Betygsätt</string>
-    <string name="gymview_adress">Adress:</string>
     <string name="no_descr_avail">Ingen beskrivning tillgänglig!</string>
 
     <!--<string-array name="spinner_list_item_array">-->
