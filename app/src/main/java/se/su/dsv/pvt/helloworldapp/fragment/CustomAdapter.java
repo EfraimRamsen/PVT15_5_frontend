@@ -13,10 +13,15 @@ import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 
 
-public class CustomAdapter extends ArrayAdapter<Challenge> {
+public class CustomAdapter extends ArrayAdapter<Challenge> implements View.OnClickListener {
 
     private ArrayList<Challenge> challenges;
     Context mContext;
+
+    @Override
+    public void onClick(View v) {
+
+    }
 
     private static class ViewHolder {
         TextView name;
