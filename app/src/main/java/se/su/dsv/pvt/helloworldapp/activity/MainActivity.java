@@ -251,8 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d(TAG, "Response data: " + outdoorGyms);
 
-                    ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
-                    ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
+                    addGymToMapMarkers();
                 } catch (NullPointerException e) {
                     System.out.println("GET - all gyms: API-response contained null.");
                     Log.d(TAG, "GET - all gyms: API-response contained null.");
@@ -513,6 +512,11 @@ public class MainActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
         fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
         active = addChallengeFragment;
+    }
+
+    private void addGymToMapMarkers() {
+        ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
+        ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
     }
 
 }

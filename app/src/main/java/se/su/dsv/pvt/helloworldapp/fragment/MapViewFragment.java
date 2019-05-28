@@ -125,6 +125,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
      * @author JD
      */
     public void addAllPlacesToMap() {
+        googleMap.clear();
         for (Place place : outdoorGyms) {
             try {
                 Marker marker = googleMap.addMarker(new MarkerOptions().position(place.getLocation().getLatLng()));
