@@ -20,7 +20,7 @@ public class CustomAdapter extends ArrayAdapter<Challenge> implements View.OnCli
 
     @Override
     public void onClick(View v) {
-
+        
     }
 
     private static class ViewHolder {
