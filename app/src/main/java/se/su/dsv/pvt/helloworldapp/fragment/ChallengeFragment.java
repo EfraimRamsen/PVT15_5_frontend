@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 
 /**
@@ -33,13 +34,12 @@ public class ChallengeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         lv = view.findViewById(R.id.listofActiveChallenges);
-        challenges = new ArrayList<>();
+
+        // Får ej denna metod att fungera
+//        MainActivity mainActivity = (MainActivity) getActivity();
+//        challenges = mainActivity.getUserChallenges(30); // lägg till nuvarande userID här
 
         Date d = Calendar.getInstance().getTime();
-
-        challenges.add(new Challenge("namn", "beskrivning", 0,0,0, d));
-        challenges.add(new Challenge("namn2", "beskrivning", 0,0,0, d));
-
 
         adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
 

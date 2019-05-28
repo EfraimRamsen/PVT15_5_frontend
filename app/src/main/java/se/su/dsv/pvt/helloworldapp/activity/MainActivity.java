@@ -515,4 +515,42 @@ public class MainActivity extends AppCompatActivity {
         active = addChallengeFragment;
     }
 
+//    public List<OutdoorGym> getOutdoorGyms() {
+//        return outdoorGyms;
+//    }
+
+//    public List<Challenge> getChallengeList(int gymID) {
+//
+//        OutdoorGym outdoorGym = null;
+//
+//        for (int i = 0; i < outdoorGyms.size(); i++) {
+//            if (outdoorGyms.get(i).getId() == gymID) {
+//                outdoorGym = outdoorGyms.get(i);
+//                break;
+//            }
+//        }
+//
+//        return outdoorGym.getChallengeList();
+//    }
+
+    public List<Challenge> getChallengeList(int index) {
+        return outdoorGyms.get(index).getChallengeList();
+    }
+
+    // fungerar ej  - null i outdoorGyms
+    public ArrayList<Challenge> getUserChallenges(int userID) {
+        getParticipationCall(userID);
+        ArrayList<Challenge> userChallengeList = new ArrayList<>();
+        List<Challenge> allGymChallenges = null; // behövs nog inte
+
+        // osäker om jag tänkt rätt här - finns säkert bättre sätt
+        for (int i = 0; i < outdoorGyms.size(); i++) {
+            for (int n = 0; n < participationList.size(); n++) {
+                if (participationList.get(n).getChallengeID() == getChallengeList(i).get(i).getChallengeID()) {
+                    userChallengeList.add(getChallengeList(i).get(i));
+                }
+            }
+        }
+        return userChallengeList;
+    }
 }
