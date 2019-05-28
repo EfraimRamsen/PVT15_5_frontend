@@ -54,39 +54,6 @@ public class MyProfileFragment extends Fragment {
         //showchallengesprofile
     }
 
-//    private class GetTask extends AsyncTask<String, Void, String> {
-//        MainActivity mainActivity = (MainActivity) getActivity();
-//        @Override
-//        protected String doInBackground(String... params) {
-//            mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
-//
-//            return "Executed";
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            challenges = mainActivity.getUserChallenges();
-//
-//            System.out.println("challenges: " + challenges);
-//
-//            if (challenges != null) {
-//                adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
-//
-//                lv.setAdapter(adapter);
-//            } else {
-//                System.out.println("challenges är fortfarande null");
-//            }
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//        }
-//
-//        @Override
-//        protected void onProgressUpdate(Void... values) {
-//        }
-//    }
-
     public void showUsersChallenges() {
 //        MainActivity mainActivity = (MainActivity) getActivity();
 //        mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
