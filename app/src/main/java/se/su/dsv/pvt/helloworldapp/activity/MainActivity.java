@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     // Här sparas alla deltagande-objekt med de utmaningar en viss användare är med i. /JD
     List<Participation> participationList;
 
+    // Här sparas alla utmaningar en viss användare är med i. /JD
+    List<Challenge> userChallengesList;
+
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
@@ -338,6 +341,32 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
+     * Denna metod hämtar alla utmaningar som en specifik användare är med i.
+     * @author JD
+     * @param userID
+     */
+    public void getUserChallengesCall(int userID) {
+        Call<ArrayList<Challenge>> call = backendApiService.getUserChallenges(userID);
+
+        call.enqueue(new Callback<ArrayList<Challenge>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Challenge>> call, Response<ArrayList<Challenge>> response) {
+                try {
+                    userChallengesList = response.body();
+                    Log.d(TAG, "Response data: " + response.body());
+                } catch (NullPointerException e) {
+                    System.out.println("GET - user challenges: API-response contained null.");
+                    Log.d(TAG, "GET - user user challenges: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Challenge>> call, Throwable t) {
                 Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });
