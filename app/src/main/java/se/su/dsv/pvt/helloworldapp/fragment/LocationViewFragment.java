@@ -33,12 +33,14 @@ public class LocationViewFragment extends Fragment {
     ArrayList<Challenge> challenges;
     ListView lv;
     private static CustomAdapter adapter;
+    private double avgRating;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Place clickedPlace = mainActivity.getOpenThisPlaceFragment();
+        avgRating = clickedPlace.getAverageRating();
 
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
 
@@ -57,7 +59,7 @@ public class LocationViewFragment extends Fragment {
         TextView title = (TextView) mainActivity.findViewById(R.id.main_title_text);
         title.setText(clickedPlace.getName());
         TextView textRating = (TextView) view.findViewById(R.id.location_view_gymrating);
-        textRating.setText("blargh"); //TODO: sluta hårdkoda ratings
+        textRating.setText(String.valueOf(clickedPlace.getAverageRating()));
         if (clickedPlace instanceof OutdoorGym) {
             TextView description = (TextView) view.findViewById(R.id.gymview_description);
             if (((OutdoorGym) clickedPlace).getDescription() == null) {
@@ -90,7 +92,7 @@ public class LocationViewFragment extends Fragment {
         imageViews[2] = iV3;
         imageViews[3] = iV4;
         imageViews[4] = iV5;
-        RatingStars.setRatingStars(4.2, view, imageViews); //TODO: sluta hårdkoda ratings!
+        RatingStars.setRatingStars(clickedPlace.getAverageRating(), view, imageViews);
 
         return view;
     }
@@ -122,8 +124,7 @@ public class LocationViewFragment extends Fragment {
         imageViews[2] = ib3;
         imageViews[3] = ib4;
         imageViews[4] = ib5;
-        // TODO: sluta hårdkoda ratings!
-        RatingStars.setRatingStars(2.6, inflater.inflate(R.layout.rank_gym_dialog, null), imageViews);
+        RatingStars.setRatingStars(avgRating, inflater.inflate(R.layout.rank_gym_dialog, null), imageViews);
         RatingStars.setListeners(imageViews, starbl);
     }
 
@@ -165,7 +166,6 @@ public class LocationViewFragment extends Fragment {
             clickedStar = Integer.parseInt(String.valueOf(textID.charAt(textID.length() - 1)));
             iV.setColorFilter(Color.RED);
             latestStar = iV;
-            // TODO: markera aktuell stjärna?
         }
     }
 }

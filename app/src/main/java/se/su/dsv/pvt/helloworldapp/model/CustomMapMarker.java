@@ -46,8 +46,8 @@ public class CustomMapMarker implements GoogleMap.InfoWindowAdapter {
         ((TextView) customView.findViewById(R.id.gym_name)).setText(place.getName());
 
         ((ImageView) customView.findViewById(R.id.gym_icon)).setImageResource(R.drawable.ic_gym_popup);
-        setRatingStars(2.6); //HÅRDKODAT!!!
-        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(4)); // TODO: HÅRDKODAT!!!
+        setRatingStars(place.getAverageRating());
+        ((TextView) customView.findViewById(R.id.gym_ratings_text)).setText(String.valueOf(place.getAverageRating()));
 
         ((TextView) customView.findViewById(R.id.gym_challenges)).setText(place.getChallengeList().size() + " utmaningar"); //Oerhört fult, but works.
 
