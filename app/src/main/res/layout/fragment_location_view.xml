@@ -82,36 +82,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <!-- This is just left here because i don't feel like redoing a bit of the layout /Niklas -->
     <TextView
         android:id="@+id/textview25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="@string/gymview_adress"
+        android:text=""
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rate_gym_popup_button" />
-
+        <!-- This too /Niklas -->
     <TextView
         android:id="@+id/gym_view_adress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toEndOf="@+id/textview25"
         app:layout_constraintTop_toBottomOf="@+id/rate_gym_popup_button" />
 
     <TextView
         android:id="@+id/gymview_description"
         android:layout_width="311dp"
-        android:layout_height="190dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview25" />
+
+    <TextView
+        android:id="@+id/challenges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="Utmaningar:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gymview_description" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="295dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/challenges" />
+
 </android.support.constraint.ConstraintLayout>
 
   </ScrollView>

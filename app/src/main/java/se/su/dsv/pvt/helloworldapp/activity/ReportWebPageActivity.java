@@ -7,6 +7,7 @@ import android.webkit.WebView;
 
 import se.su.dsv.pvt.helloworldapp.R;
 
+// Denna activity öppnar en webbsida till Stockholm Stads rapporteringssida. /JD
 public class ReportWebPageActivity extends Activity {
 
     @Override
