@@ -1,26 +1,29 @@
 package se.su.dsv.pvt.helloworldapp.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Challenge {
 
     private String name, description;
     private int numberOfParticipants, challengeID, workoutSpotID;
-    private Date timeAndDate; // datum och tid nedan måste omvandlas till Date datatyp och sparas i denna variabel
-    private String date; //datum i JSON
-    private long time; // tid i JSON
+    private Date timeAndDate;
+    private long time;
+    private String date;
 
-    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, String date, long time){
+    public Challenge(String challenge, String description, int numberOfParticipants, int challengeID, int workoutSpotID, Date timeAndDate){
         this.name = challenge;
         this.description = description;
         this.numberOfParticipants = numberOfParticipants;
         this.challengeID = challengeID;
         this.workoutSpotID = workoutSpotID;
-        this.date = date;
-        this.time = time;
+        this.timeAndDate = timeAndDate;
+        setTime();
     }
 
-    public String getChallenge(){
+    // ********************************************************************************
+
+    public String getName() {
         return name;
     }
 
@@ -40,12 +43,35 @@ public class Challenge {
         return workoutSpotID;
     }
 
+    // ********************************************************************************
+
+    // INKOMMANDE JSON
+
+    /**
+     * Denna metod deklarerar innehållet i Date-objektet med det datum och tid som challenge-objektet har.
+     * @author JD
+     */
+    public void setTimeAndDate() {
+        try {
+            timeAndDate = new Date(0);
+            timeAndDate.setTime(time);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // UTGÅENDE JSON
+
+    public void setTime() {
+        this.time = timeAndDate.getTime();
+    }
+
     public Date getTimeAndDate(){
         return timeAndDate;
     }
 
     @Override
     public String toString() {
-        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + date + " " + time;
+        return "Challenge: " + name + " " + description + " " + numberOfParticipants + " " + challengeID + " " + workoutSpotID + " " + time + " " + timeAndDate;
     }
 }

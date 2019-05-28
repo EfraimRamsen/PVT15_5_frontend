@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Location {
 
-    @SerializedName("x")
-    @Expose
+    @SerializedName("x") // SerializedName motsvarar namnet på variabeln i JSON
+    @Expose // Expose: egentligen onödig/används inte - säger vilken data som ska konverteras till JSON och tillbaka
     private Double x;
     @SerializedName("y")
     @Expose
@@ -43,6 +43,12 @@ public class Location {
         this.y = y;
     }
 
+    /**
+     * Denna metod sätter LatLng-objektet med koordinater-värdena. Behövs för att Google Maps-marker ska kunna placeras på kartan.
+     * @author JD
+     * @param x
+     * @param y
+     */
     public void setLatLng(double x, double y) {
         this.latLng = new LatLng(x, y);
     }
