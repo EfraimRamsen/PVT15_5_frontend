@@ -4,9 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import se.su.dsv.pvt.helloworldapp.R;
@@ -33,7 +34,7 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
     private int lastPosition = -1;
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View vy, ViewGroup parent) {
         // Get the data item for this position
         Challenge challenge = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -41,20 +42,20 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
 
         final View result;
 
-        if (convertView == null) {
+        if (vy == null) {
 
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.list_item, parent, false);
-            viewHolder.name = convertView.findViewById(R.id.challenge_name);
-            viewHolder.description = convertView.findViewById(R.id.description);
+            vy = inflater.inflate(R.layout.list_item, parent, false);
+            viewHolder.name = vy.findViewById(R.id.challenge_name);
+            viewHolder.description = vy.findViewById(R.id.description);
 
-            result=convertView;
+            result=vy;
 
-            convertView.setTag(viewHolder);
+            vy.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+            viewHolder = (ViewHolder) vy.getTag();
+            result=vy;
         }
 
         lastPosition = position;
@@ -63,6 +64,11 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
         viewHolder.description.setText(challenge.getDescription());
 
         // Return the completed view to render on screen
-        return convertView;
+        return vy;
     }
+
+    public void onClick(View v){
+
+    }
+
 }
