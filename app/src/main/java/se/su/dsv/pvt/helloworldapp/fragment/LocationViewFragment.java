@@ -6,24 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
+import android.util.Log;
+import android.view.*;
+import android.widget.*;
+import java.util.*;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
-import se.su.dsv.pvt.helloworldapp.model.Challenge;
-import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
-import se.su.dsv.pvt.helloworldapp.model.Place;
-import se.su.dsv.pvt.helloworldapp.model.RatingStars;
+import se.su.dsv.pvt.helloworldapp.model.*;
 
 public class LocationViewFragment extends Fragment {
 
@@ -34,12 +23,14 @@ public class LocationViewFragment extends Fragment {
     ListView lv;
     private static CustomAdapter adapter;
     private double avgRating;
+    private MainActivity mainActivity;
+    private Place clickedPlace;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MainActivity mainActivity = (MainActivity) getActivity();
-        Place clickedPlace = mainActivity.getOpenThisPlaceFragment();
+        mainActivity = (MainActivity) getActivity();
+        clickedPlace = mainActivity.getOpenThisPlaceFragment();
         avgRating = clickedPlace.getAverageRating();
 
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
@@ -52,6 +43,17 @@ public class LocationViewFragment extends Fragment {
         adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
 
         lv.setAdapter(adapter);
+
+        lv.setClickable(true);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ChallengeDialog cd = new ChallengeDialog();
+                cd.show(getFragmentManager(), "ChallengeDialog");
+                Log.d(MainActivity.class.getSimpleName(), "hej");
+            }
+        });
+
         TextView title = (TextView) mainActivity.findViewById(R.id.main_title_text);
         title.setText(clickedPlace.getName());
         TextView textRating = (TextView) view.findViewById(R.id.location_view_gymrating);
@@ -143,7 +145,7 @@ public class LocationViewFragment extends Fragment {
              * a) Läs av clickedStar,
              * b) Addera användarens betyg (clickedStar) till databasen.
              */
-            ;
+            mainActivity.rateGymCall(clickedPlace.getId(), 0, clickedStar); //TODO: HÅRDKODAT userID
             alertDialog.cancel();
         }
     }

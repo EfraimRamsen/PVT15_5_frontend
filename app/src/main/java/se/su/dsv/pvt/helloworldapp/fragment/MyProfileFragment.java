@@ -4,21 +4,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.Participation;
 
 /**
  * This is a mess. TODO: add a dynamic (or somewhat static) list of active challenges.
@@ -43,15 +40,21 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        /*
         MainActivity mainActivity = (MainActivity) getActivity();
-        //this.getFragmentManager().findFragmentById(R.id.completedChallenges);
-        TextView completedChallengesNumber = (TextView) getView().findViewById(R.id.completedChallenges);
-        String s = String.valueOf(mainActivity.getCompletedChallangeNumber());
-        completedChallengesNumber.setText(s);
-        */
-        //TODO: här någonstans måste vi lägga in aktiva challenges i den layouten som heter
-        //showchallengesprofile
+        int finishedChallenges = 0;
+        try {
+            for (Participation part : mainActivity.getParticipationList()) {
+                if (part.isCompleted()) {
+                    finishedChallenges++;
+                }
+            }
+        }
+        catch (NullPointerException e) {
+            finishedChallenges = 0;
+        }
+
+        TextView tV = (TextView) getView().findViewById(R.id.finishedChallenges);
+        tV.setText(finishedChallenges + " avklarade!");
     }
 
     public void showUsersChallenges() {
@@ -62,6 +65,18 @@ public class MyProfileFragment extends Fragment {
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
 
             lv.setAdapter(adapter);
+
+            lv.setClickable(true);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ChallengeDialog cd = new ChallengeDialog();
+                    cd.show(getFragmentManager(), "ChallengeDialog");
+
+                    Log.d(MainActivity.class.getSimpleName(), "hej");
+                }
+            });
+
         } else {
             System.out.println("challenges är null");
         }
