@@ -65,8 +65,6 @@ public class CustomAdapter extends ArrayAdapter<Challenge> {
         viewHolder.name.setText(challenge.getName());
         viewHolder.description.setText(challenge.getDescription());
 
-
-
         // Return the completed view to render on screen
         return vy;
     }

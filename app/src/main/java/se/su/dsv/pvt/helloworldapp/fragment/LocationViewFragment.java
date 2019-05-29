@@ -7,25 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
+import android.view.*;
+import android.widget.*;
+import java.util.*;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
-import se.su.dsv.pvt.helloworldapp.model.Challenge;
-import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
-import se.su.dsv.pvt.helloworldapp.model.Place;
-import se.su.dsv.pvt.helloworldapp.model.RatingStars;
+import se.su.dsv.pvt.helloworldapp.model.*;
 
 public class LocationViewFragment extends Fragment {
 
