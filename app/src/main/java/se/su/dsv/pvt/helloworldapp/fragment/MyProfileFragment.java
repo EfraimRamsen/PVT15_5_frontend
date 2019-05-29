@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +22,7 @@ import java.util.List;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.Participation;
 
 /**
  * This is a mess. TODO: add a dynamic (or somewhat static) list of active challenges.
@@ -43,15 +47,21 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        /*
         MainActivity mainActivity = (MainActivity) getActivity();
-        //this.getFragmentManager().findFragmentById(R.id.completedChallenges);
-        TextView completedChallengesNumber = (TextView) getView().findViewById(R.id.completedChallenges);
-        String s = String.valueOf(mainActivity.getCompletedChallangeNumber());
-        completedChallengesNumber.setText(s);
-        */
-        //TODO: här någonstans måste vi lägga in aktiva challenges i den layouten som heter
-        //showchallengesprofile
+        int finishedChallenges = 0;
+        try {
+            for (Participation part : mainActivity.getParticipationList()) {
+                if (part.isCompleted()) {
+                    finishedChallenges++;
+                }
+            }
+        }
+        catch (NullPointerException e) {
+            finishedChallenges = 0;
+        }
+
+        TextView tV = (TextView) getView().findViewById(R.id.finishedChallenges);
+        tV.setText(finishedChallenges + " avklarade!");
     }
 
     public void showUsersChallenges() {

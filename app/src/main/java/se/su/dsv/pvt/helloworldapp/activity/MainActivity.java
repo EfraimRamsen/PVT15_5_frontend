@@ -511,6 +511,9 @@ public class MainActivity extends AppCompatActivity {
         completedChallengesList.add(c);
         removeActiveChallenge(c);
     }
+    public List<Participation> getParticipationList() {
+        return participationList;
+    }
     /**
      * klasser som används för att koppla ihop fragment, mainactivity och backend slutar här.
      */
