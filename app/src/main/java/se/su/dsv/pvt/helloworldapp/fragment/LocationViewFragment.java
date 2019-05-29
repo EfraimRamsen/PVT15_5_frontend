@@ -6,9 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -54,6 +56,17 @@ public class LocationViewFragment extends Fragment {
         adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
 
         lv.setAdapter(adapter);
+
+        lv.setClickable(true);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ChallengeDialog cd = new ChallengeDialog();
+                cd.show(getFragmentManager(), "ChallengeDialog");
+                Log.d(MainActivity.class.getSimpleName(), "hej");
+            }
+        });
+
         TextView title = (TextView) mainActivity.findViewById(R.id.main_title_text);
         title.setText(clickedPlace.getName());
         TextView textRating = (TextView) view.findViewById(R.id.location_view_gymrating);
