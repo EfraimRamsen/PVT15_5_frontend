@@ -1,6 +1,7 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -58,10 +59,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			String pString = password.getText().toString();
 
 		if(v.getId() == R.id.login){
-			createLoginCall(uString,pString);
+			createLoginCall(uString,pString,v);
 		}
 		else if(v.getId() == R.id.register){
-			createRegisterCall(uString,pString);
+			createRegisterCall(uString,pString,v);
 		}
 	}
 
@@ -88,7 +89,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 	}
 
 	//TODO fixa så man kommer vidare på success
-	public void createLoginCall(String username, String password) {
+	public void createLoginCall(String username, String password, View v) {
 		Call<String> call = backendApiService.login(username,password);
 
 		call.enqueue(new Callback<String>() {
@@ -97,6 +98,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 				try {
 					Log.d(TAG, "Response data: " + response.body().toString());
 					setUserId(response.body().toString());
+					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
+					new StartActivity();
 				} catch (NullPointerException e) {
 					System.out.println("createLoginCall contains null");
 					Log.d(TAG, "createLoginCall contains null");
@@ -111,7 +114,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 	}
 
 	//TODO fixa så man kommer vidare på success
-	public void createRegisterCall(String username, String password){
+	public void createRegisterCall(String username, String password, View v){
 		Call<String> call = backendApiService.register(username,password);
 
 		call.enqueue(new Callback<String>() {
@@ -120,6 +123,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 				try{
 					Log.d(TAG,"Response data: " + response.body().toString());
 					setUserId(response.body().toString());
+					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
+
+					StartActivity sa =  new StartActivity();
+					Intent intent = new Intent(this, sa); //funkar ej
+
+
 				}catch (NullPointerException e){
 					System.out.println("createRegisterCall contains null");
 					Log.d(TAG,  "createRegisterCall contains null");
