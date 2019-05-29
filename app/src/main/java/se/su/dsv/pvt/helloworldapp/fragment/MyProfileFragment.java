@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,17 @@ public class MyProfileFragment extends Fragment {
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
 
             lv.setAdapter(adapter);
+
+            lv.setClickable(true);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ChallengeDialog cd = new ChallengeDialog();
+                    cd.show(getFragmentManager(), "ChallengeDialog");
+                    Log.d(MainActivity.class.getSimpleName(), "hej");
+                }
+            });
+
         } else {
             System.out.println("challenges är null");
         }
