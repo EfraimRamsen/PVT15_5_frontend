@@ -7,13 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 
 /**
@@ -32,20 +36,10 @@ public class MyProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         lv = view.findViewById(R.id.listofActiveChallenges);
-        challenges = new ArrayList<>();
-
-        Date d = Calendar.getInstance().getTime();
-
-        challenges.add(new Challenge("namn", "beskrivning", 0,0,0, d));
-        challenges.add(new Challenge("namn2", "beskrivning", 0,0,0, d));
-
-
-        adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
-
-        lv.setAdapter(adapter);
 
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -58,5 +52,22 @@ public class MyProfileFragment extends Fragment {
         */
         //TODO: här någonstans måste vi lägga in aktiva challenges i den layouten som heter
         //showchallengesprofile
+    }
+
+    public void showUsersChallenges() {
+//        MainActivity mainActivity = (MainActivity) getActivity();
+//        mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
+
+        if (challenges != null) {
+            adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
+
+            lv.setAdapter(adapter);
+        } else {
+            System.out.println("challenges är null");
+        }
+    }
+
+    public void setChallenges(ArrayList<Challenge> challenges) {
+        this.challenges = challenges;
     }
 }

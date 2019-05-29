@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     // Här sparas alla deltagande-objekt med de utmaningar en viss användare är med i. /JD
     List<Participation> participationList;
 
+    // Här sparas alla utmaningar en viss användare är med i. /JD
+    ArrayList<Challenge> userChallengesList;
+
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         // Nedan if-satser hämtar intent från föregående activity. Innehållet i intent säger vilket fragment som ska visas först. /JD
         intent = getIntent();
         if (intent.hasExtra("my")) {
-            bottomNavigation.setSelectedItemId(R.id.nav_challenges);
+            bottomNavigation.setSelectedItemId(R.id.nav_my_profile);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").commit();
@@ -154,11 +157,12 @@ public class MainActivity extends AppCompatActivity {
             TextView title = (TextView) findViewById(R.id.main_title_text);
             fm.beginTransaction().hide(active2).commit();
             switch (item.getItemId()) {
-                case R.id.nav_challenges:
+                case R.id.nav_my_profile:
                     fm.popBackStack();
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
+                    getUserChallengesCall(1); // UserID går in här
                     return true;
 
                 case R.id.nav_add_challenge:
@@ -343,6 +347,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Denna metod hämtar alla utmaningar som en specifik användare är med i.
+     * @author JD
+     * @param userID
+     */
+    public void getUserChallengesCall(int userID) {
+        Call<ArrayList<Challenge>> call = backendApiService.getUserChallenges(userID);
+
+        call.enqueue(new Callback<ArrayList<Challenge>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Challenge>> call, Response<ArrayList<Challenge>> response) {
+                try {
+                    userChallengesList = response.body();
+
+                    for (Challenge challenge : userChallengesList) {
+                        challenge.setTimeAndDate();
+                    }
+
+                    Log.d(TAG, "Response data: " + response.body());
+
+                    ((MyProfileFragment) challengeFragment).setChallenges(userChallengesList);
+                    ((MyProfileFragment) challengeFragment).showUsersChallenges();
+
+                } catch (NullPointerException e) {
+                    System.out.println("GET - user challenges: API-response contained null.");
+                    Log.d(TAG, "GET - user challenges: API-response contained null.");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Challenge>> call, Throwable t) {
+                Log.e(TAG, "Felmeddelande: " +  t.toString());
+            }
+        });
+    }
+
+    /**
      * Denna metod markerar att en specifik utmaning är slutförd av en viss användare.
      * @author JD
      * @param participationID
@@ -518,5 +557,4 @@ public class MainActivity extends AppCompatActivity {
         ((MapViewFragment) mapViewFragment).addOutdoorGymList(outdoorGyms);
         ((MapViewFragment) mapViewFragment).addAllPlacesToMap();
     }
-
 }

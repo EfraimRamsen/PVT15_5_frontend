@@ -1,11 +1,13 @@
 package se.su.dsv.pvt.helloworldapp.rest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -28,6 +30,9 @@ public interface BackendApiService {
 
     @PUT("removeChallenge/{challengeID}")
     Call<String> removeChallenge(@Path("challengeID") int challengeID);
+
+    @GET("getChallenges/{userID}")
+    Call<ArrayList<Challenge>> getUserChallenges(@Path("userID") int userID);
 
     @PUT("completeChallenge/{participationID}")
     Call<String> completeChallenge(@Path("participationID") int participationID);

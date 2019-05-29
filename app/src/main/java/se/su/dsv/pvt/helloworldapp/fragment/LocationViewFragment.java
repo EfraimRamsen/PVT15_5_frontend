@@ -45,13 +45,9 @@ public class LocationViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
 
         lv = view.findViewById(R.id.list);
-        challenges = new ArrayList<>();
+        challenges = clickedPlace.getChallengeList();
 
         Date d = Calendar.getInstance().getTime();
-
-        challenges.add(new Challenge("namn", "beskrivning", 0,0,106, d));
-        challenges.add(new Challenge("namn2", "beskrivning", 0,0,106, d));
-
 
         adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
 
