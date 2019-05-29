@@ -40,4 +40,7 @@ public interface BackendApiService {
 
     @PUT("removeParticipation/{participationID}")
     Call<String> removeParticipation(@Path("participationID") int participationID);
+
+    @GET("login/{userName}/{password}")
+    Call<String> login(@Path("userName") String userName, @Path("password") String password);
 }

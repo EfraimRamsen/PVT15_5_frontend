@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/ok2"
+        android:id="@+id/register"
         android:layout_width="135dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/cancelButton2"
+        android:id="@+id/login"
         android:layout_width="135dp"
         android:layout_height="55dp"
         android:layout_marginTop="446dp"
@@ -50,22 +50,22 @@
         app:layout_constraintVertical_bias="0.143" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="354dp"
-        android:layout_height="56dp"
+        android:id="@+id/username"
+        android:layout_width="355dp"
+        android:layout_height="55dp"
         android:layout_marginTop="256dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Namn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="352dp"
-        android:layout_height="58dp"
+        android:id="@+id/password"
+        android:layout_width="355dp"
+        android:layout_height="55dp"
         android:layout_marginTop="342dp"
         android:ems="10"
         android:inputType="textPassword"
