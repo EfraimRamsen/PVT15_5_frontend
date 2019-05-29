@@ -125,9 +125,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					setUserId(response.body().toString());
 					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
 
-					StartActivity sa =  new StartActivity();
-					Intent intent = new Intent(this, sa); //funkar ej
-
+					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+					startActivity(intent);
 
 				}catch (NullPointerException e){
 					System.out.println("createRegisterCall contains null");
