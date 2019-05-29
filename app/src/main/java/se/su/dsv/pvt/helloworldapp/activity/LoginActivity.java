@@ -99,7 +99,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					Log.d(TAG, "Response data: " + response.body().toString());
 					setUserId(response.body().toString());
 					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
-					new StartActivity();
+
+					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+					startActivity(intent);
+					
 				} catch (NullPointerException e) {
 					System.out.println("createLoginCall contains null");
 					Log.d(TAG, "createLoginCall contains null");
