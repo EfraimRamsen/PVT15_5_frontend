@@ -17,6 +17,8 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
 
     private View vy = null;
 
+    private static int userID = 1; // tillfällig ID
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     String dString = description.getText().toString();
                     Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
                     Toast.makeText(mainActivity, "Din utmaning är skapad", Toast.LENGTH_SHORT).show();
-                    mainActivity.createChallengeCall(c);
+                    mainActivity.createChallengeCall(userID, c);
                     mainActivity.clearAddChallenge();
                     break;
                 }

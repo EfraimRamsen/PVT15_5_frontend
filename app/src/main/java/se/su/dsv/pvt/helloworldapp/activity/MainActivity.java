@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
+    private static int userID = 1; // tillfällig ID
+
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
 
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
-                    getUserChallengesCall(1); // UserID går in här
+                    getUserChallengesCall(userID); // UserID går in här
                     return true;
 
                 case R.id.nav_add_challenge:
