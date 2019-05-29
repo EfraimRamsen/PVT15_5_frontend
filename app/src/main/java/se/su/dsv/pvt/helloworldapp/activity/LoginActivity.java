@@ -88,7 +88,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 		backendApiService = retrofit.create(BackendApiService.class);
 	}
 
-	//TODO fixa så man kommer vidare på success
 	public void createLoginCall(String username, String password, View v) {
 		Call<String> call = backendApiService.login(username,password);
 
@@ -97,7 +96,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			public void onResponse(Call<String> call, Response<String> response) {
 				try {
 					Log.d(TAG, "Response data: " + response.body().toString());
-					setUserId(response.body().toString());
+					userId =  Integer.parseInt(response.body().toString());
 					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
 
 					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
@@ -116,7 +115,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 		});
 	}
 
-	//TODO fixa så man kommer vidare på success
 	public void createRegisterCall(String username, String password, View v){
 		Call<String> call = backendApiService.register(username,password);
 
@@ -125,7 +123,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			public void onResponse(Call<String> call, Response<String> response) {
 				try{
 					Log.d(TAG,"Response data: " + response.body().toString());
-					setUserId(response.body().toString());
+					userId =  Integer.parseInt(response.body().toString());
 					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
 
 					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
@@ -144,10 +142,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 			}
 		});
-	}
-
-	public void setUserId(String s){ //TODO fixa så den här returneras in i stället där user iD sparas hos user typ och sen ska man vidare till appen
-		userId =  Integer.parseInt(s);
 	}
 
 	public int getUserId(){
