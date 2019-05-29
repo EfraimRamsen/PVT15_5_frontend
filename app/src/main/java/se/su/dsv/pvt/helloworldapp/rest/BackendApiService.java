@@ -48,4 +48,7 @@ public interface BackendApiService {
 
     @GET("login/{userName}/{password}")
     Call<String> login(@Path("userName") String userName, @Path("password") String password);
+
+    @POST("createUser/{userName}/{password}")
+    Call<String> register(@Path("userName") String userName, @Path("password") String password);
 }

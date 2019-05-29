@@ -60,7 +60,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			createLoginCall(uString,pString);
 		}
 		else if(v.getId() == R.id.register){
-
+			createRegisterCall(uString,pString);
 		}
 	}
 
@@ -102,6 +102,27 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			@Override
 			public void onFailure(Call<String> call, Throwable t) {
 				Log.e(TAG, "Felmeddelande: " +  t.toString());
+			}
+		});
+	}
+
+	public void createRegisterCall(String username, String password){
+		Call<String> call = backendApiService.login(username,password);
+
+		call.enqueue(new Callback<String>() {
+			@Override
+			public void onResponse(Call<String> call, Response<String> response) {
+				try{
+					Log.d(TAG,"Response data: " + response.body().toString());
+				}catch (NullPointerException e){
+					System.out.println("createRegisterCall contains null");
+					Log.d(TAG,  "createRegisterCall contains null");
+				}
+			}
+			@Override
+			public void onFailure(Call<String> call, Throwable t) {
+				Log.e(TAG, "Felmeddelande: " + t.toString());
+
 			}
 		});
 	}
