@@ -301,8 +301,8 @@ public class MainActivity extends AppCompatActivity {
      * @param challenge
      * @author JD
      */
-    public void createChallengeCall(Challenge challenge) {
-        Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
+    public void createChallengeCall(int userID, Challenge challenge) {
+        Call<Challenge> call = backendApiService.createNewChallengeRequest(userID, challenge);
 
         call.enqueue(new Callback<Challenge>() {
             @Override
