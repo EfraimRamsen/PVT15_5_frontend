@@ -34,12 +34,14 @@ public class LocationViewFragment extends Fragment {
     ListView lv;
     private static CustomAdapter adapter;
     private double avgRating;
+    private MainActivity mainActivity;
+    private Place clickedPlace;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MainActivity mainActivity = (MainActivity) getActivity();
-        Place clickedPlace = mainActivity.getOpenThisPlaceFragment();
+        mainActivity = (MainActivity) getActivity();
+        clickedPlace = mainActivity.getOpenThisPlaceFragment();
         avgRating = clickedPlace.getAverageRating();
 
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
@@ -143,7 +145,7 @@ public class LocationViewFragment extends Fragment {
              * a) Läs av clickedStar,
              * b) Addera användarens betyg (clickedStar) till databasen.
              */
-            ;
+            mainActivity.rateGymCall(clickedPlace.getId(), 0, clickedStar); //TODO: HÅRDKODAT userID
             alertDialog.cancel();
         }
     }
