@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,7 +28,7 @@ import static android.support.constraint.Constraints.TAG;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
-	String username, password;
+	private int userId;
 	BackendApiService backendApiService;
 	OkHttpClient okHttpClient;
 	Retrofit retrofit;
@@ -86,6 +87,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 		backendApiService = retrofit.create(BackendApiService.class);
 	}
 
+	//TODO fixa så man kommer vidare på success
 	public void createLoginCall(String username, String password) {
 		Call<String> call = backendApiService.login(username,password);
 
@@ -94,6 +96,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			public void onResponse(Call<String> call, Response<String> response) {
 				try {
 					Log.d(TAG, "Response data: " + response.body().toString());
+					setUserId(response.body().toString());
 				} catch (NullPointerException e) {
 					System.out.println("createLoginCall contains null");
 					Log.d(TAG, "createLoginCall contains null");
@@ -102,28 +105,41 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			@Override
 			public void onFailure(Call<String> call, Throwable t) {
 				Log.e(TAG, "Felmeddelande: " +  t.toString());
+				Toast.makeText(LoginActivity.this, "Fel: "+t, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
+	//TODO fixa så man kommer vidare på success
 	public void createRegisterCall(String username, String password){
-		Call<String> call = backendApiService.login(username,password);
+		Call<String> call = backendApiService.register(username,password);
 
 		call.enqueue(new Callback<String>() {
 			@Override
 			public void onResponse(Call<String> call, Response<String> response) {
 				try{
 					Log.d(TAG,"Response data: " + response.body().toString());
+					setUserId(response.body().toString());
 				}catch (NullPointerException e){
 					System.out.println("createRegisterCall contains null");
 					Log.d(TAG,  "createRegisterCall contains null");
 				}
+
 			}
 			@Override
 			public void onFailure(Call<String> call, Throwable t) {
 				Log.e(TAG, "Felmeddelande: " + t.toString());
+				Toast.makeText(LoginActivity.this, "Fel: "+t, Toast.LENGTH_SHORT).show();
 
 			}
 		});
+	}
+
+	public void setUserId(String s){ //TODO fixa så den här returneras in i stället där user iD sparas hos user typ och sen ska man vidare till appen
+		userId =  Integer.parseInt(s);
+	}
+
+	public int getUserId(){
+		return userId;
 	}
 }
