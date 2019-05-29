@@ -6,30 +6,13 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/timeAndDateTitle"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Datum och tid: " />
-
-    <TextView
         android:id="@+id/timeAndDate"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom ="30dp"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/nameTitle"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Utmaning: " />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom ="30dp" />
 
     <TextView
         android:id="@+id/name"
@@ -41,14 +24,6 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/descriptionTitle"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Beskrivning: " />
-
-    <TextView
         android:id="@+id/description"
         android:layout_gravity="center"
         android:textAlignment="center"
@@ -58,20 +33,13 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/participantsText"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Antal deltagare: " />
-
-    <TextView
         android:id="@+id/participants"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:text="" />
 
     <Button
         android:id="@+id/join"

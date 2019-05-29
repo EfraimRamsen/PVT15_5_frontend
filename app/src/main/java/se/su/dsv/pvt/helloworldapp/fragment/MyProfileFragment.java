@@ -72,6 +72,7 @@ public class MyProfileFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     ChallengeDialog cd = new ChallengeDialog();
                     cd.show(getFragmentManager(), "ChallengeDialog");
+
                     Log.d(MainActivity.class.getSimpleName(), "hej");
                 }
             });
