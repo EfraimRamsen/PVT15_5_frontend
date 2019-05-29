@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:text="TextView" />
+        android:layout_marginBottom ="30dp" />
 
     <TextView
         android:id="@+id/name"
@@ -22,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/description"
@@ -31,12 +30,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="TextView" />
+        android:text="" />
+
+    <TextView
+        android:id="@+id/participants"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="" />
 
     <Button
         android:id="@+id/join"
         android:layout_gravity="center"
-        android:background="@drawable/rounded_button2"
         android:layout_width="60pt"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -44,6 +51,7 @@
 
     <ImageButton
         android:id="@+id/imageButton"
+        android:background="@drawable/rounded_button2"
         android:layout_gravity="center"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -56,10 +64,9 @@
 
     <Button
         android:id="@+id/ok"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_button2"
         android:layout_width="60pt"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:text="OK" />
 
