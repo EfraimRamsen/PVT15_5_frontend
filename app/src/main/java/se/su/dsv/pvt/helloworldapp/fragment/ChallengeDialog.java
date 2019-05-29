@@ -28,7 +28,7 @@ public class ChallengeDialog extends DialogFragment {
         TextView participants = view.findViewById(R.id.participants);
         Button join = view.findViewById(R.id.join);
         Button ok = view.findViewById(R.id.ok);
-
+        
         timeAndDate.setText("Tid och datum: " );
         name.setText("Utmaning: ");
         description.setText("Beskrivning: ");
