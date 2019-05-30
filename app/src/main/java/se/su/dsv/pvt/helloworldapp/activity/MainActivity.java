@@ -304,11 +304,11 @@ public class MainActivity extends AppCompatActivity {
      * @author JD
      */
     public void createChallengeCall(int userID, Challenge challenge) {
-        Call<Challenge> call = backendApiService.createNewChallengeRequest(userID, challenge);
+        Call<String> call = backendApiService.createNewChallengeRequest(userID, challenge);
 
-        call.enqueue(new Callback<Challenge>() {
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Challenge> call, Response<Challenge> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 try {
                     Log.d(TAG, "Response data: " + response.body().toString());
                 } catch (NullPointerException e) {
@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<Challenge> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });
