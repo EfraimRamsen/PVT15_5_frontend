@@ -1,5 +1,6 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -28,11 +29,16 @@ public class ChallengeDialog extends DialogFragment {
         TextView participants = view.findViewById(R.id.participants);
         Button join = view.findViewById(R.id.join);
         Button ok = view.findViewById(R.id.ok);
-        
+
+        Button share = view.findViewById(R.id.shareButton);
+
+
         timeAndDate.setText("Tid och datum: " );
         name.setText("Utmaning: ");
         description.setText("Beskrivning: ");
         participants.setText("Antal deltagare: ");
+
+
 
 
         join.setOnClickListener(new View.OnClickListener(){
@@ -49,10 +55,26 @@ public class ChallengeDialog extends DialogFragment {
           }
         });
 
+
         ok.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 getDialog().dismiss();
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("test/plain");
+                String shareBody = "Beskrivning";
+                String shareSub = "Utmaning/titel";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+                myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                startActivity(Intent.createChooser(myIntent, "Dela med: "));
+
+               // getDialog().dismiss();
             }
         });
 
