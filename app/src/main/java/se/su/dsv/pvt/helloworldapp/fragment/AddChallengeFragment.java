@@ -50,7 +50,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.createButton:
                 if (emptyField()){
-                    Toast.makeText(mainActivity, "tomt fält", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainActivity, "Alla obligatoriska fält har ej fyllts i", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
                     EditText challenge = vy.findViewById(R.id.challengeText);
@@ -82,9 +82,9 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         TextView d = vy.findViewById(R.id.day);
         TextView h = vy.findViewById(R.id.hour);
         TextView min = vy.findViewById(R.id.minute);
-        if (challenge.getText().equals("")) {
+        if (challenge.getText().toString().trim().isEmpty()) {
             return true;
-        } else if (description.getText().equals("")) {
+        } else if (description.getText().toString().trim().isEmpty()) {
             return true;
         } else if (y.getText().equals("")) {
             return true;
