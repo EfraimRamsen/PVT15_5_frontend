@@ -96,6 +96,8 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
             return true;
         } else if (min.getText().equals("")){
             return true;
+        } else if (spinner.getSelectedItemPosition() == 0) {
+            return true;
         }
         return false;
     }
