@@ -542,7 +542,6 @@ public class MainActivity extends AppCompatActivity {
      * @author Gosia
      */
     public void showSomeFragment(Fragment someFragment) {
-
         fm.beginTransaction().hide(active).add(R.id.fragment_container, someFragment).addToBackStack("back").commit();
         active2 = someFragment;
     }
@@ -552,10 +551,11 @@ public class MainActivity extends AppCompatActivity {
      * @author Gosia
      */
     public void clearAddChallenge(){
-        addChallengeFragment = new AddChallengeFragment();
-        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
-        fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
-        active = addChallengeFragment;
+//        addChallengeFragment = new AddChallengeFragment();
+//        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
+//        fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
+//        active = addChallengeFragment;
+        ((AddChallengeFragment)addChallengeFragment).resetFields();
     }
 
     private void addGymToMapMarkers() {
