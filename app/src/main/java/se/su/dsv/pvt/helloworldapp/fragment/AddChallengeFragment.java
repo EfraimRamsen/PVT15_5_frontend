@@ -103,6 +103,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
     public void resetFields() {
         EditText challenge = vy.findViewById(R.id.challengeText);
         challenge.setText("");
+        challenge.requestFocus();
         EditText description = vy.findViewById(R.id.descriptionText);
         description.setText("");
         TextView y = vy.findViewById(R.id.year);
