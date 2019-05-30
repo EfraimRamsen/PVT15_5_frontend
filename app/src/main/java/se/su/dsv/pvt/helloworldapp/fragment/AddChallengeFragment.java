@@ -100,6 +100,10 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         return false;
     }
 
+    /**
+     * Tömning av textfälten, sätter fokus på översta fältet och återställning av spinnern
+     * @author JD
+     */
     public void resetFields() {
         EditText challenge = vy.findViewById(R.id.challengeText);
         challenge.setText("");

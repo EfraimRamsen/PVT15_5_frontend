@@ -547,14 +547,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Skapar ett nytt addChallengefragment utan att störa de existerande fragmenten
-     * @author Gosia
+     * Anropar tömning av textfälten och återställning av spinnern
+     * @author Gosia, JD
      */
     public void clearAddChallenge(){
-//        addChallengeFragment = new AddChallengeFragment();
-//        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
-//        fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
-//        active = addChallengeFragment;
         ((AddChallengeFragment)addChallengeFragment).resetFields();
     }
 
