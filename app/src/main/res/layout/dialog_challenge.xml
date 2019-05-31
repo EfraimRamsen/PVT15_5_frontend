@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/timeAndDate"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
@@ -44,7 +44,7 @@
 
     <Button
         android:id="@+id/join"
-        android:layout_width="match_parent"
+        android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
@@ -52,12 +52,11 @@
 
     <Button
         android:id="@+id/shareButton"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/rounded_button2"
         android:maxWidth="60dp"
         android:maxHeight="60dp"
         android:scaleType="fitXY"
@@ -66,14 +65,15 @@
 
     <Button
         android:id="@+id/twitterBtn"
-        android:layout_width="60dp"
+        android:layout_width="132dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="center_horizontal"
         android:text="Twitter" />
 
     <Button
         android:id="@+id/ok"
-        android:layout_width="60pt"
+        android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
