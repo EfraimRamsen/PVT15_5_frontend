@@ -48,7 +48,7 @@ public class ChallengeDialog extends DialogFragment {
 
 
         Button join = view.findViewById(R.id.join);
-        Button ok = view.findViewById(R.id.ok);
+        ImageButton closeDialog = view.findViewById(R.id.closeBtn);
         Button share = view.findViewById(R.id.shareButton);
         ImageButton twitter = view.findViewById(R.id.twitterBtn);
         TwitterPost twitterPost = new TwitterPost();
@@ -74,7 +74,7 @@ public class ChallengeDialog extends DialogFragment {
           }
         });
 
-        ok.setOnClickListener(new View.OnClickListener(){
+        closeDialog.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 getDialog().dismiss();
