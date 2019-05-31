@@ -1,6 +1,10 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -8,8 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
@@ -31,6 +36,9 @@ public class ChallengeDialog extends DialogFragment {
         Button ok = view.findViewById(R.id.ok);
 
         Button share = view.findViewById(R.id.shareButton);
+
+        Button twitter = view.findViewById(R.id.twitterBtn);
+        TwitterPost twitterPost = new TwitterPost();
 
 
         timeAndDate.setText("Tid och datum: " );
@@ -78,6 +86,50 @@ public class ChallengeDialog extends DialogFragment {
             }
         });
 
+        twitter.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String challengeInfo = "Jag är intresserad av INSERT_CHALLENGE_HERE i appen Utemaning - Möt mig och anta utmaningen du med!";
+                System.out.println("twitter");
+                startActivity(twitterPost.getTwitterIntent(getContext(), challengeInfo));
+            }
+        });
+
         return view;
+    }
+
+    public class TwitterPost
+    {
+        public Intent getTwitterIntent(Context ctx, String shareText)
+        {
+            Intent shareIntent;
+
+            if(isPackageInstalled(ctx, "com.twitter.android"))
+            {
+                shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setClassName("com.twitter.android",
+                        "com.twitter.android.PostActivity");
+                shareIntent.setType("text/*");
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
+                return shareIntent;
+            }
+            else
+            {
+                String tweetUrl = "https://twitter.com/intent/tweet?text=" + shareText;
+                Uri uri = Uri.parse(tweetUrl);
+                shareIntent = new Intent(Intent.ACTION_VIEW, uri);
+                return shareIntent;
+            }
+        }
+
+        public boolean isPackageInstalled(Context context, String packageName) {
+            final PackageManager packageManager = context.getPackageManager();
+            Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+            if (intent == null) {
+                return false;
+            }
+            List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            return list.size() > 0;
+        }
     }
 }
