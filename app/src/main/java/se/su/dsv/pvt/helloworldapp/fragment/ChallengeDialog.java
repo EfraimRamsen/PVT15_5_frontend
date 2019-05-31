@@ -49,7 +49,7 @@ public class ChallengeDialog extends DialogFragment {
 
         Button join = view.findViewById(R.id.join);
         ImageButton closeDialog = view.findViewById(R.id.closeBtn);
-        Button share = view.findViewById(R.id.shareButton);
+        ImageButton share = view.findViewById(R.id.shareBtn);
         ImageButton twitter = view.findViewById(R.id.twitterBtn);
         TwitterPost twitterPost = new TwitterPost();
 
