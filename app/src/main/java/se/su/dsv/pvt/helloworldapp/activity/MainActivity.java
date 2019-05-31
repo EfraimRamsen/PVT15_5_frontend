@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
+    private static int userID = 1; // tillfällig ID
+
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
 
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(challengeFragment).commit();
                     active = challengeFragment;
                     title.setText(R.string.challenges);
-                    getUserChallengesCall(1); // UserID går in här
+                    getUserChallengesCall(userID); // UserID går in här
                     return true;
 
                 case R.id.nav_add_challenge:
@@ -301,12 +303,12 @@ public class MainActivity extends AppCompatActivity {
      * @param challenge
      * @author JD
      */
-    public void createChallengeCall(Challenge challenge) {
-        Call<Challenge> call = backendApiService.createNewChallengeRequest(challenge);
+    public void createChallengeCall(int userID, Challenge challenge) {
+        Call<String> call = backendApiService.createNewChallengeRequest(userID, challenge);
 
-        call.enqueue(new Callback<Challenge>() {
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Challenge> call, Response<Challenge> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 try {
                     Log.d(TAG, "Response data: " + response.body().toString());
                 } catch (NullPointerException e) {
@@ -315,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<Challenge> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.e(TAG, "Felmeddelande: " +  t.toString());
             }
         });
@@ -540,20 +542,16 @@ public class MainActivity extends AppCompatActivity {
      * @author Gosia
      */
     public void showSomeFragment(Fragment someFragment) {
-
         fm.beginTransaction().hide(active).add(R.id.fragment_container, someFragment).addToBackStack("back").commit();
         active2 = someFragment;
     }
 
     /**
-     * Skapar ett nytt addChallengefragment utan att störa de existerande fragmenten
-     * @author Gosia
+     * Anropar tömning av textfälten och återställning av spinnern
+     * @author Gosia, JD
      */
     public void clearAddChallenge(){
-        addChallengeFragment = new AddChallengeFragment();
-        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment).commit();
-        fm.beginTransaction().hide(active).show(addChallengeFragment).commit();
-        active = addChallengeFragment;
+        ((AddChallengeFragment)addChallengeFragment).resetFields();
     }
 
     private void addGymToMapMarkers() {

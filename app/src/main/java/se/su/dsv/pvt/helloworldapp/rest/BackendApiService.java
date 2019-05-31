@@ -25,8 +25,8 @@ public interface BackendApiService {
     @POST("rateGym/gym/{gymID}/user/{userID}/rate/{rate}")
     Call<String> rateGym(@Path("gymID") int gymID, @Path("userID") int userID, @Path("rate") int rate);
 
-    @POST("createChallenge")
-    Call<Challenge> createNewChallengeRequest(@Body Challenge params);
+    @POST("user/{userID}/createChallenge")
+    Call<String> createNewChallengeRequest(@Path("userID") int userID, @Body Challenge params);
 
     @PUT("removeChallenge/{challengeID}")
     Call<String> removeChallenge(@Path("challengeID") int challengeID);

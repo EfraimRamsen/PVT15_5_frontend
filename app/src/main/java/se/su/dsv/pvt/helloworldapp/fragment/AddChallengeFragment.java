@@ -16,6 +16,9 @@ import se.su.dsv.pvt.helloworldapp.model.Challenge;
 public class AddChallengeFragment extends Fragment implements View.OnClickListener {
 
     private View vy = null;
+    Spinner spinner;
+
+    private static int userID = 1; // tillfällig ID
 
     @Nullable
     @Override
@@ -24,7 +27,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         String[] values = {"Välj plats", "Akalla Gårds utegym", "Björkhagens utegym", "Bredängs utegym", "Brotorp utegym", "Eriksdal utegym", "Fagersjöskogens utegym", "Farsta utegym", "Farstanäsets utegym", "Farstastrandsbadets utegym", "Flatenbadet utegym", "Fruängens utegym", "Grimsta utegym", "Grimstafältet - Grimsta mostionsspår", "Gärdet utegym", "Hammarby Sjöstads utegym", "Hellasgårdens utegym", "Hjorthagens utegym", "Hornsbergs strands utegym", "Hökarängsbadets utegym", "Kaknäs utegym", "Kanaanbadets utegym", "Kronobergsparkens utegym", "Kungsholms strandstigs utegym", "Kärrtorp utegym", "Lappkärrsbergets utegym, Docentbacken", "Liljeholmens utegym", "Lillsjöns utegym", "Mellanbergsparkens utegym", "Mälarhöjdsbadets utegym", "Nytorpsgärdets utegym", "Nälsta utegym", "Oppundaparkens utegym", "Pålsundsparkens utegym", "Rålambshovsparkens utegym", "Sannadalsparkens utegym", "Skarpnäcksfältets utegym", "Skärholmens utegym", "Smedsuddsbadets utegym", "Solviks utegym", "Spånga utegym", "Spånga IP utegym", "Stora Mossens utegym", "Stora Sköndals utegym", "Stråkets utegym", "Sätra IP utegym", "Sätradals utegym", "Sätrastrandsbadet utegym", "Tanto strandbads utegym", "Uteträffen i Tessinparken, utegym för seniorer", "Vanadislundens utegym", "Vasaparkens utegym", "Vintervikens utegym", "Vårgårdens utegym", "Ågesta utegym", "Årstaskogens utegym", "Årstavikens utegym", "Östberga utegym"
                 };
         vy = view;
-        Spinner spinner = view.findViewById(R.id.locationPicker);
+        spinner = view.findViewById(R.id.locationPicker);
         ArrayAdapter<String> LTRadapter = new ArrayAdapter<>(Objects.requireNonNull(this.getActivity()), android.R.layout.simple_spinner_item, values);
         LTRadapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(LTRadapter);
@@ -47,7 +50,7 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.createButton:
                 if (emptyField()){
-                    Toast.makeText(mainActivity, "tomt fält", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainActivity, "Alla obligatoriska fält har ej fyllts i", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
                     EditText challenge = vy.findViewById(R.id.challengeText);
@@ -56,8 +59,8 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
                     String dString = description.getText().toString();
                     Challenge c = new Challenge(cString, dString, 0, 0, getID(), parseDate());
                     Toast.makeText(mainActivity, "Din utmaning är skapad", Toast.LENGTH_SHORT).show();
-                    mainActivity.createChallengeCall(c);
-                    mainActivity.clearAddChallenge();
+                    mainActivity.createChallengeCall(userID, c);
+                    resetFields();
                     break;
                 }
             case R.id.cancelButton:
@@ -79,9 +82,9 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
         TextView d = vy.findViewById(R.id.day);
         TextView h = vy.findViewById(R.id.hour);
         TextView min = vy.findViewById(R.id.minute);
-        if (challenge.getText().equals("")) {
+        if (challenge.getText().toString().trim().isEmpty()) {
             return true;
-        } else if (description.getText().equals("")) {
+        } else if (description.getText().toString().trim().isEmpty()) {
             return true;
         } else if (y.getText().equals("")) {
             return true;
@@ -93,8 +96,33 @@ public class AddChallengeFragment extends Fragment implements View.OnClickListen
             return true;
         } else if (min.getText().equals("")){
             return true;
+        } else if (spinner.getSelectedItemPosition() == 0) {
+            return true;
         }
         return false;
+    }
+
+    /**
+     * Tömning av textfälten, sätter fokus på översta fältet och återställning av spinnern
+     * @author JD
+     */
+    public void resetFields() {
+        EditText challenge = vy.findViewById(R.id.challengeText);
+        challenge.setText("");
+        challenge.requestFocus();
+        EditText description = vy.findViewById(R.id.descriptionText);
+        description.setText("");
+        TextView y = vy.findViewById(R.id.year);
+        y.setText("");
+        TextView m = vy.findViewById(R.id.month);
+        m.setText("");
+        TextView d = vy.findViewById(R.id.day);
+        d.setText("");
+        TextView h = vy.findViewById(R.id.hour);
+        h.setText("");
+        TextView min = vy.findViewById(R.id.minute);
+        min.setText("");
+        spinner.setSelection(0, true);
     }
 
     /**

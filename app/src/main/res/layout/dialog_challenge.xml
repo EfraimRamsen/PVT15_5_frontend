@@ -49,8 +49,8 @@
         android:layout_marginBottom="30dp"
         android:text="Gå med" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
+    <Button
+        android:id="@+id/shareButton"
         android:background="@drawable/rounded_button2"
         android:layout_gravity="center"
         android:layout_width="60dp"
@@ -60,7 +60,15 @@
         android:maxHeight="60dp"
         android:scaleType="fitXY"
         android:layout_marginBottom="30dp"
+        android:text="Dela"
         app:srcCompat="@drawable/share" />
+
+    <Button
+        android:id="@+id/twitterBtn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Twitter" />
 
     <Button
         android:id="@+id/ok"

@@ -27,12 +27,22 @@ public class TimePickerFragment extends DialogFragment
                 DateFormat.is24HourFormat(getActivity()));
     }
 
+    @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
         TextView h = getActivity().findViewById(R.id.hour);
         TextView min = getActivity().findViewById(R.id.minute);
-        h.setText(view.getCurrentHour() + "");
-        min.setText(view.getCurrentMinute() + "");
 
+        if (view.getCurrentHour() < 10) {
+            h.setText("0" + view.getCurrentHour() + "");
+        } else {
+            h.setText(view.getCurrentHour() + "");
+        }
+
+        if (view.getCurrentMinute() < 10) {
+            min.setText("0" + view.getCurrentMinute() + "");
+        } else {
+            min.setText(view.getCurrentMinute() + "");
+        }
     }
 }

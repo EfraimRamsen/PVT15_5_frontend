@@ -71,8 +71,13 @@ public class MyProfileFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     ChallengeDialog cd = new ChallengeDialog();
+                    //RADEN UNDER HÄMTAR DET OBJEKT SOM ANVÄNDAREN KLICKAT PÅ I LISTAN
+                    Challenge c = adapter.getItem(position);
+                    //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
+                    //METODEN FINNS PÅ RAD 103 I CHALLENGEDIALOG
+                    cd.updateView(c);
+                    //RADEN UNDER ÖPPNAR CHALLENGEDIALOG OCH VISAR FÖNSTRET FÖR ANVÄNDAREN
                     cd.show(getFragmentManager(), "ChallengeDialog");
-
                     Log.d(MainActivity.class.getSimpleName(), "hej");
                 }
             });

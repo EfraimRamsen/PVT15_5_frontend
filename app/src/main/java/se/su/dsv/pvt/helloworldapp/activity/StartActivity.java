@@ -15,6 +15,8 @@ public class StartActivity extends Activity implements View.OnClickListener {
     final int MY_CHALLENGES_VIEW = 2;
     final int FIND_CHALLENGES_VIEW = 3;
 
+    private static int userID = 1; // tillfällig ID
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
