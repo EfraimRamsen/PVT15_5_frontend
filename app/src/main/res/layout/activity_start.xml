@@ -9,8 +9,8 @@
 
     <ImageButton
         android:id="@+id/plusBtn"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
@@ -21,16 +21,16 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_plus"
         app:layout_constraintEnd_toStartOf="@+id/myChallengesBtn"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toEndOf="@+id/mapBtn"
         app:layout_constraintTop_toBottomOf="@+id/logoImg" />
 
     <ImageButton
         android:id="@+id/myChallengesBtn"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="28dp"
         android:adjustViewBounds="true"
         android:background="@drawable/button_states"
         android:onClick="onClick"
@@ -41,9 +41,9 @@
 
     <ImageButton
         android:id="@+id/mapBtn"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="56dp"
         android:adjustViewBounds="true"
         android:background="@drawable/button_states"
@@ -57,8 +57,8 @@
         android:id="@+id/plusTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:labelFor="@id/plusBtn"
@@ -68,17 +68,17 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/myChallengesTxt"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.732"
         app:layout_constraintStart_toEndOf="@+id/findChallengesTxt"
-        app:layout_constraintTop_toBottomOf="@+id/plusBtn"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintTop_toTopOf="@+id/plusBtn"
+        app:layout_constraintVertical_bias="0.014" />
 
     <TextView
         android:id="@+id/myChallengesTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="36dp"
         android:layout_marginBottom="8dp"
         android:labelFor="@id/myChallengesBtn"
         android:text="@string/challenges_start_page"
@@ -86,15 +86,15 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myChallengesBtn"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintTop_toTopOf="@+id/myChallengesBtn"
+        app:layout_constraintVertical_bias="0.014" />
 
     <TextView
         android:id="@+id/findChallengesTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="112dp"
         android:layout_marginBottom="8dp"
         android:labelFor="@id/mapBtn"
         android:text="@string/find_challenges_start_page"
@@ -102,7 +102,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapBtn"
+        app:layout_constraintTop_toTopOf="@+id/mapBtn"
         app:layout_constraintVertical_bias="0.016" />
 
     <ImageView
