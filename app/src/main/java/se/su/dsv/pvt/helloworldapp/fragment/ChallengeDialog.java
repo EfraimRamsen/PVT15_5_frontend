@@ -18,10 +18,13 @@ import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
+import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.Place;
 
 public class ChallengeDialog extends DialogFragment {
 
     private static final String TAG = "ChallengeDialog";
+    private Challenge challenge;
 
     @Nullable
     @Override
@@ -34,7 +37,6 @@ public class ChallengeDialog extends DialogFragment {
         TextView participants = view.findViewById(R.id.participants);
         Button join = view.findViewById(R.id.join);
         Button ok = view.findViewById(R.id.ok);
-
         Button share = view.findViewById(R.id.shareButton);
 
         Button twitter = view.findViewById(R.id.twitterBtn);
@@ -48,16 +50,19 @@ public class ChallengeDialog extends DialogFragment {
 
 
 
-
         join.setOnClickListener(new View.OnClickListener(){
           @Override
           public void onClick (View v){
               CharSequence text = join.getText();
               if (text.equals("Gå med")){
                   //TODO: add functionality to join a challenge
+                  mainActivity.createChallengeParticipationCall(30, 0); //TODO: HÅRDKODAT
+
+
                   join.setText("Gå ur");
               } else if (text.equals("Gå ur")){
                   //TODO: add functionality to leave a challenge
+                  mainActivity.removeParticipationCall(0); //TODO: HÅRDKODAT
                   join.setText("Gå med");
               }
           }

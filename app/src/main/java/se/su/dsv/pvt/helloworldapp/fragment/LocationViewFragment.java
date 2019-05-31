@@ -41,7 +41,6 @@ public class LocationViewFragment extends Fragment {
         Date d = Calendar.getInstance().getTime();
 
         adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
-
         lv.setAdapter(adapter);
 
         lv.setClickable(true);
