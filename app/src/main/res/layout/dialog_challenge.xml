@@ -63,13 +63,14 @@
         android:text="Dela"
         app:srcCompat="@drawable/share" />
 
-    <Button
+    <ImageButton
         android:id="@+id/twitterBtn"
-        android:layout_width="132dp"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="94dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="30dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Twitter" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/twitter_logo" />
 
     <Button
         android:id="@+id/ok"

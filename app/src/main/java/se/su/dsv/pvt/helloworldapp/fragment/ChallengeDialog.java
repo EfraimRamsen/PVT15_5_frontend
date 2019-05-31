@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -49,7 +50,7 @@ public class ChallengeDialog extends DialogFragment {
         Button join = view.findViewById(R.id.join);
         Button ok = view.findViewById(R.id.ok);
         Button share = view.findViewById(R.id.shareButton);
-        Button twitter = view.findViewById(R.id.twitterBtn);
+        ImageButton twitter = view.findViewById(R.id.twitterBtn);
         TwitterPost twitterPost = new TwitterPost();
 
 
