@@ -85,7 +85,7 @@ public class ChallengeDialog extends DialogFragment {
             public void onClick(View v){
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("test/plain");
-                String shareBody = description;
+                String shareBody = description + "\n" + date;
                 String shareSub = "Jag har skapat utemaningen : " + name + " med appen Utemaning. Kom och hurta med mig!";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
                 myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
