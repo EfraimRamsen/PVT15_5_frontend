@@ -20,4 +20,10 @@ public class OutdoorGym extends Place {
     public void setDescription(String s) {
         this.description = s;
     }
+
+    public void ifDescIsNull() {
+        if (description.equals("null")) {
+            this.description = "Beskrivning saknas.";
+        }
+    }
 }

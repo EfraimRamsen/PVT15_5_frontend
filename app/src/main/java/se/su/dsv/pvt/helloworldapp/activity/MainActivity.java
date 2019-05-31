@@ -249,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
                     // behövs för av någon anledning deklareras inte Location direkt när man hämtar från json
                     for (OutdoorGym outdoorGym : outdoorGyms) {
                         outdoorGym.getLocation().setLatLng(outdoorGym.getLocation().getX(), outdoorGym.getLocation().getY());
+                        outdoorGym.ifDescIsNull();
 
                         for (Challenge challenge : outdoorGym.getChallengeList()) {
                             challenge.setTimeAndDate();
