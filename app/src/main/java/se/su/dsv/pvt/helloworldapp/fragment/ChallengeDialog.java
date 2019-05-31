@@ -14,39 +14,49 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
+import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.Place;
 
 public class ChallengeDialog extends DialogFragment {
 
     private static final String TAG = "ChallengeDialog";
+    String name;
+    String description;
+    int workOutSpot;
+    int participants;
+    Date date;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
-        MainActivity mainActivity = (MainActivity) getActivity();
+        //MainActivity mainActivity = (MainActivity) getActivity();
+
+        //HÄR KAN VI NÅ TEXTFÄLTEN FRÅN XML-FILEN SOM BEHÖVER FYLLAS I MED KORREKT DATA (DVS OBJEKTET SOM KLICKATS PÅ)
+        //VI KAN DOCK INTE NÅ CHALLENGE-OBJEKTET SOM VI BEHÖVER HÄMTA DATA IFRÅN
         View view = inflater.inflate(R.layout.dialog_challenge, container, false);
-        TextView timeAndDate = view.findViewById(R.id.timeAndDate);
-        TextView name = view.findViewById(R.id.name);
-        TextView description = view.findViewById(R.id.description);
-        TextView participants = view.findViewById(R.id.participants);
+        TextView TextTimeAndDate = view.findViewById(R.id.timeAndDate);
+        TextView TextName = view.findViewById(R.id.name);
+        TextView TextDescription = view.findViewById(R.id.description);
+        TextView TextParticipants = view.findViewById(R.id.participants);
+
+
+
         Button join = view.findViewById(R.id.join);
         Button ok = view.findViewById(R.id.ok);
-
         Button share = view.findViewById(R.id.shareButton);
-
         Button twitter = view.findViewById(R.id.twitterBtn);
         TwitterPost twitterPost = new TwitterPost();
 
 
-        timeAndDate.setText("Tid och datum: " );
-        name.setText("Utmaning: ");
-        description.setText("Beskrivning: ");
-        participants.setText("Antal deltagare: ");
-
-
+        TextTimeAndDate.setText("Tid och datum: " + date + workOutSpot);
+        TextName.setText("Utmaning: " + name);
+        TextDescription.setText("Beskrivning: " + description );
+        TextParticipants.setText("Antal deltagare: " + participants);
 
 
         join.setOnClickListener(new View.OnClickListener(){
@@ -63,7 +73,6 @@ public class ChallengeDialog extends DialogFragment {
           }
         });
 
-
         ok.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -76,8 +85,8 @@ public class ChallengeDialog extends DialogFragment {
             public void onClick(View v){
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("test/plain");
-                String shareBody = "Beskrivning";
-                String shareSub = "Utmaning/titel";
+                String shareBody = description + "\n" + date;
+                String shareSub = "Jag har skapat utemaningen : " + name + " med appen Utemaning. Kom och hurta med mig!";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
                 myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
                 startActivity(Intent.createChooser(myIntent, "Dela med: "));
@@ -96,6 +105,17 @@ public class ChallengeDialog extends DialogFragment {
         });
 
         return view;
+    }
+
+    // HÄR KAN VI NÅ CHALLENGE-OBJEKTET SOM BLIVIT KLICKAT PÅ
+    // VI KAN DÄREMOT ÄN SÅ LÄNGE INTE NÅ TEXTFÄLTEN I XML-FILEN SOM BEHÖVER UPPDATERAS MED DATAT
+    public void updateView(Challenge c){
+
+        name = c.getName();
+        description =c.getDescription();
+        workOutSpot = c.getWorkoutSpotID();
+        date = c.getTimeAndDate();
+        participants = c.getNumberOfParticipants();
     }
 
     public class TwitterPost
