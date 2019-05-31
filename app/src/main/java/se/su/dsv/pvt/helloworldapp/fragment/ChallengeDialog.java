@@ -84,7 +84,7 @@ public class ChallengeDialog extends DialogFragment {
             @Override
             public void onClick(View v){
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("test/plain");
+                myIntent.setType("text/plain");
                 String shareBody = description + "\n" + date;
                 String shareSub = "Jag har skapat utemaningen : " + name + " med appen Utemaning. Kom och hurta med mig!";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
@@ -127,9 +127,10 @@ public class ChallengeDialog extends DialogFragment {
             if(isPackageInstalled(ctx, "com.twitter.android"))
             {
                 shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setClassName("com.twitter.android",
-                        "com.twitter.android.PostActivity");
-                shareIntent.setType("text/*");
+//                shareIntent.setClassName("com.twitter.android",
+//                        "com.twitter.android.PostActivity");
+                shareIntent.setPackage("com.twitter.android");
+                shareIntent.setType("text/plain");
                 shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
                 return shareIntent;
             }
