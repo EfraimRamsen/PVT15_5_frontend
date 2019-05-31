@@ -28,7 +28,27 @@ public class ChallengeDialog extends DialogFragment {
         TextView participants = view.findViewById(R.id.participants);
         Button join = view.findViewById(R.id.join);
         Button ok = view.findViewById(R.id.ok);
-        
+
+        timeAndDate.setText("Tid och datum: " );
+        name.setText("Utmaning: ");
+        description.setText("Beskrivning: ");
+        participants.setText("Antal deltagare: ");
+
+
+        join.setOnClickListener(new View.OnClickListener(){
+          @Override
+          public void onClick (View v){
+              CharSequence text = join.getText();
+              if (text.equals("Gå med")){
+                  //TODO: add functionality to join a challenge
+                  join.setText("Gå ur");
+              } else if (text.equals("Gå ur")){
+                  //TODO: add functionality to leave a challenge
+                  join.setText("Gå med");
+              }
+          }
+        });
+
         timeAndDate.setText("Tid och datum: " );
         name.setText("Utmaning: ");
         description.setText("Beskrivning: ");
