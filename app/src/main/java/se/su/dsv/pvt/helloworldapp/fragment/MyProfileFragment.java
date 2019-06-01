@@ -12,9 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
+
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Participation;
 
 /**
@@ -27,6 +30,8 @@ public class MyProfileFragment extends Fragment {
     ListView lv;
     private static CustomAdapter adapter;
     Challenge c;
+
+    ChallengeDialog cd = new ChallengeDialog();;
 
     @Nullable
     @Override
@@ -71,7 +76,6 @@ public class MyProfileFragment extends Fragment {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ChallengeDialog cd = new ChallengeDialog();
                     //RADEN UNDER HÄMTAR DET OBJEKT SOM ANVÄNDAREN KLICKAT PÅ I LISTAN
                     c = adapter.getItem(position);
                     //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
@@ -90,5 +94,9 @@ public class MyProfileFragment extends Fragment {
 
     public void setChallenges(ArrayList<Challenge> challenges) {
         this.challenges = challenges;
+    }
+
+    public void setOutdoorGyms(List<OutdoorGym> outdoorGyms) {
+        cd.setOutdoorGym(outdoorGyms);
     }
 }

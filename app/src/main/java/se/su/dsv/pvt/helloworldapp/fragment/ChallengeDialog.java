@@ -15,22 +15,27 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
-import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
+import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 
 public class ChallengeDialog extends DialogFragment {
 
     private static final String TAG = "ChallengeDialog";
-    String name;
+    String challengeName;
     String description;
-    int workOutSpot;
+    int workoutPlaceID;
+    String workoutPlaceName;
     int participants;
     Date date;
+
+    List<OutdoorGym> outdoorGyms;
+    OutdoorGym outdoorGym;
 
     @Nullable
     @Override
@@ -54,8 +59,8 @@ public class ChallengeDialog extends DialogFragment {
         TwitterPost twitterPost = new TwitterPost();
 
 
-        TextTimeAndDate.setText("Tid och datum: " + date + workOutSpot);
-        TextName.setText("Utmaning: " + name);
+        TextTimeAndDate.setText("Tid och datum: " + date + workoutPlaceID);
+        TextName.setText("Utmaning: " + challengeName);
         TextDescription.setText("Beskrivning: " + description );
         TextParticipants.setText("Antal deltagare: " + participants);
 
@@ -87,7 +92,8 @@ public class ChallengeDialog extends DialogFragment {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
                 String shareBody = description + "\n" + date;
-                String shareSub = "Jag har skapat utemaningen : " + name + " med appen Utemaning. Kom och hurta med mig!";
+                // TODO: Add standard text when sharing a challenge
+                String shareSub = "Jag har skapat utemaningen : " + challengeName + " med appen Utemaning. Kom och hurta med mig!";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
                 myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
                 startActivity(Intent.createChooser(myIntent, "Dela med: "));
@@ -99,8 +105,8 @@ public class ChallengeDialog extends DialogFragment {
         twitter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String challengeInfo = "Jag är intresserad av INSERT_CHALLENGE_HERE i appen Utemaning - Möt mig och anta utmaningen du med!";
-                System.out.println("twitter");
+                // TODO: Add standard text when sharing a challenge
+                String challengeInfo = "Jag är intresserad av utmaningen " + challengeName + " vid " + workoutPlaceName + " i appen Utemaning - Möt mig och anta utmaningen du med!";
                 startActivity(twitterPost.getTwitterIntent(getContext(), challengeInfo));
             }
         });
@@ -112,11 +118,36 @@ public class ChallengeDialog extends DialogFragment {
     // VI KAN DÄREMOT ÄN SÅ LÄNGE INTE NÅ TEXTFÄLTEN I XML-FILEN SOM BEHÖVER UPPDATERAS MED DATAT
     public void updateView(Challenge c){
 
-        name = c.getName();
+        challengeName = c.getName();
         description =c.getDescription();
-        workOutSpot = c.getWorkoutSpotID();
+        workoutPlaceID = c.getWorkoutSpotID();
         date = c.getTimeAndDate();
         participants = c.getNumberOfParticipants();
+
+        for (OutdoorGym outdoorGym : outdoorGyms) {
+            if (outdoorGym.getId() == workoutPlaceID) {
+                workoutPlaceName = outdoorGym.getName();
+                this.outdoorGym = outdoorGym;
+                break;
+            }
+        }
+    }
+
+    public void updateView(Challenge c, OutdoorGym outdoorGym){
+
+        challengeName = c.getName();
+        description =c.getDescription();
+        workoutPlaceID = c.getWorkoutSpotID();
+        date = c.getTimeAndDate();
+        participants = c.getNumberOfParticipants();
+
+        this.outdoorGym = outdoorGym;
+        workoutPlaceName = outdoorGym.getName();
+    }
+
+    // Behövs göras före updateView för annars blir Gym-objektet null
+    public void setOutdoorGym(List<OutdoorGym> outdoorGyms) {
+        this.outdoorGyms = outdoorGyms;
     }
 
     public class TwitterPost
