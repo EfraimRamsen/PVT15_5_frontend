@@ -48,21 +48,6 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity mainActivity = (MainActivity) getActivity();
-        int finishedChallenges = 0;
-        try {
-            for (Participation part : mainActivity.getParticipationList()) {
-                if (part.isCompleted()) {
-                    finishedChallenges++;
-                }
-            }
-        }
-        catch (NullPointerException e) {
-            finishedChallenges = 0;
-        }
-
-        TextView tV = (TextView) getView().findViewById(R.id.finishedChallenges);
-        tV.setText(finishedChallenges + " avklarade!");
     }
 
     public void showUsersChallenges() {
@@ -70,6 +55,7 @@ public class MyProfileFragment extends Fragment {
 //        mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
 
         checkIfChallengeCompleted();
+        countCompleted();
 
         if (challenges != null) {
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
@@ -111,6 +97,24 @@ public class MyProfileFragment extends Fragment {
         } else {
             System.out.println("challenges eller participationList är null");
         }
+    }
+
+    private void countCompleted() {
+        int finishedChallenges = 0;
+        try {
+            for (Participation part : participationList) {
+                if (part.isCompleted()) {
+                    finishedChallenges++;
+                }
+            }
+        }
+        catch (NullPointerException e) {
+            System.out.println("counter: " + e);
+            finishedChallenges = 0;
+        }
+
+        TextView tV = getView().findViewById(R.id.finishedChallenges);
+        tV.setText(finishedChallenges + " avklarade!");
     }
 
     public void setChallenges(ArrayList<Challenge> challenges) {
