@@ -79,8 +79,19 @@ public class ChallengeDialog extends DialogFragment {
 
         if (participation != null) {
             join.setText("Gå ur");
+
+            if (participation.isCompleted()) {
+                complete.setVisibility(View.GONE);
+                join.setVisibility(View.GONE);
+                TextCompleted.setVisibility(View.VISIBLE);
+            } else {
+                complete.setVisibility(View.VISIBLE);
+                TextCompleted.setVisibility(View.GONE);
+            }
         } else {
             join.setText("Gå med");
+            complete.setVisibility(View.GONE);
+            TextCompleted.setVisibility(View.GONE);
         }
 
         join.setOnClickListener(new View.OnClickListener(){
