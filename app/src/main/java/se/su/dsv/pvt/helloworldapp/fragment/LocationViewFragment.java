@@ -26,8 +26,6 @@ public class LocationViewFragment extends Fragment {
     private MainActivity mainActivity;
     private Place clickedPlace;
 
-    List<OutdoorGym> outdoorGyms;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,7 +53,7 @@ public class LocationViewFragment extends Fragment {
                 Challenge c = adapter.getItem(position);
                 //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
                 //METODEN FINNS PÅ RAD 103 I CHALLENGEDIALOG
-                cd.updateView(c, (OutdoorGym) clickedPlace);
+                cd.updateView(c, (OutdoorGym) clickedPlace); // ful-casting
                 cd.show(getFragmentManager(), "ChallengeDialog");
                 Log.d(MainActivity.class.getSimpleName(), "hej");
             }
@@ -172,9 +170,5 @@ public class LocationViewFragment extends Fragment {
             iV.setColorFilter(Color.RED);
             latestStar = iV;
         }
-    }
-
-    public void setOutdoorGyms(List<OutdoorGym> outdoorGyms) {
-        this.outdoorGyms = outdoorGyms;
     }
 }

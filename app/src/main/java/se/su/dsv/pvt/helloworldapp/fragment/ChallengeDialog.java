@@ -34,7 +34,7 @@ public class ChallengeDialog extends DialogFragment {
     int participants;
     Date date;
 
-    List<OutdoorGym> outdoorGyms;
+//    List<OutdoorGym> outdoorGyms;
     OutdoorGym outdoorGym;
 
     @Nullable
@@ -116,22 +116,22 @@ public class ChallengeDialog extends DialogFragment {
 
     // HÄR KAN VI NÅ CHALLENGE-OBJEKTET SOM BLIVIT KLICKAT PÅ
     // VI KAN DÄREMOT ÄN SÅ LÄNGE INTE NÅ TEXTFÄLTEN I XML-FILEN SOM BEHÖVER UPPDATERAS MED DATAT
-    public void updateView(Challenge c){
-
-        challengeName = c.getName();
-        description =c.getDescription();
-        workoutPlaceID = c.getWorkoutSpotID();
-        date = c.getTimeAndDate();
-        participants = c.getNumberOfParticipants();
-
-        for (OutdoorGym outdoorGym : outdoorGyms) {
-            if (outdoorGym.getId() == workoutPlaceID) {
-                workoutPlaceName = outdoorGym.getName();
-                this.outdoorGym = outdoorGym;
-                break;
-            }
-        }
-    }
+//    public void updateView(Challenge c){
+//
+//        challengeName = c.getName();
+//        description =c.getDescription();
+//        workoutPlaceID = c.getWorkoutSpotID();
+//        date = c.getTimeAndDate();
+//        participants = c.getNumberOfParticipants();
+//
+//        for (OutdoorGym outdoorGym : outdoorGyms) {
+//            if (outdoorGym.getId() == workoutPlaceID) {
+//                workoutPlaceName = outdoorGym.getName();
+//                this.outdoorGym = outdoorGym;
+//                break;
+//            }
+//        }
+//    }
 
     public void updateView(Challenge c, OutdoorGym outdoorGym){
 
@@ -146,9 +146,9 @@ public class ChallengeDialog extends DialogFragment {
     }
 
     // Behövs göras före updateView för annars blir Gym-objektet null
-    public void setOutdoorGym(List<OutdoorGym> outdoorGyms) {
-        this.outdoorGyms = outdoorGyms;
-    }
+//    public void setOutdoorGym(List<OutdoorGym> outdoorGyms) {
+//        this.outdoorGyms = outdoorGyms;
+//    }
 
     public class TwitterPost
     {

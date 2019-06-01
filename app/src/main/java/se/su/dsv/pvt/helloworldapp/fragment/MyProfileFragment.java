@@ -31,7 +31,8 @@ public class MyProfileFragment extends Fragment {
     private static CustomAdapter adapter;
     Challenge c;
 
-    ChallengeDialog cd = new ChallengeDialog();;
+    ChallengeDialog cd = new ChallengeDialog();
+    List<OutdoorGym> outdoorGyms;
 
     @Nullable
     @Override
@@ -78,9 +79,12 @@ public class MyProfileFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //RADEN UNDER HÄMTAR DET OBJEKT SOM ANVÄNDAREN KLICKAT PÅ I LISTAN
                     c = adapter.getItem(position);
+
+                    OutdoorGym selectedOutdoorGym = getSelectedOutdoorGym();
+
                     //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
                     //METODEN FINNS PÅ RAD 103 I CHALLENGEDIALOG
-                    cd.updateView(c);
+                    cd.updateView(c, selectedOutdoorGym);
                     //RADEN UNDER ÖPPNAR CHALLENGEDIALOG OCH VISAR FÖNSTRET FÖR ANVÄNDAREN
                     cd.show(getFragmentManager(), "ChallengeDialog");
                     Log.d(MainActivity.class.getSimpleName(), "hej");
@@ -97,6 +101,16 @@ public class MyProfileFragment extends Fragment {
     }
 
     public void setOutdoorGyms(List<OutdoorGym> outdoorGyms) {
-        cd.setOutdoorGym(outdoorGyms);
+//        cd.setOutdoorGym(outdoorGyms);
+        this.outdoorGyms = outdoorGyms;
+    }
+
+    private OutdoorGym getSelectedOutdoorGym() {
+        for (OutdoorGym outdoorGym : outdoorGyms) {
+            if (outdoorGym.getId() == c.getWorkoutSpotID()) {
+                return outdoorGym;
+            }
+        }
+        return null;
     }
 }
