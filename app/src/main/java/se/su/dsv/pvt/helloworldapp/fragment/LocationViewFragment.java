@@ -26,11 +26,15 @@ public class LocationViewFragment extends Fragment {
     private MainActivity mainActivity;
     private Place clickedPlace;
 
+    Challenge c;
+    List<Participation> participationList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainActivity = (MainActivity) getActivity();
         clickedPlace = mainActivity.getOpenThisPlaceFragment();
+        participationList = mainActivity.getParticipationList();
         avgRating = clickedPlace.getAverageRating();
 
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
@@ -50,10 +54,10 @@ public class LocationViewFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ChallengeDialog cd = new ChallengeDialog();
                 //RADEN UNDER HÄMTAR DET OBJEKT SOM ANVÄNDAREN KLICKAT PÅ I LISTAN
-                Challenge c = adapter.getItem(position);
+                c = adapter.getItem(position);
                 //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
                 //METODEN FINNS PÅ RAD 103 I CHALLENGEDIALOG
-                cd.updateView(c, (OutdoorGym) clickedPlace); // ful-casting
+                cd.updateView(c, (OutdoorGym) clickedPlace, getSpecificParticipation()); // ful-casting
                 cd.show(getFragmentManager(), "ChallengeDialog");
                 Log.d(MainActivity.class.getSimpleName(), "hej");
             }
@@ -99,6 +103,16 @@ public class LocationViewFragment extends Fragment {
 
         return view;
     }
+
+    private Participation getSpecificParticipation() {
+        for (Participation participation : participationList) {
+            if (participation.getChallengeID() == c.getChallengeID()) {
+                return participation;
+            }
+        }
+        return null;
+    }
+
     /**
      * Creates and shows the popup for rating a gym.
      * @param inflater

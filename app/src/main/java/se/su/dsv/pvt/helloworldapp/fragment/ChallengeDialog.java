@@ -20,22 +20,32 @@ import java.util.Date;
 import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
+import se.su.dsv.pvt.helloworldapp.model.Participation;
 import se.su.dsv.pvt.helloworldapp.model.Place;
 
 public class ChallengeDialog extends DialogFragment {
 
     private static final String TAG = "ChallengeDialog";
-    String challengeName;
-    String description;
-    int workoutPlaceID;
-    String workoutPlaceName;
-    int participants;
-    Date date;
+    private static int userID = 1; // tillfällig ID
+
+    private String challengeName;
+    private int challengeID;
+    private String description;
+    private int workoutPlaceID;
+    private String workoutPlaceName;
+    private int participants;
+    private Date date;
 
 //    List<OutdoorGym> outdoorGyms;
     OutdoorGym outdoorGym;
+    Participation participation;
+    private boolean joinedChallenge;
+    private String social_media_message;
+
+    Button join;
 
     @Nullable
     @Override
@@ -52,7 +62,7 @@ public class ChallengeDialog extends DialogFragment {
 
 
 
-        Button join = view.findViewById(R.id.join);
+        join = view.findViewById(R.id.join);
         ImageButton closeDialog = view.findViewById(R.id.closeBtn);
         ImageButton share = view.findViewById(R.id.shareBtn);
         ImageButton twitter = view.findViewById(R.id.twitterBtn);
@@ -64,6 +74,13 @@ public class ChallengeDialog extends DialogFragment {
         TextDescription.setText("Beskrivning: " + description );
         TextParticipants.setText("Antal deltagare: " + participants);
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        if (participation != null) {
+            join.setText("Gå ur");
+        } else {
+            join.setText("Gå med");
+        }
 
         join.setOnClickListener(new View.OnClickListener(){
           @Override
@@ -71,9 +88,12 @@ public class ChallengeDialog extends DialogFragment {
               CharSequence text = join.getText();
               if (text.equals("Gå med")){
                   //TODO: add functionality to join a challenge
+                  mainActivity.createChallengeParticipationCall(userID, challengeID);
                   join.setText("Gå ur");
               } else if (text.equals("Gå ur")){
                   //TODO: add functionality to leave a challenge
+                  System.out.println("nr 2: " + participation);
+                  mainActivity.removeParticipationCall(participation.getParticipationID());
                   join.setText("Gå med");
               }
           }
@@ -91,11 +111,11 @@ public class ChallengeDialog extends DialogFragment {
             public void onClick(View v){
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String shareBody = description + "\n" + date;
-                // TODO: Add standard text when sharing a challenge
-                String shareSub = "Jag har skapat utemaningen : " + challengeName + " med appen Utemaning. Kom och hurta med mig!";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
-                myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+//                String shareBody = description + "\n" + date;
+//                String shareSub = "Jag har skapat utemaningen : " + challengeName + " med appen Utemaning. Kom och hurta med mig!";
+//                myIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+//                myIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+                myIntent.putExtra(Intent.EXTRA_TEXT, social_media_message);
                 startActivity(Intent.createChooser(myIntent, "Dela med: "));
 
                // getDialog().dismiss();
@@ -105,17 +125,15 @@ public class ChallengeDialog extends DialogFragment {
         twitter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                // TODO: Add standard text when sharing a challenge
-                String challengeInfo = "Jag är intresserad av utmaningen " + challengeName + " vid " + workoutPlaceName + " i appen Utemaning - Möt mig och anta utmaningen du med!";
-                startActivity(twitterPost.getTwitterIntent(getContext(), challengeInfo));
+//                String challengeInfo = "Jag är intresserad av utmaningen " + challengeName + " vid " + workoutPlaceName + " i appen Utemaning - Möt mig och anta utmaningen du med!";
+                startActivity(twitterPost.getTwitterIntent(getContext(), social_media_message));
             }
         });
 
         return view;
     }
 
-    // HÄR KAN VI NÅ CHALLENGE-OBJEKTET SOM BLIVIT KLICKAT PÅ
-    // VI KAN DÄREMOT ÄN SÅ LÄNGE INTE NÅ TEXTFÄLTEN I XML-FILEN SOM BEHÖVER UPPDATERAS MED DATAT
+
 //    public void updateView(Challenge c){
 //
 //        challengeName = c.getName();
@@ -133,9 +151,12 @@ public class ChallengeDialog extends DialogFragment {
 //        }
 //    }
 
-    public void updateView(Challenge c, OutdoorGym outdoorGym){
+    // HÄR KAN VI NÅ CHALLENGE-OBJEKTET SOM BLIVIT KLICKAT PÅ
+    // VI KAN DÄREMOT ÄN SÅ LÄNGE INTE NÅ TEXTFÄLTEN I XML-FILEN SOM BEHÖVER UPPDATERAS MED DATAT
+    public void updateView(Challenge c, OutdoorGym outdoorGym, Participation participation){
 
         challengeName = c.getName();
+        challengeID = c.getChallengeID();
         description =c.getDescription();
         workoutPlaceID = c.getWorkoutSpotID();
         date = c.getTimeAndDate();
@@ -143,6 +164,10 @@ public class ChallengeDialog extends DialogFragment {
 
         this.outdoorGym = outdoorGym;
         workoutPlaceName = outdoorGym.getName();
+
+        this.participation = participation;
+
+        social_media_message = "Utmana mig och andra i utmaningen '" + challengeName + "' vid " + workoutPlaceName + " med appen Utemaning - Anta utmaningen du med!";
     }
 
     // Behövs göras före updateView för annars blir Gym-objektet null

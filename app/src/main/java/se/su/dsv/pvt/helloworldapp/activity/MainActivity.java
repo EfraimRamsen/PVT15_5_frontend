@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
   
-    final Fragment challengeFragment = new MyProfileFragment();
+    final Fragment myProfileFragment = new MyProfileFragment();
     Fragment addChallengeFragment = new AddChallengeFragment();
     final Fragment mapViewFragment = new MapViewFragment();
     final FragmentManager fm = getSupportFragmentManager();
     BottomNavigationView bottomNavigation;
 
-    Fragment active = challengeFragment;
+    Fragment active = myProfileFragment;
     Fragment active2 = active;
     Intent intent;
 
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         createConnectionToApi();
+        getParticipationCall(userID);
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
@@ -121,18 +122,18 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigation.setSelectedItemId(R.id.nav_my_profile);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
-            fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").commit();
-            active = challengeFragment;
+            fm.beginTransaction().add(R.id.fragment_container, myProfileFragment, "1").commit();
+            active = myProfileFragment;
         } else if (intent.hasExtra("add")) {
             bottomNavigation.setSelectedItemId(R.id.nav_add_challenge);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
-            fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").hide(challengeFragment).commit();
+            fm.beginTransaction().add(R.id.fragment_container, myProfileFragment, "1").hide(myProfileFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").commit();
             active = addChallengeFragment;
         } else if (intent.hasExtra("find")) {
             bottomNavigation.setSelectedItemId(R.id.nav_map);
             fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
-            fm.beginTransaction().add(R.id.fragment_container, challengeFragment, "1").hide(challengeFragment).commit();
+            fm.beginTransaction().add(R.id.fragment_container, myProfileFragment, "1").hide(myProfileFragment).commit();
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").commit();
             active = mapViewFragment;
         }
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         //Lägger till fragmenten i fragment_container, och döljer fragment 2 och 3
 //        fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
 //        fm.beginTransaction().add(R.id.fragment_container, addChallengeFragment, "2").hide(addChallengeFragment).commit();
-//        fm.beginTransaction().add(R.id.fragment_container,challengeFragment, "1").commit();
+//        fm.beginTransaction().add(R.id.fragment_container,myProfileFragment, "1").commit();
     }
 
 
@@ -161,10 +162,11 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.nav_my_profile:
                     fm.popBackStack();
-                    fm.beginTransaction().hide(active).show(challengeFragment).commit();
-                    active = challengeFragment;
+                    fm.beginTransaction().hide(active).show(myProfileFragment).commit();
+                    active = myProfileFragment;
                     title.setText(R.string.challenges);
                     getUserChallengesCall(userID); // UserID går in här
+                    getParticipationCall(userID);
                     return true;
 
                 case R.id.nav_add_challenge:
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_map:
                     fm.popBackStack();
                     getAllGymsCall(); // kan behöva ladda om fragmentet för att visa nya utmaningar och ny info om gymmen
+                    getParticipationCall(userID);
                     fm.beginTransaction().hide(active).show(mapViewFragment).commit();
                     active = mapViewFragment;
                     title.setText(R.string.map);
@@ -259,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "Response data: " + outdoorGyms);
 
                     addGymToMapMarkers();
-                    ((MyProfileFragment) challengeFragment).setOutdoorGyms(outdoorGyms);
+                    ((MyProfileFragment) myProfileFragment).setOutdoorGyms(outdoorGyms);
                 } catch (NullPointerException e) {
                     System.out.println("GET - all gyms: API-response contained null.");
                     Log.d(TAG, "GET - all gyms: API-response contained null.");
@@ -370,8 +373,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d(TAG, "Response data: " + response.body());
 
-                    ((MyProfileFragment) challengeFragment).setChallenges(userChallengesList);
-                    ((MyProfileFragment) challengeFragment).showUsersChallenges();
+                    ((MyProfileFragment) myProfileFragment).setChallenges(userChallengesList);
+                    ((MyProfileFragment) myProfileFragment).showUsersChallenges();
 
                 } catch (NullPointerException e) {
                     System.out.println("GET - user challenges: API-response contained null.");
@@ -450,6 +453,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     participationList = response.body();
                     Log.d(TAG, "Response data: " + response.body());
+                    ((MyProfileFragment) myProfileFragment).setParticipationList(participationList);
                 } catch (NullPointerException e) {
                     System.out.println("GET - user participation: API-response contained null.");
                     Log.d(TAG, "GET - user participation: API-response contained null.");
@@ -532,6 +536,7 @@ public class MainActivity extends AppCompatActivity {
         removeOpenThisPlaceFragment();
         return p;
     }
+
     public void setOpenThisPlaceFragment(Place openThisPlaceFragment) {
         this.openThisPlaceFragment = openThisPlaceFragment;
     }
