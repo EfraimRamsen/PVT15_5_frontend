@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
     android:layout_height="match_parent"
     android:layout_marginBottom="30dp"
@@ -43,6 +44,20 @@
         android:text=""
         android:textAlignment="center" />
 
+    <TextView
+        android:id="@+id/completedTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Du har redan avklarat denna utmaning"
+        android:textAllCaps="true"
+        android:textColor="#F00606"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/join"
         android:layout_width="132dp"
@@ -50,6 +65,15 @@
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:text="Gå med" />
+
+    <Button
+        android:id="@+id/completeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:text="Genomförd utmaning"
+        tools:visibility="gone" />
 
     <ImageButton
         android:id="@+id/shareBtn"

@@ -69,6 +69,8 @@ public class MyProfileFragment extends Fragment {
 //        MainActivity mainActivity = (MainActivity) getActivity();
 //        mainActivity.getUserChallengesCall(1); // lägg till nuvarande userID här
 
+        checkIfChallengeCompleted();
+
         if (challenges != null) {
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
 
@@ -91,6 +93,23 @@ public class MyProfileFragment extends Fragment {
 
         } else {
             System.out.println("challenges är null");
+        }
+    }
+
+    private void checkIfChallengeCompleted() {
+        if (challenges != null || participationList != null) {
+            for (Challenge challenge : challenges) {
+                for (Participation participation : participationList) {
+                    if (challenge.getChallengeID() == participation.getChallengeID()) {
+                        if (participation.isCompleted()) {
+                            System.out.println("avklarad utmaning");
+                            challenges.remove(challenge);
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("challenges eller participationList är null");
         }
     }
 

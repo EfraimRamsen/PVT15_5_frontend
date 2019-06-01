@@ -59,7 +59,7 @@ public class ChallengeDialog extends DialogFragment {
         TextView TextName = view.findViewById(R.id.name);
         TextView TextDescription = view.findViewById(R.id.description);
         TextView TextParticipants = view.findViewById(R.id.participants);
-
+        TextView TextCompleted = view.findViewById(R.id.completedTxt);
 
 
         join = view.findViewById(R.id.join);
@@ -67,6 +67,7 @@ public class ChallengeDialog extends DialogFragment {
         ImageButton share = view.findViewById(R.id.shareBtn);
         ImageButton twitter = view.findViewById(R.id.twitterBtn);
         TwitterPost twitterPost = new TwitterPost();
+        Button complete = view.findViewById(R.id.completeBtn);
 
 
         TextTimeAndDate.setText("Tid och datum: " + date + workoutPlaceID);
@@ -97,6 +98,14 @@ public class ChallengeDialog extends DialogFragment {
                   join.setText("Gå med");
               }
           }
+        });
+
+        complete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mainActivity.completeChallengeCall(participation.getParticipationID());
+                getDialog().dismiss();
+            }
         });
 
         closeDialog.setOnClickListener(new View.OnClickListener(){
