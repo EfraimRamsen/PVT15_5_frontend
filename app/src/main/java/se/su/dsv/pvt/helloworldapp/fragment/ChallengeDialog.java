@@ -29,7 +29,7 @@ import se.su.dsv.pvt.helloworldapp.model.Place;
 public class ChallengeDialog extends DialogFragment {
 
     private static final String TAG = "ChallengeDialog";
-    private static int userID = 1; //  TODO: tillfällig ID
+    private static int userID;
 
     private String challengeName;
     private int challengeID;
@@ -51,6 +51,8 @@ public class ChallengeDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         //MainActivity mainActivity = (MainActivity) getActivity();
+
+        userID = MainActivity.getUserID();
 
         //HÄR KAN VI NÅ TEXTFÄLTEN FRÅN XML-FILEN SOM BEHÖVER FYLLAS I MED KORREKT DATA (DVS OBJEKTET SOM KLICKATS PÅ)
         //VI KAN DOCK INTE NÅ CHALLENGE-OBJEKTET SOM VI BEHÖVER HÄMTA DATA IFRÅN
@@ -99,11 +101,9 @@ public class ChallengeDialog extends DialogFragment {
           public void onClick (View v){
               CharSequence text = join.getText();
               if (text.equals("Gå med")){
-                  //TODO: add functionality to join a challenge
                   mainActivity.createChallengeParticipationCall(userID, challengeID);
                   join.setText("Gå ur");
               } else if (text.equals("Gå ur")){
-                  //TODO: add functionality to leave a challenge
                   System.out.println("nr 2: " + participation);
                   mainActivity.removeParticipationCall(participation.getParticipationID());
                   join.setText("Gå med");

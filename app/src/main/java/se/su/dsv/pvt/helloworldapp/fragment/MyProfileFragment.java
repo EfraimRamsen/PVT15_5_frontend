@@ -87,7 +87,7 @@ public class MyProfileFragment extends Fragment {
 
     private void checkIfChallengeCompleted() {
         if (challenges != null || participationList != null) {
-            for (Challenge challenge : challenges) {
+            for (Challenge challenge : new ArrayList<Challenge>(challenges)) {
                 for (Participation participation : participationList) {
                     if (challenge.getChallengeID() == participation.getChallengeID()) {
                         if (participation.isCompleted()) {
