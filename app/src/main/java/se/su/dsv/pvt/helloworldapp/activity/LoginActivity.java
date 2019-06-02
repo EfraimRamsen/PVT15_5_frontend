@@ -25,7 +25,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import se.su.dsv.pvt.helloworldapp.R;
-import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.rest.BackendApiService;
 
 import static android.support.constraint.Constraints.TAG;
@@ -33,6 +32,7 @@ import static android.support.constraint.Constraints.TAG;
 public class LoginActivity extends Activity implements View.OnClickListener {
 
 	private int userId;
+	private String userName;
 	BackendApiService backendApiService;
 	OkHttpClient okHttpClient;
 	Retrofit retrofit;
@@ -55,23 +55,23 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 	@Override
 	public void onClick(View v){
-			EditText username = findViewById(R.id.username);
-			String uString = username.getText().toString().trim();
+			EditText usernameField = findViewById(R.id.username);
+			userName = usernameField.getText().toString().trim();
 
-			EditText password = findViewById(R.id.password);
-			String pString = password.getText().toString();
+			EditText passwordField = findViewById(R.id.password);
+			String password = passwordField.getText().toString();
 
 		if(v.getId() == R.id.login){
-			if (uString.equals("")) {
+			if (userName.equals("")) {
 				Toast.makeText(this, "Fyll i användarnamn", Toast.LENGTH_SHORT).show();
-			} else if (pString.equals("")) {
+			} else if (password.equals("")) {
 				Toast.makeText(this, "Fyll i lösenord", Toast.LENGTH_SHORT).show();
 			} else {
-				loginHandler(uString,pString);
+				loginHandler(userName,password);
 			}
 		}
 		else if(v.getId() == R.id.register){
-			createRegisterCall(uString,pString,v);
+			createRegisterCall(userName,password,v);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 	public String createLoginCall(Call<ResponseBody> call) {
 		try {
-//			Call<ResponseBody> call = backendApiService.login(username, password);
+//			Call<ResponseBody> call = backendApiService.login(userName, password);
 			return call.execute().body().string();
 		} catch (IOException | NullPointerException e) {
 			Toast.makeText(LoginActivity.this, "Ett fel inträffade", Toast.LENGTH_SHORT).show();
@@ -191,6 +191,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					userId =  Integer.parseInt(result);
 					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
 					intent.putExtra("userID", userId);
+					intent.putExtra("userName", userName);
 					System.out.println("id är: " + userId);
 					startActivity(intent);
 				}
