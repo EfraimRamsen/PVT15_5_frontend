@@ -46,4 +46,10 @@ public interface BackendApiService {
 
     @PUT("removeParticipation/{participationID}")
     Call<String> removeParticipation(@Path("participationID") int participationID);
+
+    @GET("login/{userName}/{password}")
+    Call<ResponseBody> login(@Path("userName") String userName, @Path("password") String password);
+
+    @POST("createUser/{userName}/{password}")
+    Call<ResponseBody> register(@Path("userName") String userName, @Path("password") String password);
 }
