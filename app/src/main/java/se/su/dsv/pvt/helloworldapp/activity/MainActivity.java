@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
-    private static int userID = 1; //  TODO: tillfällig ID
+    private static int userID;
+    private static String userName;
 
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         //fm.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
         // Nedan if-satser hämtar intent från föregående activity. Innehållet i intent säger vilket fragment som ska visas först. /JD
-        intent = getIntent();
+        intentHandler();
         if (intent.hasExtra("my")) {
             bottomNavigation.setSelectedItemId(R.id.nav_my_profile);
             fm.beginTransaction().add(R.id.fragment_container, mapViewFragment, "3").hide(mapViewFragment).commit();
@@ -198,6 +199,18 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.bottom_navigation, menu);
 
         return true;
+    }
+
+    private void intentHandler() {
+        intent = getIntent();
+        userID = intent.getIntExtra("userID", 0);
+        System.out.println("main: " + userID);
+        userName = intent.getStringExtra("userName");
+        System.out.println("main: " + userName);
+    }
+
+    public static String getUserName() {
+        return userName;
     }
 
     public void showDatePickerDialog(View v) {

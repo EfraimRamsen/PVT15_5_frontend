@@ -42,6 +42,9 @@ public class MyProfileFragment extends Fragment {
 
         lv = view.findViewById(R.id.listofActiveChallenges);
 
+
+
+
         return view;
     }
 

@@ -15,13 +15,16 @@ public class StartActivity extends Activity implements View.OnClickListener {
     final int MY_CHALLENGES_VIEW = 2;
     final int FIND_CHALLENGES_VIEW = 3;
 
-    private static int userID = 1; // tillfällig ID
+    private static int userID;
     private static String userName;
+    Intent infoIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        handleIntentPassthrough();
 
         ImageButton addBtn = (ImageButton) findViewById(R.id.plusBtn);
         addBtn.setOnClickListener(this);
@@ -36,19 +39,28 @@ public class StartActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.plusBtn) {
             System.out.println("add challenge");
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("add", ADD_CHALLENGES_VIEW);
-            v.getContext().startActivity(intent);
+            infoIntent.putExtra("add", ADD_CHALLENGES_VIEW);
+            v.getContext().startActivity(infoIntent);
         } else if (v.getId() == R.id.myChallengesBtn) {
             System.out.println("mina utmaningar");
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("my", MY_CHALLENGES_VIEW);
-            v.getContext().startActivity(intent);
+            infoIntent.putExtra("my", MY_CHALLENGES_VIEW);
+            v.getContext().startActivity(infoIntent);
         } else if (v.getId() == R.id.mapBtn) {
             System.out.println("hitta challenge");
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("find", FIND_CHALLENGES_VIEW);
-            v.getContext().startActivity(intent);
+            infoIntent.putExtra("find", FIND_CHALLENGES_VIEW);
+            v.getContext().startActivity(infoIntent);
         }
+    }
+
+    private void handleIntentPassthrough() {
+        Intent intent = getIntent();
+        userID = intent.getIntExtra("userID", 0);
+        System.out.println(userID);
+        userName = intent.getStringExtra("userName");
+        System.out.println(userName);
+
+        infoIntent = new Intent(this, MainActivity.class);
+        infoIntent.putExtra("userID", userID);
+        infoIntent.putExtra("userName", userName);
     }
 }
