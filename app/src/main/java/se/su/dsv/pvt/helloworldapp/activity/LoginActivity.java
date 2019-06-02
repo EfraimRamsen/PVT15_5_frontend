@@ -33,7 +33,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 	BackendApiService backendApiService;
 	OkHttpClient okHttpClient;
 	Retrofit retrofit;
-	public static final  String BASE_URL = "https://pvt.dsv.su.se/Group05/";
+	public static final String BASE_URL = "https://pvt.dsv.su.se/Group05/";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
