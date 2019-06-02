@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,6 +42,16 @@ public class MyProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         lv = view.findViewById(R.id.listofActiveChallenges);
+
+        lv.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
         TextView profileName = view.findViewById(R.id.profile_ID);
         profileName.setText("@" + MainActivity.getUserName());
