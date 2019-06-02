@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -47,7 +48,7 @@ public interface BackendApiService {
     Call<String> removeParticipation(@Path("participationID") int participationID);
 
     @GET("login/{userName}/{password}")
-    Call<String> login(@Path("userName") String userName, @Path("password") String password);
+    Call<ResponseBody> login(@Path("userName") String userName, @Path("password") String password);
 
     @POST("createUser/{userName}/{password}")
     Call<String> register(@Path("userName") String userName, @Path("password") String password);
