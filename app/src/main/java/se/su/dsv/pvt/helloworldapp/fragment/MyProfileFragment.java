@@ -42,8 +42,8 @@ public class MyProfileFragment extends Fragment {
 
         lv = view.findViewById(R.id.listofActiveChallenges);
 
-
-
+        TextView profileName = view.findViewById(R.id.profile_ID);
+        profileName.setText("@" + MainActivity.getUserName());
 
         return view;
     }
