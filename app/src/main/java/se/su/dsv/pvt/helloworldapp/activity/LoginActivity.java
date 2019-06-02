@@ -70,7 +70,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 				loginHandler(userName,password);
 			}
 			else if(v.getId() == R.id.register){
-				createRegisterCall(userName,password,v);
+				registerHandler(userName, password);
 			}
 		}
 	}
@@ -78,6 +78,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 	private void loginHandler(String username, String password) {
 		Call<ResponseBody> call = backendApiService.login(username, password);
 		new LoginTask().execute(call);
+	}
+
+	private void registerHandler(String username, String password) {
+		Call<ResponseBody> call = backendApiService.register(username, password);
+		new RegisterTask().execute(call);
 	}
 
 
@@ -136,33 +141,41 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 //		});
 	}
 
-	public void createRegisterCall(String username, String password, View v){
-		Call<String> call = backendApiService.register(username,password);
+	public String createRegisterCall(Call<ResponseBody> call){
+		try {
+			return call.execute().body().string();
+		} catch (IOException | NullPointerException e) {
+			Toast.makeText(LoginActivity.this, "Ett fel inträffade", Toast.LENGTH_SHORT).show();
+			System.out.println("Sign up failed: " + e);
+		}
+		return null;
 
-		call.enqueue(new Callback<String>() {
-			@Override
-			public void onResponse(Call<String> call, Response<String> response) {
-				try{
-					Log.d(TAG,"Response data: " + response.body().toString());
-					userId =  Integer.parseInt(response.body().toString());
-					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
-
-					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
-					startActivity(intent);
-
-				}catch (NullPointerException e){
-					System.out.println("createRegisterCall contains null");
-					Log.d(TAG,  "createRegisterCall contains null");
-				}
-
-			}
-			@Override
-			public void onFailure(Call<String> call, Throwable t) {
-				Log.e(TAG, "Felmeddelande: " + t.toString());
-				Toast.makeText(LoginActivity.this, "Fel: "+t, Toast.LENGTH_SHORT).show();
-
-			}
-		});
+//		Call<String> call = backendApiService.register(username,password);
+//
+//		call.enqueue(new Callback<String>() {
+//			@Override
+//			public void onResponse(Call<String> call, Response<String> response) {
+//				try{
+//					Log.d(TAG,"Response data: " + response.body().toString());
+//					userId =  Integer.parseInt(response.body().toString());
+//					Toast.makeText(LoginActivity.this, "Framgång!", Toast.LENGTH_SHORT).show();
+//
+//					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+//					startActivity(intent);
+//
+//				}catch (NullPointerException e){
+//					System.out.println("createRegisterCall contains null");
+//					Log.d(TAG,  "createRegisterCall contains null");
+//				}
+//
+//			}
+//			@Override
+//			public void onFailure(Call<String> call, Throwable t) {
+//				Log.e(TAG, "Felmeddelande: " + t.toString());
+//				Toast.makeText(LoginActivity.this, "Fel: "+t, Toast.LENGTH_SHORT).show();
+//
+//			}
+//		});
 	}
 
 	public int getUserId(){
@@ -192,11 +205,40 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
 					intent.putExtra("userID", userId);
 					intent.putExtra("userName", userName);
-					System.out.println("id är: " + userId);
+					System.out.println("id är: " + userId + " & username är: " + userName);
 					startActivity(intent);
 				}
 			} else {
 				System.out.println("Login response contained null");
+			}
+		}
+	}
+
+	private class RegisterTask extends AsyncTask<Call, Void, String> {
+		@Override
+		protected String doInBackground(Call... params) {
+			try {
+				Call<ResponseBody> call = params[0];
+				return createRegisterCall(call);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (result != null) {
+					Toast.makeText(LoginActivity.this, "Registrering lyckades", Toast.LENGTH_SHORT).show();
+					userId =  Integer.parseInt(result);
+					Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+					intent.putExtra("userID", userId);
+					intent.putExtra("userName", userName);
+					System.out.println("id är: " + userId + " & username är: " + userName);
+					startActivity(intent);
+
+			} else {
+				System.out.println("Register response contained null");
 			}
 		}
 	}

@@ -51,5 +51,5 @@ public interface BackendApiService {
     Call<ResponseBody> login(@Path("userName") String userName, @Path("password") String password);
 
     @POST("createUser/{userName}/{password}")
-    Call<String> register(@Path("userName") String userName, @Path("password") String password);
+    Call<ResponseBody> register(@Path("userName") String userName, @Path("password") String password);
 }
