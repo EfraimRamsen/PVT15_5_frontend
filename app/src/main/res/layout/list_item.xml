@@ -13,17 +13,18 @@
         android:src="@drawable/barbell_pic" />
 
     <TextView
-        android:textSize="15sp"
         android:id="@+id/challenge_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/barbell"
-        android:layout_marginLeft="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_toEndOf="@id/barbell"
         android:text="txt"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:textSize="15sp"

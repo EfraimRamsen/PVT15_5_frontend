@@ -58,24 +58,32 @@ public class LocationViewFragment extends Fragment {
 
         Date d = Calendar.getInstance().getTime();
 
-        adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
+        TextView missingChallengesTxt = view.findViewById(R.id.missingChallengesTxt);
 
-        lv.setAdapter(adapter);
+        if (!challenges.isEmpty()) {
+            missingChallengesTxt.setVisibility(View.GONE);
 
-        lv.setClickable(true);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ChallengeDialog cd = new ChallengeDialog();
-                //RADEN UNDER HÄMTAR DET OBJEKT SOM ANVÄNDAREN KLICKAT PÅ I LISTAN
-                c = adapter.getItem(position);
-                //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
-                //METODEN FINNS PÅ RAD 103 I CHALLENGEDIALOG
-                cd.updateView(c, (OutdoorGym) clickedPlace, getSpecificParticipation()); // ful-casting
-                cd.show(getFragmentManager(), "ChallengeDialog");
-                Log.d(MainActivity.class.getSimpleName(), "hej");
-            }
-        });
+            adapter  = new CustomAdapter (challenges, getActivity().getApplicationContext());
+
+            lv.setAdapter(adapter);
+
+            lv.setClickable(true);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ChallengeDialog cd = new ChallengeDialog();
+                    //RADEN UNDER HÄMTAR DET OBJEKT SOM ANVÄNDAREN KLICKAT PÅ I LISTAN
+                    c = adapter.getItem(position);
+                    //RADEN UNDER ANROPAR EN METOD I CHALLENGEDIALOG OCH SKICKAR MED OBJEKTET SOM ANVÄNDAREN VALT
+                    //METODEN FINNS PÅ RAD 103 I CHALLENGEDIALOG
+                    cd.updateView(c, (OutdoorGym) clickedPlace, getSpecificParticipation()); // ful-casting
+                    cd.show(getFragmentManager(), "ChallengeDialog");
+                    Log.d(MainActivity.class.getSimpleName(), "hej");
+                }
+            });
+        } else {
+            missingChallengesTxt.setVisibility(View.VISIBLE);
+        }
 
         TextView title = (TextView) mainActivity.findViewById(R.id.main_title_text);
         title.setText(clickedPlace.getName());
@@ -83,7 +91,7 @@ public class LocationViewFragment extends Fragment {
         textRating.setText(String.valueOf(clickedPlace.getAverageRating()));
         if (clickedPlace instanceof OutdoorGym) {
             TextView description = (TextView) view.findViewById(R.id.gymview_description);
-            if (((OutdoorGym) clickedPlace).getDescription() == null) {
+            if (((OutdoorGym) clickedPlace).getDescription().equals("null")) {
                 description.setText(R.string.no_descr_avail);
             }
             description.setText(((OutdoorGym) clickedPlace).getDescription());

@@ -23,7 +23,7 @@ public class OutdoorGym extends Place {
 
     public void ifDescIsNull() {
         if (description.equals("null")) {
-            this.description = "Beskrivning saknas.";
+            this.description = "Ingen beskrivning tillgänglig.";
         }
     }
 }
