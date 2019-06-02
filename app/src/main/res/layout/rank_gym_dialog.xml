@@ -4,6 +4,7 @@
     android:id="@+id/rankgymdialogxml"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/reverse_gradient_background"
     android:theme="@android:style/Theme.Holo.Dialog">
 
     <Button
@@ -30,7 +31,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center_horizontal"
         android:text="@string/choose_amount_stars"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

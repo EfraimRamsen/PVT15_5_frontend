@@ -36,6 +36,13 @@ public class LocationViewFragment extends Fragment {
     Challenge c;
     List<Participation> participationList;
 
+    // motsvarar stjärnorna i popup-fönstret
+    ImageView ib1;
+    ImageView ib2;
+    ImageView ib3;
+    ImageView ib4;
+    ImageView ib5;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -137,11 +144,11 @@ public class LocationViewFragment extends Fragment {
 
         starButtonListener starbl = new starButtonListener();
 
-        ImageView ib1 = (ImageView) alertDialog.findViewById(R.id.star1);
-        ImageView ib2 = (ImageView) alertDialog.findViewById(R.id.star2);
-        ImageView ib3 = (ImageView) alertDialog.findViewById(R.id.star3);
-        ImageView ib4 = (ImageView) alertDialog.findViewById(R.id.star4);
-        ImageView ib5 = (ImageView) alertDialog.findViewById(R.id.star5);
+        ib1 = (ImageView) alertDialog.findViewById(R.id.star1);
+        ib2 = (ImageView) alertDialog.findViewById(R.id.star2);
+        ib3 = (ImageView) alertDialog.findViewById(R.id.star3);
+        ib4 = (ImageView) alertDialog.findViewById(R.id.star4);
+        ib5 = (ImageView) alertDialog.findViewById(R.id.star5);
         ImageView[] imageViews = new ImageView[5];
         imageViews[0] = ib1;
         imageViews[1] = ib2;
@@ -171,9 +178,7 @@ public class LocationViewFragment extends Fragment {
              * a) Läs av clickedStar,
              * b) Addera användarens betyg (clickedStar) till databasen.
              */
-
             new RateGymCall().execute();
-
         }
     }
     public class starButtonListener implements ImageView.OnClickListener {
@@ -184,12 +189,35 @@ public class LocationViewFragment extends Fragment {
          */
         public void onClick(View v) {
             if (latestStar != null) {
-                latestStar.clearColorFilter();
+                ib5.clearColorFilter();
+                ib4.clearColorFilter();
+                ib3.clearColorFilter();
+                ib2.clearColorFilter();
+                ib1.clearColorFilter();
             }
+
             String textID = v.getResources().getResourceName(v.getId());
             ImageView iV = (ImageView) v.findViewById(v.getId());
+
             clickedStar = Integer.parseInt(String.valueOf(textID.charAt(textID.length() - 1)));
-            iV.setColorFilter(Color.RED);
+
+            if (iV.equals(ib5)) {
+                ib4.setColorFilter(Color.parseColor("#f4c842"));
+                ib3.setColorFilter(Color.parseColor("#f4c842"));
+                ib2.setColorFilter(Color.parseColor("#f4c842"));
+                ib1.setColorFilter(Color.parseColor("#f4c842"));
+            } else if (iV.equals(ib4)) {
+                ib3.setColorFilter(Color.parseColor("#f4c842"));
+                ib2.setColorFilter(Color.parseColor("#f4c842"));
+                ib1.setColorFilter(Color.parseColor("#f4c842"));
+            } else if (iV.equals(ib3)) {
+                ib2.setColorFilter(Color.parseColor("#f4c842"));
+                ib1.setColorFilter(Color.parseColor("#f4c842"));
+            } else if (iV.equals(ib2)) {
+                ib1.setColorFilter(Color.parseColor("#f4c842"));
+            }
+
+            iV.setColorFilter(Color.parseColor("#f4c842"));
             latestStar = iV;
         }
     }
