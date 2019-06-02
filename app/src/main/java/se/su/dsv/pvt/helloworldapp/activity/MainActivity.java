@@ -1,6 +1,7 @@
 package se.su.dsv.pvt.helloworldapp.activity;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Place openThisPlaceFragment = null; // ugly solution to a problem.
 
-    private static int userID = 1; // tillfällig ID
+    private static int userID = 1; //  TODO: tillfällig ID
 
     //  TAG används för logg/debug i Android, innehåller bara namnet på klassen. /JD
     private static final String TAG = MainActivity.class.getSimpleName(); // ignorera
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private static Retrofit retrofit = null;
     OkHttpClient okHttpClient;
     BackendApiService backendApiService;
+    String responseText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,24 +286,33 @@ public class MainActivity extends AppCompatActivity {
      * @param userID
      * @param rate
      */
-    public void rateGymCall(int gymID, int userID, int rate) {
-        Call<String> call = backendApiService.rateGym(gymID, userID, rate);
+    public String rateGymCall(int gymID, int userID, int rate) {
+        try {
+            Call<ResponseBody> call = backendApiService.rateGym(gymID, userID, rate);
+            return call.execute().body().string();
+        } catch (IOException | NullPointerException e) {
+            System.out.println("Rate gym failed: " + e);
+        }
+        return null;
 
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    Log.d(TAG, "Response data: " + response.body());
-                } catch (NullPointerException e) {
-                    System.out.println("POST - rate gym: API-response contained null.");
-                    Log.d(TAG, "POST - rate gym: API-response contained null.");
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e(TAG, "Felmeddelande: " +  t.toString());
-            }
-        });
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                try {
+//                    Log.d(TAG, "Response data: " + response.body());
+//                    responseText = response.body();
+//                } catch (NullPointerException e) {
+//                    System.out.println("POST - rate gym: API-response contained null.");
+//                    Log.d(TAG, "POST - rate gym: API-response contained null.");
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Log.e(TAG, "Felmeddelande: " +  t.toString());
+//            }
+//        });
+//
+//        return responseText;
     }
 
     /**

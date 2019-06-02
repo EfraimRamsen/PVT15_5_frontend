@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -23,7 +24,7 @@ public interface BackendApiService {
     Call<List<OutdoorGym>> getAllGyms();
 
     @POST("rateGym/gym/{gymID}/user/{userID}/rate/{rate}")
-    Call<String> rateGym(@Path("gymID") int gymID, @Path("userID") int userID, @Path("rate") int rate);
+    Call<ResponseBody> rateGym(@Path("gymID") int gymID, @Path("userID") int userID, @Path("rate") int rate);
 
     @POST("user/{userID}/createChallenge")
     Call<String> createNewChallengeRequest(@Path("userID") int userID, @Body Challenge params);

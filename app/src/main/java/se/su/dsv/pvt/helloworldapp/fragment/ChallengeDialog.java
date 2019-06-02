@@ -29,7 +29,7 @@ import se.su.dsv.pvt.helloworldapp.model.Place;
 public class ChallengeDialog extends DialogFragment {
 
     private static final String TAG = "ChallengeDialog";
-    private static int userID = 1; // tillfällig ID
+    private static int userID = 1; //  TODO: tillfällig ID
 
     private String challengeName;
     private int challengeID;

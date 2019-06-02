@@ -1,6 +1,7 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,12 +10,18 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+
+import java.io.IOException;
 import java.util.*;
+
+import retrofit2.Call;
+import retrofit2.Response;
 import se.su.dsv.pvt.helloworldapp.R;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.*;
 
 public class LocationViewFragment extends Fragment {
+    private static int userID = 1; //  TODO: tillfällig ID
 
     protected AlertDialog alertDialog;
     private int clickedStar;
@@ -164,8 +171,9 @@ public class LocationViewFragment extends Fragment {
              * a) Läs av clickedStar,
              * b) Addera användarens betyg (clickedStar) till databasen.
              */
-            mainActivity.rateGymCall(clickedPlace.getId(), 0, clickedStar); //TODO: HÅRDKODAT userID
-            alertDialog.cancel();
+
+            new RateGymCall().execute();
+
         }
     }
     public class starButtonListener implements ImageView.OnClickListener {
@@ -183,6 +191,35 @@ public class LocationViewFragment extends Fragment {
             clickedStar = Integer.parseInt(String.valueOf(textID.charAt(textID.length() - 1)));
             iV.setColorFilter(Color.RED);
             latestStar = iV;
+        }
+    }
+
+    private class RateGymCall extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+//                Call<String> call = params[0];
+//                Response<String> response = call.execute();
+                return mainActivity.rateGymCall(clickedPlace.getId(), userID, clickedStar);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                if (result.equals("Success")) {
+                    alertDialog.cancel();
+                    Toast.makeText(mainActivity, "Din rankning av gymmet har skickats", Toast.LENGTH_SHORT).show();
+                } else if (result.equals("user has already rated this gym")) {
+                    alertDialog.cancel();
+                    Toast.makeText(mainActivity, "Du har redan rankat gymmet tidigare!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                System.out.println("RateGym response contained null");
+            }
         }
     }
 }
