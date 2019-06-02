@@ -61,17 +61,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 			EditText passwordField = findViewById(R.id.password);
 			String password = passwordField.getText().toString();
 
-		if(v.getId() == R.id.login){
-			if (userName.equals("")) {
-				Toast.makeText(this, "Fyll i användarnamn", Toast.LENGTH_SHORT).show();
-			} else if (password.equals("")) {
-				Toast.makeText(this, "Fyll i lösenord", Toast.LENGTH_SHORT).show();
-			} else {
+		if (userName.equals("")) {
+			Toast.makeText(this, "Fyll i användarnamn", Toast.LENGTH_SHORT).show();
+		} else if (password.equals("")) {
+			Toast.makeText(this, "Fyll i lösenord", Toast.LENGTH_SHORT).show();
+		} else {
+			if(v.getId() == R.id.login){
 				loginHandler(userName,password);
 			}
-		}
-		else if(v.getId() == R.id.register){
-			createRegisterCall(userName,password,v);
+			else if(v.getId() == R.id.register){
+				createRegisterCall(userName,password,v);
+			}
 		}
 	}
 
