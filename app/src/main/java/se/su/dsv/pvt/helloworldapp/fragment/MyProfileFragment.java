@@ -114,7 +114,12 @@ public class MyProfileFragment extends Fragment {
         }
 
         TextView tV = getView().findViewById(R.id.finishedChallenges);
-        tV.setText(finishedChallenges + " avklarade!");
+        TextView counter = getView().findViewById(R.id.countTxt);
+
+        counter.setText(Integer.toString(finishedChallenges));
+
+        if (finishedChallenges > 0)
+            tV.setText("antal avklarade!");
     }
 
     public void setChallenges(ArrayList<Challenge> challenges) {
