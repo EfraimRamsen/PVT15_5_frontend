@@ -145,7 +145,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:text="Denna plats saknar utmaningar just nu!\nVill du göra skillnad? Skapa en utmaning!"
+        android:text="Just nu saknar denna plats utmaningar.\nVill du göra skillnad? Skapa en utmaning!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
