@@ -1,20 +1,24 @@
 package se.su.dsv.pvt.helloworldapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
 import se.su.dsv.pvt.helloworldapp.R;
+import se.su.dsv.pvt.helloworldapp.activity.LoginActivity;
 import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.Challenge;
 import se.su.dsv.pvt.helloworldapp.model.OutdoorGym;
@@ -35,12 +39,41 @@ public class MyProfileFragment extends Fragment {
     List<OutdoorGym> outdoorGyms;
     List<Participation> participationList;
 
+    TextView missingUserChallenges;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         lv = view.findViewById(R.id.listofActiveChallenges);
+
+        lv.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        Button logOutBtn = view.findViewById(R.id.logOutButton);
+
+        logOutBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                getActivity().finishAffinity();
+                v.getContext().startActivity(new Intent(getContext(), LoginActivity.class));
+            }
+        });
+
+        TextView profileName = view.findViewById(R.id.profile_ID);
+        profileName.setText("@" + MainActivity.getUserName());
+
+        missingUserChallenges = view.findViewById(R.id.missingUserChallengesTxt);
 
         return view;
     }
@@ -57,7 +90,12 @@ public class MyProfileFragment extends Fragment {
         checkIfChallengeCompleted();
         countCompleted();
 
-        if (challenges != null) {
+
+
+        if (challenges != null && !challenges.isEmpty()) {
+            missingUserChallenges.setVisibility(View.GONE);
+            lv.setVisibility(View.VISIBLE);
+
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
 
             lv.setAdapter(adapter);
@@ -79,12 +117,14 @@ public class MyProfileFragment extends Fragment {
 
         } else {
             System.out.println("challenges är null");
+            missingUserChallenges.setVisibility(View.VISIBLE);
+            lv.setVisibility(View.GONE);
         }
     }
 
     private void checkIfChallengeCompleted() {
         if (challenges != null || participationList != null) {
-            for (Challenge challenge : challenges) {
+            for (Challenge challenge : new ArrayList<Challenge>(challenges)) {
                 for (Participation participation : participationList) {
                     if (challenge.getChallengeID() == participation.getChallengeID()) {
                         if (participation.isCompleted()) {

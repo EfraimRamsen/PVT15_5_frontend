@@ -21,7 +21,7 @@ import se.su.dsv.pvt.helloworldapp.activity.MainActivity;
 import se.su.dsv.pvt.helloworldapp.model.*;
 
 public class LocationViewFragment extends Fragment {
-    private static int userID = 1; //  TODO: tillfällig ID
+    private static int userID;
 
     protected AlertDialog alertDialog;
     private int clickedStar;
@@ -50,6 +50,8 @@ public class LocationViewFragment extends Fragment {
         clickedPlace = mainActivity.getOpenThisPlaceFragment();
         participationList = mainActivity.getParticipationList();
         avgRating = clickedPlace.getAverageRating();
+
+        userID = MainActivity.getUserID();
 
         View view = inflater.inflate(R.layout.fragment_location_view, container, false);
 

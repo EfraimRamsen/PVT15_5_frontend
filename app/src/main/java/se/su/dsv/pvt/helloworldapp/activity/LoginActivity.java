@@ -207,6 +207,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					intent.putExtra("userName", userName);
 					System.out.println("id är: " + userId + " & username är: " + userName);
 					startActivity(intent);
+					finish();
 				}
 			} else {
 				System.out.println("Login response contained null");
@@ -236,7 +237,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					intent.putExtra("userName", userName);
 					System.out.println("id är: " + userId + " & username är: " + userName);
 					startActivity(intent);
-
+					finish();
 			} else {
 				System.out.println("Register response contained null");
 			}
