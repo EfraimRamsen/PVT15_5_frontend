@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -95,6 +96,17 @@ public class MyProfileFragment extends Fragment {
         if (challenges != null && !challenges.isEmpty()) {
             missingUserChallenges.setVisibility(View.GONE);
             lv.setVisibility(View.VISIBLE);
+
+            int listViewLayoutHeight = 195;
+            float factor =  getContext().getResources().getDisplayMetrics().density;
+
+            if (challenges.size() == 1) {
+                listViewLayoutHeight = 65;
+            } else if (challenges.size() == 2) {
+                listViewLayoutHeight = 130;
+            }
+
+            lv.getLayoutParams().height = (int)(listViewLayoutHeight * factor);
 
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
 
