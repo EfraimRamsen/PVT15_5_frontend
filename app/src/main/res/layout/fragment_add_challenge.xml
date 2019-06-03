@@ -106,17 +106,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose" />
 
-    <Button
-        android:id="@+id/dateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="56dp"
-        android:onClick="showDatePickerDialog"
-        android:text="@string/datum"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationPicker" />
-
     <TextView
         android:id="@+id/year"
         android:layout_width="wrap_content"
@@ -155,24 +144,13 @@
         app:layout_constraintStart_toEndOf="@+id/slash2"
         app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 
-    <Button
-        android:id="@+id/timeButton"
+    <TextView
+        android:id="@+id/hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dateButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="56dp"
-        android:onClick="showTimePickerDialog"
-        android:text="@string/time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationPicker" />
-
-    <TextView
-    android:id="@+id/hour"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintEnd_toStartOf="@id/colon"
-    app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@id/colon"
+        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
 
     <TextView
         android:id="@+id/colon"
@@ -180,15 +158,15 @@
         android:layout_height="wrap_content"
         android:text=" : "
         app:layout_constraintEnd_toStartOf="@id/minute"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
 
     <TextView
         android:id="@+id/minute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="72dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -212,6 +190,34 @@
         android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/year" />
+
+    <ImageButton
+        android:id="@+id/dateButton"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/btn_default"
+        android:onClick="showDatePickerDialog"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationPicker"
+        app:srcCompat="@drawable/calendar_100" />
+
+    <ImageButton
+        android:id="@+id/timeButton"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
+        android:background="@android:drawable/btn_default"
+        android:onClick="showTimePickerDialog"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationPicker"
+        app:srcCompat="@drawable/clock_filled_96" />
 
 
 </android.support.constraint.ConstraintLayout>
