@@ -69,4 +69,10 @@ public class StartActivity extends Activity implements View.OnClickListener {
         infoIntent.putExtra("userID", userID);
         infoIntent.putExtra("userName", userName);
     }
+
+    @Override
+    public void onBackPressed()
+    {
+            moveTaskToBack(true); // exist app
+    }
 }
