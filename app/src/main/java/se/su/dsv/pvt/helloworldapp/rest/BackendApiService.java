@@ -48,8 +48,8 @@ public interface BackendApiService {
     Call<String> removeParticipation(@Path("participationID") int participationID);
 
     @GET("login/{userName}/{password}")
-    Call<ResponseBody> login(@Path("userName") String userName, @Path("password") String password);
+    Call<ResponseBody> login(@Path(value = "userName", encoded = true) String userName, @Path(value = "password", encoded = true) String password);
 
     @POST("createUser/{userName}/{password}")
-    Call<ResponseBody> register(@Path("userName") String userName, @Path("password") String password);
+    Call<ResponseBody> register(@Path(value = "userName", encoded = true) String userName, @Path(value = "password", encoded = true) String password);
 }
