@@ -40,14 +40,20 @@ public class StartActivity extends Activity implements View.OnClickListener {
         if (v.getId() == R.id.plusBtn) {
             System.out.println("add challenge");
             infoIntent.putExtra("add", ADD_CHALLENGES_VIEW);
+            infoIntent.removeExtra("my");
+            infoIntent.removeExtra("find");
             v.getContext().startActivity(infoIntent);
         } else if (v.getId() == R.id.myChallengesBtn) {
             System.out.println("mina utmaningar");
             infoIntent.putExtra("my", MY_CHALLENGES_VIEW);
+            infoIntent.removeExtra("add");
+            infoIntent.removeExtra("find");
             v.getContext().startActivity(infoIntent);
         } else if (v.getId() == R.id.mapBtn) {
             System.out.println("hitta challenge");
             infoIntent.putExtra("find", FIND_CHALLENGES_VIEW);
+            infoIntent.removeExtra("add");
+            infoIntent.removeExtra("my");
             v.getContext().startActivity(infoIntent);
         }
     }
