@@ -39,6 +39,8 @@ public class MyProfileFragment extends Fragment {
     List<OutdoorGym> outdoorGyms;
     List<Participation> participationList;
 
+    TextView missingUserChallenges;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class MyProfileFragment extends Fragment {
         TextView profileName = view.findViewById(R.id.profile_ID);
         profileName.setText("@" + MainActivity.getUserName());
 
+        missingUserChallenges = view.findViewById(R.id.missingUserChallengesTxt);
+
         return view;
     }
 
@@ -86,7 +90,12 @@ public class MyProfileFragment extends Fragment {
         checkIfChallengeCompleted();
         countCompleted();
 
-        if (challenges != null) {
+
+
+        if (challenges != null && !challenges.isEmpty()) {
+            missingUserChallenges.setVisibility(View.GONE);
+            lv.setVisibility(View.VISIBLE);
+
             adapter = new CustomAdapter(challenges, getActivity().getApplicationContext());
 
             lv.setAdapter(adapter);
@@ -108,6 +117,8 @@ public class MyProfileFragment extends Fragment {
 
         } else {
             System.out.println("challenges är null");
+            missingUserChallenges.setVisibility(View.VISIBLE);
+            lv.setVisibility(View.GONE);
         }
     }
 
